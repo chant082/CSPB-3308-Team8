@@ -3,7 +3,9 @@ Team #: 8
 Team/Product Name: Infinite
 Team members:
 - Adam Chanthakeo
+
   chant082
+
   Adam.Chanthakeo@colorado.edu
 
 - Hannah Pfeifer
