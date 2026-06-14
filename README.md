@@ -1,6 +1,9 @@
 Project title: Course Review Platform
+
 Team #: 8
+
 Team/Product Name: Infinite
+
 Team members:
 - Adam Chanthakeo
 
