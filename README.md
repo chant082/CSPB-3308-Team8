@@ -5,20 +5,20 @@ Team #: 8
 Team/Product Name: Infinite
 
 Team members:
-- Adam Chanthakeo
-  chant082
+- Adam Chanthakeo |
+  chant082 |
   Adam.Chanthakeo@colorado.edu
 
-- Hannah Pfeifer
-  hpfeifer37
+- Hannah Pfeifer |
+  hpfeifer37 |
   Hannah.Pfeifer@colorado.edu
   
-- Craig
-  craig-dev-01 
+- Craig Sanders |
+  craig-dev-01 |
   Craig.Sanders@colorado.edu
   
-- Sean Lin
-  seanlinwriter
+- Sean Lin |
+  seanlinwriter |
   Ching-Hsiang.Lin@colorado.edu
   
 Day/Time/TimeZone for the scheduled team weekly meeting (30 minutes via Zoom): Thursday 9am Mountain Time
