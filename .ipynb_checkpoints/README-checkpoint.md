@@ -2,7 +2,7 @@
 
 ___
 
-### **Team Information**
+## **Team Information**
 
 **Team #**: 8
 
@@ -30,7 +30,7 @@ ___
 ___
 
 
-### **Project Overview**
+## **Project Overview**
 
 **Vision statement**: 
 
@@ -52,6 +52,6 @@ To mitigate these risks, we discussed the project proposal and identified a mini
  
 **Development method**: Agile/Scrum
 
-**Project Tracking Software link**: 
+**Project Tracking Software link (Trello)**: 
 
-Trello - https://trello.com/invite/b/6a30b0db391f8fdf1f49abdf/ATTI70aed0306c5eda1aa71a8952ce4989241FE6089E/initial-product-backlog-pending
+https://trello.com/invite/b/6a30b0db391f8fdf1f49abdf/ATTI70aed0306c5eda1aa71a8952ce4989241FE6089E/initial-product-backlog-pending
