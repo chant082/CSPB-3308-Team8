@@ -54,4 +54,5 @@ To mitigate these risks, we discussed the project proposal and identified a mini
 
 **Project Tracking Software link (Trello)**: 
 
-https://trello.com/invite/b/6a30b0db391f8fdf1f49abdf/ATTI70aed0306c5eda1aa71a8952ce4989241FE6089E/initial-product-backlog-pending
+- Invite: https://trello.com/invite/b/6a30b0db391f8fdf1f49abdf/ATTI70aed0306c5eda1aa71a8952ce4989241FE6089E/initial-product-backlog-pending
+- Product Backlog: https://trello.com/b/gswMJp9O/initial-product-backlog-pending
