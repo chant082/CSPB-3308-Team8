@@ -10,6 +10,8 @@
 **Meeting Date:** July 2, 2026
 **Meeting Duration:** 45 minutes
 **Meeting Format:** Discord
+**Scrum master:** Ching-Hsiang (Sean) Lin
+**Meeting attendees** All team members
 ---
 ## Overview
 This document captures the **weekly status** of the CSPB Course Review Platform project for the specified reporting period.
@@ -33,44 +35,47 @@ Major infrastructure and planning milestones were completed to prepare for activ
 development.
 Key accomplishments include:
 - Defined MVP feature scope
-- Agreed on the minimum feature set
+- Agreed on the feature set of each required page
 - Created a Flask skeleton and a set of routes to implement
-- Agreed on the essential platform workflow
+- Agreed on the essential workflow of login and review writing
 ---
 ## Completed Tasks
 - Product scope
-    - Clarified the required feature set: login, signup, adding reviews
-    - Added more wireframe sketches: guest view and admin panel
-    - Added flowcharts for home pages and review writing
+    - Clarified the required feature set: login, signup, adding reviews, adding courses
+    - Added more wireframe sketches: guest homepage and admin panel
+    - Added flowcharts to illustrate home pages and review writing workflow 
     - Defined the scope of a minimum viable product
 - Repository
     - Created a Flask skeleton
     - Defined a set of routes to be implemented
 ---
 ## Planned Tasks for Next Week
-- Design and implement the initial database schema
+- Begin frontend page layout design
+- Determine user interface elements for each page
+- Design the initial database schema corresponding to the frontend design  
+- Determine how pages link to each other
 - Expand on basic backend routes for users
-- Begin frontend page layout for scheduling and task views
-- Refine wireframes based on team feedback and milestone requirements
 ---
 ## Blockers and Issues
 No major technical blockers were encountered this week.
 One discussion point involved balancing MVP scope versus optional enhancements. The
 team agreed to:
-- Focus on a **simple availability overlap view**
-- Defer advanced calendar interactions until later milestones (if time allows)
+- Resist the temptation to add more features before implement core features
+- Defer more advanced features such as admin moderation until time permits
 ---
 ## Risks and Mitigation
-**Identified Risk:** Feature creep
+**Identified Risk:** Potential feature creep
 - *Mitigation:* Strict adherence to MVP scope and milestone requirements
-**Identified Risk:** Frontend/backend integration complexity
-- *Mitigation:* Develop and test API endpoints incrementally, starting early
+- *Mitigation:* Focus only on a short list of CSPB courses and the current set of essential features
+- *Mitigation:* identify must-have features and nice-to-have features
+**Identified Risk:** Potentially code conflicts
+- *Mitigation:* Everyone should create a branch for development while working on part of the project. Avoid pushing directly to the main branch without peer review.  
 ---
 ## Team Reflection
 The team reported:
-- Strong communication and consistent participation
-- Clear alignment on goals and responsibilities
-- Confidence in the project direction entering the development phase
+- The brainstorming sessions have been going well.
+- Collaboration on the same project repository requires clear workflow and branch management.
+- The current repository structure can be further improved for better structure and division of work.
 The weekly status format was found to be useful for maintaining accountability and
 focus.
 ---
@@ -78,7 +83,7 @@ focus.
 - **Hannah Pfeifer:** Set up initial backend app with placeholders using Flask in repo, added .gitignore file to repo, contributed to software specifications and questions to resolve on Google Doc, added tasks to Trello board, set up initial weekly status document
 - **Adam Chathankeo:** Contributed to software specifications on Google Doc, added tasks to Trello board
 - **Craig Sanders:** Contributed to software specifications on Google Doc
-- **Sean Lin** Coordinated meeting agenda, added pages for guest home page and admin panel, and added flowcharts
+- **Ching-Hsiang (Sean) Lin** Coordinated meeting agenda, added pages for guest home page and admin panel, and added flowcharts
 ---
 ## Notes
 This file will be updated weekly as the project progresses.
