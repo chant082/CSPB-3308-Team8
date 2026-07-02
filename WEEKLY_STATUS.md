@@ -35,21 +35,22 @@ This week, the team focused on **initial project setup and scope definition**.
 Major infrastructure and planning milestones were completed to prepare for active
 development.
 Key accomplishments include:
-- Creation of a shared GitHub repository with all members added
-- Establishment of a basic frontend and backend project structure
+- Defined MVP feature scope
 - Agreement on the minimum viable product (MVP) feature set
-- Initial wireframe sketches for core pages (scheduling and tasks)
 ---
 ## Completed Tasks
-- Created GitHub repository and added all team members
-- Established baseline frontend and backend directory structure
-- Set up Trello project board with initial task breakdown
-- Defined MVP feature scope
-- Drafted initial user stories for availability scheduling and task management
+- Product scope
+    - clarified the required feature set: login, signup, adding reviews
+    - added more wireframe sketches: guest view and admin panel
+    - added flowcharts for home pages and review writing
+    - defined the scope of a minimum viable product
+- Repository
+    - Created a Flask skeleton
+    - Defined a set of routes to be implemented
 ---
 ## Planned Tasks for Next Week
 - Design and implement the initial database schema
-- Create basic backend routes for users and groups
+- Expand on basic backend routes for users
 - Begin frontend page layout for scheduling and task views
 - Refine wireframes based on team feedback and milestone requirements
 ---
