@@ -75,7 +75,7 @@ The weekly status format was found to be useful for maintaining accountability a
 focus.
 ---
 ## Individual Contributions This Week
-- **Hannah Pfeifer:** Set up initial backend with placeholders using Flask, contributed to software specifications and questions to resolve on Google Doc, added tasks to Trello board, set up initial weekly status document
+- **Hannah Pfeifer:** Set up initial backend app with placeholders using Flask in repo, added .gitignore file to repo, contributed to software specifications and questions to resolve on Google Doc, added tasks to Trello board, set up initial weekly status document
 - **Adam Chathankeo:** Contributed to software specifications on Google Doc, added tasks to Trello board
 - **Craig Sanders:** Contributed to software specifications on Google Doc
 - **Sean Lin** Coordinated meeting agenda
