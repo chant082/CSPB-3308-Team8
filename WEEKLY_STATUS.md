@@ -10,7 +10,9 @@
 ---
 ## Reporting Period
 
-**Week:** 3
+**Week:** 7 (of the semester)
+
+**Sprint**: 3
 
 **Meeting Held:** Yes
 
@@ -79,6 +81,7 @@ team agreed to:
 - *Mitigation:* Strict adherence to MVP scope and milestone requirements
 - *Mitigation:* Focus only on a short list of CSPB courses and the current set of essential features
 - *Mitigation:* identify must-have features and nice-to-have features
+
 **Identified Risk:** Potentially code conflicts
 - *Mitigation:* Everyone should create a branch for development while working on part of the project. Avoid pushing directly to the main branch without peer review.  
 ---
