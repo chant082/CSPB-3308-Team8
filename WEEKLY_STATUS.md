@@ -26,9 +26,6 @@ The team is using a shared **Trello board** to manage tasks and sprint progress.
 At the time of this report:
 - Columns include: Backlog, In Progress, In Review, Done
 - Tasks are assigned to individual team members
-- Due dates and priorities are tracked per task
-(A visual snapshot of the board may be included in the repository alongside this
-file.)
 ---
 ## Progress Since Last Week
 This week, the team focused on **initial project setup and scope definition**.
@@ -36,14 +33,16 @@ Major infrastructure and planning milestones were completed to prepare for activ
 development.
 Key accomplishments include:
 - Defined MVP feature scope
-- Agreement on the minimum viable product (MVP) feature set
+- Agreed on the minimum feature set
+- Created a Flask skeleton and a set of routes to implement
+- Agreed on the essential platform workflow
 ---
 ## Completed Tasks
 - Product scope
-    - clarified the required feature set: login, signup, adding reviews
-    - added more wireframe sketches: guest view and admin panel
-    - added flowcharts for home pages and review writing
-    - defined the scope of a minimum viable product
+    - Clarified the required feature set: login, signup, adding reviews
+    - Added more wireframe sketches: guest view and admin panel
+    - Added flowcharts for home pages and review writing
+    - Defined the scope of a minimum viable product
 - Repository
     - Created a Flask skeleton
     - Defined a set of routes to be implemented
@@ -79,7 +78,7 @@ focus.
 - **Hannah Pfeifer:** Set up initial backend app with placeholders using Flask in repo, added .gitignore file to repo, contributed to software specifications and questions to resolve on Google Doc, added tasks to Trello board, set up initial weekly status document
 - **Adam Chathankeo:** Contributed to software specifications on Google Doc, added tasks to Trello board
 - **Craig Sanders:** Contributed to software specifications on Google Doc
-- **Sean Lin** Coordinated meeting agenda
+- **Sean Lin** Coordinated meeting agenda, added pages for guest home page and admin panel, and added flowcharts
 ---
 ## Notes
 This file will be updated weekly as the project progresses.
