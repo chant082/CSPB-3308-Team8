@@ -8,7 +8,7 @@
 **Week:** 3
 **Meeting Held:** Yes
 **Meeting Date:** July 2, 2026
-**Meeting Duration:** 30 minutes
+**Meeting Duration:** 45 minutes
 **Meeting Format:** Discord
 ---
 ## Overview
