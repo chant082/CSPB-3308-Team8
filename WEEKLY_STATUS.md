@@ -1,20 +1,31 @@
 # WEEKLY_STATUS.md
+
 ## Project Milestone 3: Weekly Status Report
+
 **Project:** CSPB Course Review Platform
+
 **Team Number:** 8
+
 **Team Name:** Team Infinity
 ---
 ## Reporting Period
+
 **Week:** 3
+
 **Meeting Held:** Yes
+
 **Meeting Date:** July 2, 2026
+
 **Meeting Duration:** 45 minutes
+
 **Meeting Format:** Discord
+
 **Scrum master:** Ching-Hsiang (Sean) Lin
-**Meeting attendees** All team members
+
+**Meeting attendees:** All team members
 ---
 ## Overview
-This document captures the **weekly status** of the CSPB Course Review Platform project for the specified reporting period.
+This document captures the **weekly status** of the **CSPB Course Review Platform** project for the specified reporting period.
 It is intended to provide a concise snapshot of progress, plans, and risks, and
 will be updated weekly throughout the project.
 This weekly status format is designed to:
@@ -43,7 +54,7 @@ Key accomplishments include:
 - Product scope
     - Clarified the required feature set: login, signup, adding reviews, adding courses
     - Added more wireframe sketches: guest homepage and admin panel
-    - Added flowcharts to illustrate home pages and review writing workflow 
+    - Added flowcharts to illustrate home page, login, and review writing workflow 
     - Defined the scope of a minimum viable product
 - Repository
     - Created a Flask skeleton
@@ -83,7 +94,7 @@ focus.
 - **Hannah Pfeifer:** Set up initial backend app with placeholders using Flask in repo, added .gitignore file to repo, contributed to software specifications and questions to resolve on Google Doc, added tasks to Trello board, set up initial weekly status document
 - **Adam Chathankeo:** Contributed to software specifications on Google Doc, added tasks to Trello board
 - **Craig Sanders:** Contributed to software specifications on Google Doc
-- **Ching-Hsiang (Sean) Lin** Coordinated meeting agenda, added pages for guest home page and admin panel, and added flowcharts
+- **Ching-Hsiang (Sean) Lin**: Coordinated meeting agenda, added pages for guest home page and admin panel, and added flowcharts
 ---
 ## Notes
 This file will be updated weekly as the project progresses.
