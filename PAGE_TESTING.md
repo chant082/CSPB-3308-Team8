@@ -73,7 +73,7 @@ Purpose: Displays the home page for a logged-in user. Users can browse courses, 
 
 *Regular User View:*
 
-![Regular User View](ourse_docs/archive/Milestone4/images/home_page.png)
+![Regular User View](course_docs/archive/Milestone4/images/home_page.png)
 
 *Admin View:*
 
@@ -587,7 +587,7 @@ Purpose: Displays detailed information for a selected course, including average 
 
 ---
 
-# 9) Review Writing Page
+# 9) Write a Review
 
 ## Page Title
 *Course Title* (Displays the selected course title)
