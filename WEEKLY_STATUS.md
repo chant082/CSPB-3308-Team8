@@ -25,7 +25,7 @@ At the time of this report:
 - Tasks are assigned to individual team members
 ---
 
-## Reporting Period
+# Reporting Period
 
 **Week:** 7 (of the semester)
 
@@ -101,6 +101,9 @@ focus.
 - **Ching-Hsiang (Sean) Lin**: Coordinated meeting agenda, added pages for guest home page and admin panel, and added flowcharts
 ---
 
+## Reporting Period
+
+**Week**: 8 (of the semester)
 
 **Sprint**: 4
 
@@ -191,3 +194,70 @@ The weekly status format was found to be useful for maintaining accountability a
 This file will be updated weekly as the project progresses.
 Earlier weekly entries may be retained below or moved to an archive directory if
 the file grows large
+
+---
+
+# Reporting Period
+
+**Week**: 9 (of the semester)
+
+**Sprint**: 5
+
+**Meeting Held:** Yes
+
+**Meeting Date:** July 16, 2026
+
+**Meeting Duration:** 20 minutes
+
+**Meeting Format:** Zoom
+
+**Scrum master:** Hannah Pfeifer
+
+**Meeting attendees:** All team members
+---
+## Progress Since Last Week
+This week, the team focused on **Milestone 5 and SQL Design**.
+Major infrastructure and planning milestones were completed to prepare for active
+development.
+Key accomplishments include:
+- Discussed progress of project, confirming all requirements for Milestone 5 were met
+- Agreed on the SQL table contents and access methods
+- Updated Flask routes and started on HTML pages
+- Discussed project deadlines and goals for next week
+---
+## Completed Tasks
+- Milestone 5
+    - Defined 3 required tables: Users, Courses, and Reviews
+    - Defined access methods and how to test them
+    - Decided that commenting will not be included in the MVP due to time constraints
+    - Discuss submission of SQL_TESTING.md
+- Repository
+    - Expanded on Flask skeleton
+    - Completed base.html from which the rest of the html pages will extend from
+---
+## Planned Tasks for Next Week
+- Continue frontend page layout designs
+- Implement the initial SQL tables and queries
+- Research and implement some HTML web forms so users can submit information to the database
+- Make classes for course and review objects
+---
+## Blockers and Issues
+No major technical blockers were encountered this week.
+---
+## Risks and Mitigation
+**Identified Risk:** Only 3 weeks before project demo
+- *Mitigation:* Focus on functionality rather than aesthetics for upcoming project demo.
+
+**Identified Risk:** Potential duplicate work
+- *Mitigation:* Everyone will work on a separate task such as SQL, web forms, or HTML. In our Google Doc, we will create a list of html pages and who is working on what so our work doesn't overlap.
+---
+## Team Reflection
+The team reported:
+- The planning stage is mostly complete (will add items as needed) so now focus should be on implementing and tying everything together.
+---
+## Individual Contributions This Week
+- **Hannah Pfeifer:** Expanded routes on backend app using Flask, contributed to SQL table design on Google Doc, added HTML and variables planning page to Google Doc, built base.html and started working on home.html, updated WEEKLY_STATUS.md.
+- **Adam Chathankeo:** Contributed to SQL design on Google Doc, formatted and submitted Milestone 5.
+- **Craig Sanders:** Contributed to SQL access methods and testing on Google Doc.
+- **Ching-Hsiang (Sean) Lin**: Contributed to SQL tables, testing, and access methods on Google Doc.
+---
