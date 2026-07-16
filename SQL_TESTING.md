@@ -109,8 +109,8 @@ Stores CSPB course information
 
 **Expected Result:** course row created  
 **Actual Result:** course returned  
-**Status:** Pass
-**Post-conditions:** Course persisted    
+**Status:** Pass  
+**Post-conditions:** Course persisted  
 
 ---
 
@@ -148,10 +148,10 @@ Stores reviews for each course
 1. Insert a valid review row
 2. Query by user name and course name
 
-**Expected Result:** Review exists
-**Actual Result:** Review returned  
-**Status:** Pass  
-**Post-conditions:** Review persisted  
+**Expected Result:** Review exists  
+**Actual Result:** Review returned    
+**Status:** Pass   
+**Post-conditions:** Review persisted   
 
 ---
 
