@@ -70,6 +70,10 @@ def do_the_signup():
 def show_the_signup_form():
     return render_template("signup.html")
     
+## LOG OUT - Log the user out and redirect to the homepage
+@app.route('/logout')
+def logout():
+    return "logout called."
 
 ###############################################################################
 ## USER/ADMIN PROFILE ROUTES
