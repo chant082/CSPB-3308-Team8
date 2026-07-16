@@ -1,6 +1,9 @@
 ## Project Milestone 5: SQL Design
+
 **Team:** Team 8 - Infinity
+
 **Project:** CSPB Course Reviews  
+
 **Purpose:** Database design and testing specification for developers
 
 ---
@@ -62,7 +65,8 @@ Stores user account information.
 **Pre-conditions:** Database running  
 **Test Steps:**
 1. Insert a valid user row
-2. Query by email  
+2. Query by email
+
 **Expected Result:** User row exists  
 **Actual Result:** User returned by query  
 **Status:** Pass  
@@ -102,6 +106,7 @@ Stores CSPB course information
 **Test Steps:**
 1. Insert a valid course row
 2. Query by course name
+
 **Expected Result:** course row created  
 **Actual Result:** course returned  
 **Status:** Pass
@@ -126,9 +131,9 @@ Stores reviews for each course
 | **Upvotes** | The number of positive votes the review has received | `int` |
 | **Downvotes** | The number of negative votes the review has received | `int` |
 | **Flagged** | Indicates whether the review has been reported or flagged | `bool` |
-| **Rating** | The numerical course rating given by the user | `dbl` |
-| **Difficulty** | The perceived difficulty level of the course | `dbl` |
-| **Time** | The estimated hours per week spent on the course | `dbl` |
+| **Rating** | The numerical course rating given by the user | `int` |
+| **Difficulty** | The perceived difficulty level of the course | `int` |
+| **Time** | The estimated hours per week spent on the course | `int` |
 
 
 ### Relationships
@@ -141,11 +146,13 @@ Stores reviews for each course
 **Description:** Verify review creation  
 **Test Steps:**
 1. Insert a valid review row
-2. Query by user name and course name  
+2. Query by user name and course name
+
 **Expected Result:** Review exists
 **Actual Result:** Review returned  
 **Status:** Pass  
 **Post-conditions:** Review persisted  
+
 ---
 
 
@@ -190,7 +197,8 @@ This is used whenever the platform needs to greet a user or display the author o
 **Use Case Name:** Retrieve username of a user  
 **Pre-conditions:** User exists  
 **Test Steps:**
-1. Call method with known user_id 
+1. Call method with known user_id
+
 **Expected Result:** Username returned  
 **Post-conditions:** None 
 
@@ -231,7 +239,8 @@ Fetches the average rating of a course
 **Test Steps:**
 1. Call method with known course_id
 2. Retrieve all individual ratings
-3. Use AVG(rating) to calculate the average  
+3. Use AVG(rating) to calculate the average
+
 **Expected Result:** Course rating average returned  
 **Post-conditions:** None 
 
@@ -269,7 +278,8 @@ Fetches a list of courses that contain a keyword
 **Pre-conditions:** Database running  
 **Test Steps:**
 1. Call method with keywords
-2. Use SQL command Like to match the keyword   
+2. Use SQL command Like to match the keyword
+   
 **Expected Result:** None or one or multiple rows of courses returned  
 **Post-conditions:** None 
 
