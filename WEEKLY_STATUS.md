@@ -257,7 +257,7 @@ The team reported:
 ---
 ## Individual Contributions This Week
 - **Hannah Pfeifer:** Expanded routes on backend app using Flask, contributed to SQL table design on Google Doc, added HTML and variables planning page to Google Doc, built base.html and started working on home.html, updated WEEKLY_STATUS.md.
-- **Adam Chathankeo:** Contributed to SQL design on Google Doc, formatted and submitted Milestone 5.
+- **Adam Chathankeo:** Contributed to SQL design on Google Doc, formatted and submitted Milestone 5, working on simple css styling for html files, and reviewing flask skeleton, reviewed WEEKLY_STATUS.md.
 - **Craig Sanders:** Contributed to SQL access methods and testing on Google Doc.
 - **Ching-Hsiang (Sean) Lin**: Contributed to SQL tables, testing, and access methods on Google Doc.
 ---
