@@ -1,25 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Signup: Page for creating a new user account -->
+{% extends "base.html" %}
 
-<head>
-    <title>Sign Up</title>
-</head>
+{% block title %}Sign Up | CSPB Course Reviews{% endblock %}
 
-<body>
+{% block content %}
 
-    <header>
-        <!-- Logo -->
-        <h1>CSPB Course Review Platform</h1>
-    </header>
+<div>
+    <h2>Sign Up</h2>
+    <!-- sign up image? -->
+    <p>
+        Create a new account to access additional features in the CSPB Course Review Platform. <br>
+        Already a member? <a href="{{ url_for('login') }}">Log in here</a>.
+    </p>
+</div>
 
-    <main>
-        <h2>Create an Account</h2>
+<div>
+    <!-- TODO: Add sign up web form -->
+   
+</div>
 
-        <p>This is the sign up page.</p>
+<div>
+    <!-- My recent reviews-->
+    <!-- If user is normal user, show recent reviews table-->
+</div>
 
-        <!-- content -->
-    </main>
 
-</body>
-
-</html>
+{% endblock %}

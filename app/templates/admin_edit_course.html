@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Admin Edit Course: Page with web form for editing existing courses -->
+{% extends "base.html" %}
 
-<head>
-    <title>Admin Edit Course</title>
-</head>
+{% block title %}Admin Edit Course | CSPB Course Reviews{% endblock %}
 
-<body>
+{% block content %}
 
-    <header>
-        <!-- Logo -->
-        <h1>CSPB Course Review Platform</h1>
-    </header>
+<div>
+    <h2>Edit Course</h2>
+    <p>
+        Fill out the form below to edit the course details. 
+        Please ensure that all required fields are completed accurately before submitting the form.
+    </p>
+</div>
 
-    <main>
-        <h2>Edit Course</h2>
+<div>
+    <!-- TODO: Add Edit Course Form -->
+</div>
 
-        <p>This is the edit course page for course {{ course.name }}.</p>
-
-        <!-- content -->
-    </main>
-
-</body>
-
-</html>
+{% endblock %}

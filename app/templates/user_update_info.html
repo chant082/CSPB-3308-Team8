@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Edit Profile: Page for updating user account information -->
+{% extends "base.html" %}
 
-<head>
-    <title>Update Profile</title>
-</head>
+{% block title %}Edit Profile | CSPB Course Reviews{% endblock %}
 
-<body>
+{% block content %}
 
-    <header>
-        <!-- Logo -->
-        <h1>CSPB Course Review Platform</h1>
-    </header>
+<div>
+    <h2>Edit Profile</h2>
+    <p>
+        Edit your account information below, {{ user.username }}. 
+        You can update your email, password, and other details as needed.
+    </p>
+</div>
 
-    <main>
-        <h2>Update Profile</h2>
+<div>
+    <!-- TODO: Add edit profile form to change pic, username, email, password, apply for admin role? -->
+</div>
 
-        <p>This is the update profile page for user: {{ user.username }}.</p>
-
-        <!-- content -->
-    </main>
-
-</body>
-
-</html>
+{% endblock %}

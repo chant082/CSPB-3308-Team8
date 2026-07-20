@@ -1,25 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Course Details: Course page with average ratings and reviews -->
+{% extends "base.html" %}
 
-<head>
-    <title>Course Details</title>
-</head>
+{% block title %}{{ course.name }} | CSPB Course Reviews{% endblock %}
 
-<body>
+{% block content %}
 
-    <header>
-        <!-- Logo -->
-        <h1>CSPB Course Review Platform</h1>
-    </header>
+<div>
+    <h2>{{ course.name }}</h2>
+    <!-- Add image or course icon -->
+    <p>
+        This is the details page for the course: "{{ course.name }}".
+    </p>
+    <!-- Add course description -->
+    <p>
+        {{ course.description }}
+    </p>
+</div>
 
-    <main>
-        <h2>Course Details</h2>
+<div>
+    <!-- If logged in, write a review button shows -->
+</div>  
 
-        <p>This is the course details page for course: "{{ course.name }}".</p>
+<div>
+    <h3>Average Ratings</h3>
+    <!-- TODO: Add average rating display (include icons) -->
+    <p>
+        Overall Rating: {{ course.average_rating }}<br>
+        Difficulty: {{ course.difficulty }}<br>
+        Workload: {{ course.time }}
+    </p>
 
-        <!-- content -->
-    </main>
+</div>
 
-</body>
+<div>
+    <!-- TODO: Add table of recent reviews with ratings, upvote and downvote buttons. 
+     Filters? Refer to software specifications for details -->
+</div>
 
-</html>
+{% endblock %}

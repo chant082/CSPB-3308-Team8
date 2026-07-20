@@ -1,25 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- About page: Description of website and Team Infinity -->
+{% extends "base.html" %}
 
-<head>
-    <title>About</title>
-</head>
+{% block title %}About | CSPB Course Reviews{% endblock %}
 
-<body>
+{% block content %}
 
-    <header>
-        <!-- Logo -->
-        <h1>CSPB Course Review Platform</h1>
-    </header>
+<div>
+    <h2>About CSPB Course Reviews</h2>
+    <p>
+        Welcome to CSPB Course Reviews, a platform designed to help students share their experiences and insights about 
+        courses offered in the Computer Science Post-Baccalaureate program at the University of Colorado Boulder. 
+        Our goal is to provide a space where students can make informed decisions about their course selections based 
+        on the feedback and reviews from their peers.
+    </p>
+    <p>
+        <strong>Team Infinity</strong> is dedicated to creating a comprehensive and user-friendly platform for students 
+        to access and share course reviews. We believe that informed decision-making is crucial for academic success, 
+        and our platform aims to facilitate this process by providing a reliable source of information about courses 
+        in the CSPB program. Sign up or log in to contribute your own reviews and help fellow students navigate their academic journey.
+    </p>
+</div>
 
-    <main>
-        <h2>About</h2>
+<div>
+    <h3>CSPB 3308: Software Development Project</h3>
+    <p>
+        This project is part of CSPB 3308: Software Development Methods and Tools at CU Boulder. 
+        The course focuses on developing software solutions in a team environment, emphasizing collaboration, 
+        communication, and practical application of software development principles. Team Infinity has worked together 
+        to design and implement this course review platform, showcasing our skills in web development, database 
+        management, and user experience design. After the completion of this course, we hope to continue improving 
+        and expanding the platform.
+    </p>
 
-        <p>This is the about page.</p>
+    <h3>Team Infinity</h3>
+    <ul>
+        <li>Hannah Pfeifer</li>
+        <li>Adam Chathankeo</li>
+        <li>Ching-Hsiang (Sean) Lin</li>
+        <li>Craig Sanders</li>
+    </ul>   
+</div>
 
-        <!-- content -->
-    </main>
-
-</body>
-
-</html>
+{% endblock %}
