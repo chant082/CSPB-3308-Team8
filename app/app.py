@@ -112,7 +112,7 @@ def add_course(username):
     if request.method == 'POST':
         return do_add_course(username)
     else:
-        return show_add_course_form(username)
+        return show_add_course_form()
 
 def do_add_course(username):
     return f"do_add_course called for user: {username}"
