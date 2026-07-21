@@ -1,0 +1,172 @@
+/*
+    CSPB Course Reviews Main CSS file.
+    
+    Color palette from mockups:
+        #0052f2 - bright blue (button)
+        #0045cc - blue (button hover)
+        #051331 - dark navy
+        #ffffff - white (background)
+        #000000 - black (main text)
+        #e9ebf0 - light gray (border)
+        #787e95 - medium gray (secondary text)
+        #f2f6ff - pale blue (secondary button hover)
+*/
+
+/* Page Setup */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 10px;
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: white;
+    color: black;
+}
+
+/* Links - blue */
+a {
+    color: #0052f2;
+}
+
+/* Overall page container */
+.site_container {
+    width: 100%;
+    max-width: 1400px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Header */
+.site_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 18px 0;
+    border-bottom: 1px solid #e9ebf0;
+}
+
+/* Logo */
+.logo_link {
+    display: inline-flex;
+    align-items: left;
+}
+
+.site_logo {
+    display: block;
+    width: 500px;
+    max-width: 100%;
+    height: auto;
+    align-items: left;
+}
+
+/* Main Navigation */
+.main_nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.main_nav a {
+    text-decoration: none;
+    color: #051331;
+    font-weight: bold
+}
+
+.main_nav a:hover {
+    color: #0052f2;
+}
+
+/* Main page content */
+.content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+/* Resuable card */
+.card {
+    margin-bottom: 24px;
+    padding: 24px;
+    background-color: white;
+    border: 1px solid #e9ebf0;
+    border: 10px;
+
+    box-shadow: 0 4px 12px rgba(5, 19, 49, 0.06);
+}
+
+/* Headings and text */
+.page_title {
+    margin-top: 0;
+    margin-bottom: 24px;
+    color: #051331;
+}
+
+.section_title {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: #051331;
+}
+
+.secondary_text {
+    color: #787e95;
+}
+/* Buttons */
+.button {
+    display: inline-block;
+    padding: 10px 22px;
+
+    font: inherit;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #0052f2;
+
+    border: 1px solid #e9ebf0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ 
+.button:hover {
+    background-color: #0045cc;
+}
+
+.button_secondary {
+    color: #0052f2;
+    background-color: white;
+}
+
+.button_secondary:hover {
+    background-color: #f2f6ff;
+}
+
+/* Forms */
+
+
+/* Footer */
+.site_footer {
+    margin-top:30px;
+    padding: 24p 0;
+    text-align: center;
+    color: #787e95;
+    border-top: 1px solid #e9ebf0;
+}
+
+.site-footer p {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+.site-footer a {
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
