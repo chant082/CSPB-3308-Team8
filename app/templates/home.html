@@ -1,25 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Home page: Welcome message and recent reviews -->
 
-<head>
-    <title>Home</title>
-</head>
+{% extends "base.html" %}
 
-<body>
+{% block title %}Home | CSPB Course Reviews{% endblock %}
 
-    <header>
-        <!-- Logo -->
-        <h1>CSPB Course Review Platform</h1>
-    </header>
+{% block content %}
 
-    <main>
-        <h2>Home Page</h2>
+<div>
+    <!-- User View: Display a personalized welcome message if the user is logged in -->
+    {% if username %}
+        <h2>Welcome back, {{ username }}!</h2>
+        <p>
+            Share your experience and help other students 
+            make informed decisions by writing a review for your courses.
+        </p>
+        <!-- Add generic image for writing a review-->
+        <!-- write a review button -->
 
-        <p>This is the home page.</p>
+    <!-- Guest View-->
+    {% else %}
+        
+        <h2>Welcome to the CSPB Course Review Platform!</h2>
+        <p> 
+            Log in or create an account to write reviews and access additional features.
+        </p>
 
-        <!-- content -->
-    </main>
+        <!-- Add log in and sign up buttons -->
+        <!-- Add generic image for writing a review-->
+    {% endif %}
+</div>
 
-</body>
+<div>
+    <!-- Add Recent Reviews Section (list of recent courses and links to each course detail page)-->
+</div>
 
-</html>
+{% endblock %}

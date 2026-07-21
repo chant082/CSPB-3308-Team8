@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Submit Review: Page for submitting a new course review -->
+{% extends "base.html" %}
 
-<head>
-    <title>Submit Review</title>
-</head>
+{% block title %}Submit Review | CSPB Course Reviews{% endblock %}
 
-<body>
+{% block content %}
 
-    <header>
-        <!-- Logo -->
-        <h1>CSPB Course Review Platform</h1>
-    </header>
+<div>
+    <h2>Submit Review</h2>
+    <p>
+        This is the submit review page for course: {{ course.name }}.
+    </p>
+</div>
 
-    <main>
-        <h2>Submit Review</h2>
+<div>
+    <!-- TODO: Add submit review web form -->
+</div>
 
-        <p>This is the submit review page for course: {{ course.name }}.</p>
-
-        <!-- content -->
-    </main>
-
-</body>
-
-</html>
+{% endblock %}

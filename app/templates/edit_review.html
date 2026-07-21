@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Edit Review: Page with web form for editing a review -->
+{% extends "base.html" %}
 
-<head>
-    <title>Edit Review</title>
-</head>
+{% block title %}Edit Review | CSPB Course Reviews{% endblock %}
 
-<body>
+{% block content %}
 
-    <header>
-        <!-- Logo -->
-        <h1>CSPB Course Review Platform</h1>
-    </header>
+<div>
+    <h2>Edit Review</h2>
+    <p>
+        This is the edit review page for review: {{ review.id }}.
+    </p>
+</div>
 
-    <main>
-        <h2>Edit Review</h2>
+<div>
+    <!-- TODO: Add Edit Review Form -->
+</div>
 
-        <p>This is the edit review page for review: {{ review.id }}.</p>
-
-        <!-- content -->
-    </main>
-
-</body>
-
-</html>
+{% endblock %}

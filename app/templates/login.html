@@ -1,25 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Login: Page with web form for user login -->
+{% extends "base.html" %}
 
-<head>
-    <title>Login</title>
-</head>
+{% block title %}Login | CSPB Course Reviews{% endblock %}
 
-<body>
+{% block content %}
 
-    <header>
-        <!-- Logo -->
-        <h1>CSPB Course Review Platform</h1>
-    </header>
+<div>
+    <h2>Login</h2>
+    <p>
+        Please enter your credentials to log in. <br>
+        Not a member? Create an account.
+        <!-- Create account button -->
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+    </p>
+</div>
 
-    <main>
-        <h2>Login</h2>
+<div>
+    <!-- TODO: Add Login Form -->
+</div>
 
-        <p>This is the login page.</p>
-
-        <!-- content -->
-    </main>
-
-</body>
-
-</html>
+{% endblock %}

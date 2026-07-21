@@ -4,27 +4,41 @@
 <!-- Base template for all pages. Includes header with navigation and footer -->
 
 <head>
-    <title>CSPB Course Reviews</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CSPB Course Reviews{% endblock %}</title>
 </head>
 
 <body>
 
     <header>
-        <!-- Logo -->
-         
-        <h1>CSPB Course Review Platform</h1>
+        <img src="{{ url_for('static', filename='images/CSPB_horiz_logo.png') }}" alt="CSPB Course Reviews Logo" width=60%>
+        
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('browse_courses') }}">Courses</a>
+            {% if username %}
+                <a href="{{ url_for('profile', username=username) }}">Profile</a>
+                <a href="{{ url_for('logout') }}">Log Out</a>
+            {% else %}
+                <a href="{{ url_for('signup') }}">Sign Up</a>
+                <a href="{{ url_for('login') }}">Log In</a>
+            {% endif %}
+        </nav>
 
-        <!-- Navigation -->
     </header>
 
     <main>
-
         <!-- Page content -->
-
+        {% block content %}
+        {% endblock %} 
     </main>
 
     <footer>
-        <p>Team Infinity | CSPB 3308 Software Development</p>
+        <p>Team Infinity | CSPB 3308 - Software Development</p>
+        <nav>
+            <a href="{{ url_for('about') }}">About</a>
+        </nav>
     </footer>
 
 </body>

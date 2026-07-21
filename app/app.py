@@ -70,6 +70,10 @@ def do_the_signup():
 def show_the_signup_form():
     return render_template("signup.html")
     
+## LOG OUT - Log the user out and redirect to the homepage
+@app.route('/logout')
+def logout():
+    return "logout called."
 
 ###############################################################################
 ## USER/ADMIN PROFILE ROUTES
@@ -108,7 +112,7 @@ def add_course(username):
     if request.method == 'POST':
         return do_add_course(username)
     else:
-        return show_add_course_form(username)
+        return show_add_course_form()
 
 def do_add_course(username):
     return f"do_add_course called for user: {username}"
