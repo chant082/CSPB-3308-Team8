@@ -5,12 +5,12 @@
 
 {% block content %}
 
-<div>
+<section=description>
     <h2>Submit Review</h2>
     <p>
         This is the submit review page for course: {{ course.name }}.
     </p>
-</div>
+</section>
 
 <div>
     <form method="post" action="{{url_for('submit_review', course_id=course_id)}}">
