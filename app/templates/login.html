@@ -1,22 +1,35 @@
 <!-- Login: Page with web form for user login -->
 {% extends "base.html" %}
-
 {% block title %}Login | CSPB Course Reviews{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
 
 {% block content %}
 
-<section=description>
-    <h2>Login</h2>
+<section id = "description">
+    <h1>Log in</h1>
     <p>
-        Please enter your credentials to log in. <br>
-        Not a member? Create an account.
-        <!-- Create account button -->
-        <a href="{{ url_for('signup') }}">Sign Up</a>
+       Please enter your credentials to log in. <br>
+       Not a member? Create an account. <a href="{{ url_for('signup') }}">Sign Up</a>
     </p>
 </section>
 
-<section=login_form>
+<section id = "login_form">
     <!-- TODO: Add Login Form -->
+     <div class="login-container">
+        <form action="{{ url_for('login') }}" method="post">
+            <label for="username"><strong>Username:</strong></label>
+            <input type="text" id="username" name="username" required>
+            
+
+            <label for="password"><strong>Password:</strong></label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Log In</button>
+        </form>
+    </div>
 </section>
 
 {% endblock %}
