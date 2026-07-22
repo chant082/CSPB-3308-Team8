@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div>
+<section=welcome>
     <!-- User View: Display a personalized welcome message if the user is logged in -->
     {% if username %}
         <h2>Welcome back, {{ username }}!</h2>
@@ -28,10 +28,10 @@
         <!-- Add log in and sign up buttons -->
         <!-- Add generic image for writing a review-->
     {% endif %}
-</div>
+</section>
 
-<div>
+<section=recent_reviews>
     <!-- Add Recent Reviews Section (list of recent courses and links to each course detail page)-->
-</div>
+</section>
 
 {% endblock %}

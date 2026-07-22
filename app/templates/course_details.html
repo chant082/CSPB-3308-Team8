@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div>
+<section=course_details>
     <h2>{{ course.name }}</h2>
     <!-- Add image or course icon -->
     <p>
@@ -15,13 +15,13 @@
     <p>
         {{ course.description }}
     </p>
-</div>
+</section>
 
-<div>
+<section=write_review>
     <!-- If logged in, write a review button shows -->
-</div>  
+</section>
 
-<div>
+<section=average_ratings>
     <h3>Average Ratings</h3>
     <!-- TODO: Add average rating display (include icons) -->
     <p>
@@ -29,12 +29,11 @@
         Difficulty: {{ course.difficulty }}<br>
         Workload: {{ course.time }}
     </p>
+</section>
 
-</div>
-
-<div>
+<section=recent_reviews>
     <!-- TODO: Add table of recent reviews with ratings, upvote and downvote buttons. 
      Filters? Refer to software specifications for details -->
-</div>
+</section>
 
 {% endblock %}

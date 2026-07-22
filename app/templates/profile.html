@@ -5,14 +5,14 @@
 
 {% block content %}
 
-<div>
+<section=description>
     <h2>Profile</h2>
     <p>
         Welcome to your profile page, {{ user.username }}! Here you can view and edit your account information.
     </p>
-</div>
+</section>
 
-<div>
+<section=profile_info>
     <!-- TODO: Add Profile information. Block out password? -->
     <!-- Profile Pic -->
     Username: {{ user.username }} <br>
@@ -26,18 +26,18 @@
 
     <!-- TODO: Add Edit Profile button -->
     <a href="{{ url_for('user_update_info') }}">Edit Profile</a>
-</div>
+</section>
 
-<div>
+<section=recent_reviews>
     <!-- My recent reviews-->
     <!-- If user is normal user, show recent reviews table-->
-</div>
+</section>
 
-<div>
+<section=admin_panel>
     <!-- admin panel button-->
     {% if user.is_admin %}
         <a href="{{ url_for('admin_panel') }}">Admin Panel</a>
     {% endif %}
-</div>
+</section>
 
 {% endblock %}
