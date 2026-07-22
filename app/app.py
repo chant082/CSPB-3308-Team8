@@ -10,6 +10,7 @@
 
 from flask import Flask, url_for, request, render_template 
 from markupsafe import escape
+from models import get_course, insert_review
 
 # Create the Flask application
 app = Flask(__name__)
@@ -174,10 +175,23 @@ def submit_review(course_id):
         return show_submit_review_form(course_id)
 
 def do_submit_review(course_id):
+   
+    #need to validate these values
+    rating = request.form.get("rating")
+    difficulty = request.form.get("difficulty")
+    time = request.form.get("time")
+    review = request.form.get("review")
+
+    #this will have to be changed once we have auth functionality
+    user_id = 1
+
+    insert_review(course_id, user_id, review, rating, difficulty, time)
+
     return f"do_submit_review called for course: {course_id}"
 
 def show_submit_review_form(course_id):
-    return render_template("submit_review.html", course_id=course_id)
+    course = get_course(course_id)
+    return render_template("submit_review.html", course_id = course_id, course = course)
 
 ## EDIT REVIEW - display or process the edit review form for a specific course and review
 @app.route('/courses/<int:course_id>/edit_review/<int:review_id>', methods=['GET', 'POST'])
