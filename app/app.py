@@ -10,7 +10,7 @@
 
 from flask import Flask, url_for, request, render_template 
 from markupsafe import escape
-from models import get_course, insert_review
+#from models import get_course, insert_review
 
 # Create the Flask application
 app = Flask(__name__)
