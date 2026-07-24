@@ -1,7 +1,6 @@
 import sqlite3
 from config import DATABASE
 
-
 def get_db():
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row  
@@ -24,14 +23,14 @@ def get_course(course_id):
     return course
 
 #insert review into review table
-def insert_review(course_id, user_id, review, rating, difficulty, time):
+def insert_review(course_id, user_id, review_text, rating, difficulty, time, year, semester):
     conn = get_db()
     conn.execute(
         """
-        INSERT INTO Reviews (course_id, user_id, review, rating, difficulty, time)
-        VALUES(?,?,?,?,?,?)
+        INSERT INTO Reviews (course_id, user_id, review_text, rating, difficulty, time, year, semester)
+        VALUES(?,?,?,?,?,?,?,?)
         """,
-        (course_id, user_id, review, rating, difficulty, time),
+        (course_id, user_id, review_text, rating, difficulty, time, year, semester),
     )
     conn.commit()
     conn.close()
