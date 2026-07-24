@@ -23,7 +23,7 @@
         </div>
 
         <div>
-            <label for="difficulty">Percieved course difficulty 1-5</label>
+            <label for="difficulty">Perceived course difficulty 1-5</label>
             <input type="number" id="difficulty" name="difficulty" min="1" max="5" required>
         </div>
         
@@ -34,8 +34,23 @@
 
         <div>        
             <label for="review">Leave a review (300 character max.)</label>
-            <textarea id="review" name="review" maxlength=300 rows="5" required></textarea>
+            <textarea id="review" name="review_text" maxlength=300 rows="5" required></textarea>
 
+        </div>
+
+        <div>
+            <label for="year">Year class was taken (YYYY)</label>
+            <input type="text" id="year" name="year" pattern="[0-9]{4}" maxlength="4" inputmode="numeric" required>
+        </div>
+
+        <div>
+            <label for="semester">Semester</label>
+            <select id="semester" name="semester" required>
+                <option value="" disabled selected>Select a semester</option>
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
+                <option value="Fall">Fall</option>
+            </select>
         </div>
 
         <button type="submit">Submit Review</button>

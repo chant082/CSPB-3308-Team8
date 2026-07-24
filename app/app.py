@@ -8,7 +8,7 @@
 ###############################################################################
 
 
-from flask import Flask, url_for, request, render_template 
+from flask import Flask, url_for, request, render_template, redirect
 from markupsafe import escape
 from models import get_course, insert_review
 
@@ -177,17 +177,22 @@ def submit_review(course_id):
 def do_submit_review(course_id):
    
     #need to validate these values
-    rating = request.form.get("rating")
-    difficulty = request.form.get("difficulty")
-    time = request.form.get("time")
-    review = request.form.get("review")
-
+    review_text = request.form.get("review_text")
+    semester = request.form.get("semester")
+    try: 
+        rating = int(request.form.get("rating"))
+        difficulty = int(request.form.get("difficulty"))
+        time = int(request.form.get("time"))
+        year = int(request.form.get("year"))
+    except ValueError as ve:
+        return f"Invalid input: {ValueError}"
+ 
     #this will have to be changed once we have auth functionality
     user_id = 1
 
-    insert_review(course_id, user_id, review, rating, difficulty, time)
+    insert_review(course_id, user_id, review_text, rating, difficulty, time, year, semester)
 
-    return f"do_submit_review called for course: {course_id}"
+    return redirect(url_for('course_details', course_id=course_id))
 
 def show_submit_review_form(course_id):
     course = get_course(course_id)
