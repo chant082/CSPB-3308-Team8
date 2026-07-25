@@ -8,9 +8,9 @@
 ###############################################################################
 
 
-from flask import Flask, url_for, request, render_template, redirect
+from flask import Flask, url_for, request, render_template, redirect, abort
 from markupsafe import escape
-#from models import get_course, insert_review
+from models import get_course, get_course_object, insert_review
 
 # Create the Flask application
 app = Flask(__name__)
@@ -159,7 +159,10 @@ def show_courses():
 ## COURSE DETAILS - display the details of a specific course and its reviews
 @app.route('/courses/<int:course_id>')
 def course_details(course_id):
-    return render_template("course_details.html", course_id=escape(course_id))  
+    course = get_course_object(course_id)
+    if course is None:
+        abort(404)
+    return render_template("course_details.html", course=course)
 
 
 ###############################################################################

@@ -1,33 +1,33 @@
 <!-- Course Details: Course page with average ratings and reviews -->
 {% extends "base.html" %}
 
-{% block title %}{{ course.name }} | CSPB Course Reviews{% endblock %}
+{% block title %}{{ course.get_course_name() }} | CSPB Course Reviews{% endblock %}
 
 {% block content %}
 
-<section=course_details>
-    <h2>{{ course.name }}</h2>
+<div>
+    <h2>{{ course.get_course_name() }}</h2>
     <!-- Add image or course icon -->
     <p>
-        This is the details page for the course: "{{ course.name }}".
+        This is the details page for the course: "{{ course.get_course_name() }}".
     </p>
     <!-- Add course description -->
     <p>
-        {{ course.description }}
+        {{ course.get_course_description() }}
     </p>
 </section>
 
 <section=write_review>
     <!-- If logged in, write a review button shows -->
-</section>
+</div>
 
 <section=average_ratings>
     <h3>Average Ratings</h3>
     <!-- TODO: Add average rating display (include icons) -->
     <p>
-        Overall Rating: {{ course.average_rating }}<br>
-        Difficulty: {{ course.difficulty }}<br>
-        Workload: {{ course.time }}
+        Overall Rating: {{ course.get_average_rating() }}<br>
+        Difficulty: {{ course.get_average_difficulty() }}<br>
+        Workload: {{ course.get_average_workload() }}
     </p>
 </section>
 
