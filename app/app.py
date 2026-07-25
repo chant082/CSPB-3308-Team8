@@ -8,8 +8,9 @@
 ###############################################################################
 
 
-from flask import Flask, url_for, request, render_template 
+from flask import Flask, url_for, request, render_template, redirect, abort
 from markupsafe import escape
+from models import get_course, get_course_object, insert_review
 
 # Create the Flask application
 app = Flask(__name__)
@@ -158,7 +159,10 @@ def show_courses():
 ## COURSE DETAILS - display the details of a specific course and its reviews
 @app.route('/courses/<int:course_id>')
 def course_details(course_id):
-    return render_template("course_details.html", course_id=escape(course_id))  
+    course = get_course_object(course_id)
+    if course is None:
+        abort(404)
+    return render_template("course_details.html", course=course)
 
 
 ###############################################################################
@@ -174,10 +178,28 @@ def submit_review(course_id):
         return show_submit_review_form(course_id)
 
 def do_submit_review(course_id):
-    return f"do_submit_review called for course: {course_id}"
+   
+    #need to validate these values
+    review_text = request.form.get("review_text")
+    semester = request.form.get("semester")
+    try: 
+        rating = int(request.form.get("rating"))
+        difficulty = int(request.form.get("difficulty"))
+        time = int(request.form.get("time"))
+        year = int(request.form.get("year"))
+    except ValueError as ve:
+        return f"Invalid input: {ValueError}"
+ 
+    #this will have to be changed once we have auth functionality
+    user_id = 1
+
+    insert_review(course_id, user_id, review_text, rating, difficulty, time, year, semester)
+
+    return redirect(url_for('course_details', course_id=course_id))
 
 def show_submit_review_form(course_id):
-    return render_template("submit_review.html", course_id=course_id)
+    course = get_course(course_id)
+    return render_template("submit_review.html", course_id = course_id, course = course)
 
 ## EDIT REVIEW - display or process the edit review form for a specific course and review
 @app.route('/courses/<int:course_id>/edit_review/<int:review_id>', methods=['GET', 'POST'])

@@ -8,14 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
+
+    <!-- Additional styles for specific pages -->
+    {% block styles %}{% endblock %}
     <title>{% block title %}CSPB Course Reviews{% endblock %}</title>
 </head>
 
 <body>
     <div class="site_container">
         <header class="site_header">
-            <a href="{{ url_for('home') }}" class="logo_link"></a>
+            <a href="{{ url_for('home') }}" class="logo_link">
                 <img src="{{ url_for('static', filename='images/CSPB_horiz_logo.png') }}" 
                     alt="CSPB Course Reviews Logo"
                     class="site_logo">

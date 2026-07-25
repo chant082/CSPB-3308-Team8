@@ -3,19 +3,38 @@
 
 {% block title %}Sign Up | CSPB Course Reviews{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+{% endblock %}
+
 {% block content %}
 
-<section=description>
-    <h2>Sign Up</h2>
-    <!-- sign up image? -->
+<section id= "description">
+    <h1>Sign Up</h1>
     <p>
-        Create a new account to access additional features in the CSPB Course Review Platform. <br>
-        Already a member? <a href="{{ url_for('login') }}">Log in here</a>.
+       Please enter the following information to create your account. <br>
+       Already a member? <a href="{{ url_for('login') }}">Log in</a>.
+
     </p>
 </section>
 
-<section=signup_form>
+<section class = "signup_form">
     <!-- TODO: Add sign up web form -->
+     <div class = "signup-container">
+        <form action="{{ url_for('signup') }}" method="post">
+            <label for="username"><strong>Username:</strong></label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="email"><strong>Email:</strong></label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password"><strong>Password:</strong></label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
 </section>
+
 
 {% endblock %}

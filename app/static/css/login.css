@@ -1,0 +1,51 @@
+/*
+    CSPB Course Reviews Login CSS File.
+    
+    Color palette from mockups:
+        #0052f2 - bright blue (button)
+        #0045cc - blue (button hover)
+        #051331 - dark navy
+        #ffffff - white (background)
+        #000000 - black (main text)
+        #e9ebf0 - light gray (border)
+        #787e95 - medium gray (secondary text)
+        #f2f6ff - pale blue (secondary button hover)
+*/
+
+#description {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#signup_link {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 500px;
+}
+
+.login-container {
+    width: 350px;
+    margin: 50px auto;
+    padding: 60px;
+    border: 6px solid #ccc;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#username {
+    margin-bottom: 20px;
+}
