@@ -5,20 +5,20 @@
 
 {% block content %}
 
-<div>
+<section=description>
     <!-- Insert image (admin shield) -->
     <h2>Admin Panel</h2>
     <p>
         Welcome to the admin panel, {{ user.username }}! As an admin, you have the ability to manage courses and 
         oversee the content on the CSPB Course Reviews platform. Use the options below to add new courses or edit existing ones.
     </p>
-</div>
+</section>
 
-<div>
+<section=flagged_reviews>
     <!-- Flagged for Review?-->
-</div>
+</section>
 
-<div>
+<section=course_management>
     <h3>Course Management</h3>
 
     <!-- TODO: Add Buttons for add courses -->
@@ -26,6 +26,6 @@
 
     <!-- TODO: Add table of courses with info and edit button. Add delete course button per mockups? -->
     <a href="{{ url_for('admin_edit_course') }}">Edit</a>
-</div>
+</section>
 
 {% endblock %}
