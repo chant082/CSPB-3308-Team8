@@ -1,0 +1,15 @@
+/* Specific styling for home page*/
+
+.hero {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hero-image {
+    width: 300px;
+    height: auto;
+    text-align: center;
+    justify-self: end;
+}
