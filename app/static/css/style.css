@@ -109,7 +109,21 @@ a {
 }
 
 
-/* Resuable card */
+/* Resuable hero card and generic cards */
+
+.hero {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hero-image {
+    width: 300px;
+    height: auto;
+    text-align: center;
+    justify-self: end;
+}
 
 .hero-card {
     margin-top: 30px;
@@ -121,6 +135,7 @@ a {
 
     box-shadow: 0 4px 12px rgba(5, 19, 49, 0.06);
 }
+
 
 .card {
     margin-top: 30px;

@@ -11,8 +11,7 @@
 <section id = "description">
     <h1>Log in</h1>
     <p>
-       Please enter your credentials to log in. <br>
-       Not a member? Create an account. <a href="{{ url_for('signup') }}">Sign Up</a>
+       Please enter your credentials to log in.
     </p>
 </section>
 
@@ -27,7 +26,10 @@
             <label for="password"><strong>Password:</strong></label>
             <input type="password" id="password" name="password" required>
 
-            <button type="submit">Log In</button>
+            <button class="button" type="submit">Log In</button>
+
+           <p>Not a member?
+            <a href="{{ url_for('signup') }}">Sign Up</a></p> 
         </form>
     </div>
 </section>

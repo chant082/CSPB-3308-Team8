@@ -13,28 +13,26 @@
     <h1>Sign Up</h1>
     <p>
        Please enter the following information to create your account. <br>
-       Already a member? <a href="{{ url_for('login') }}">Log in</a>.
-
     </p>
 </section>
 
 <section class = "signup_form">
-    <!-- TODO: Add sign up web form -->
+
      <div class = "signup-container">
         <form action="{{ url_for('signup') }}" method="post">
-            <label for="username"><strong>Username:</strong></label>
-            <input type="text" id="username" name="username" required>
+            <label for="username"><strong>Username:</strong></label><br>
+            <input type="text" id="username" name="username" required><br>
             
-            <label for="email"><strong>Email:</strong></label>
-            <input type="email" id="email" name="email" required>
+            <label for="email"><strong>Email:</strong></label><br>
+            <input type="email" id="email" name="email" required><br>
 
-            <label for="password"><strong>Password:</strong></label>
-            <input type="password" id="password" name="password" required>
+            <label for="password"><strong>Password:</strong></label><br>
+            <input type="password" id="password" name="password" required><br>
 
-            <button type="submit">Sign Up</button>
+            <button class="button" type="submit">Sign Up</button>
+            <p>Already a member? <a href="{{ url_for('login') }}">Log in</a>.</p>
         </form>
     </div>
 </section>
-
 
 {% endblock %}
