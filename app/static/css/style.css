@@ -4,13 +4,26 @@
     Color palette from mockups:
         #0052f2 - bright blue (button)
         #0045cc - blue (button hover)
-        #051331 - dark navy
+        #051331 - navy
         #ffffff - white (background)
         #000000 - black (main text)
         #e9ebf0 - light gray (border)
         #787e95 - medium gray (secondary text)
         #f2f6ff - pale blue (secondary button hover)
 */
+
+/* Color variables */
+:root {
+    --bright-blue: #0052f2;
+    --blue: #0045cc;
+    --navy: #051331;
+    --white: #ffffff;
+    --black: #000000;
+    --light-gray: #e9ebf0;
+    --medium-gray: #787e95;
+    --pale-blue: #f2f6ff;
+}
+
 
 /* Page Setup */
 
@@ -22,14 +35,16 @@ body {
     margin: 10px;
     font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     line-height: 1.6;
-    background-color: white;
-    color: black;
+    background-color: var(--white);
+    color: var(--black);
 }
+
 
 /* Links - blue */
 a {
-    color: #0052f2;
+    color: var(--bright-blue);
 }
+
 
 /* Overall page container */
 .site_container {
@@ -40,6 +55,7 @@ a {
     padding: 0 24px;
 }
 
+
 /* Header */
 .site_header {
     display: flex;
@@ -47,8 +63,9 @@ a {
     justify-content: space-between;
     gap: 30px;
     padding: 18px 0;
-    border-bottom: 1px solid #e9ebf0;
+    border-bottom: 1px solid var(--light-gray);
 }
+
 
 /* Logo */
 .logo_link {
@@ -64,6 +81,7 @@ a {
     align-items: left;
 }
 
+
 /* Main Navigation */
 .main_nav {
     display: flex;
@@ -73,49 +91,91 @@ a {
 
 .main_nav a {
     text-decoration: none;
-    color: #051331;
-    font-weight: bold
+    color: var(--navy);
+    font-weight: bold;
 }
 
 .main_nav a:hover {
-    color: #0052f2;
+    color: var(--bright-blue);
 }
+
 
 /* Main page content */
 .content {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 30px 0;
 }
 
-/* Resuable card */
-.card {
-    margin-bottom: 24px;
-    padding: 24px;
-    background-color: white;
-    border: 1px solid #e9ebf0;
+
+/* Resuable hero card and generic cards */
+
+.hero {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hero-image {
+    width: 300px;
+    height: auto;
+    text-align: center;
+    justify-self: end;
+}
+
+.hero-card {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 30px;
+    background-color: var(--pale-blue);
+    border: 1px solid var(--light-gray);
     border: 10px;
 
     box-shadow: 0 4px 12px rgba(5, 19, 49, 0.06);
 }
 
+
+.card {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 30px;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border: 10px;
+
+    box-shadow: 0 4px 12px rgba(5, 19, 49, 0.06);
+}
+
+.card img {
+    width: 50%;
+    max-width: 500px;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+
 /* Headings and text */
 .page_title {
     margin-top: 0;
     margin-bottom: 24px;
-    color: #051331;
+    color: var(--navy);
 }
 
 .section_title {
     margin-top: 0;
     margin-bottom: 16px;
-    color: #051331;
+    color: var(--navy);
 }
 
 .secondary_text {
-    color: #787e95;
+    color: var(--medium-gray);
 }
+
+
 /* Buttons */
 .button {
     display: inline-block;
@@ -125,28 +185,86 @@ a {
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    color: white;
-    background-color: #0052f2;
+    color: var(--white);
+    background-color: var(--bright-blue);
 
-    border: 1px solid #e9ebf0;
+    border: 1px solid var(--light-gray);
     border-radius: 5px;
     cursor: pointer;
 }
  
 .button:hover {
-    background-color: #0045cc;
+    background-color: var(--blue);
 }
 
 .button_secondary {
-    color: #0052f2;
-    background-color: white;
+    color: var(--bright-blue);
+    background-color: var(--white);
 }
 
 .button_secondary:hover {
-    background-color: #f2f6ff;
+    background-color: var(--pale-blue);
 }
 
+
 /* Forms */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.form-control {
+    width: 100%;
+    padding: 11px 12px;
+    font: inherit;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    outline: 2px solid rgba(0, 82, 242, 0.2);
+    border-color: var(--bright-blue);
+}
+
+
+/* Course cards */
+.course-card {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) repeat(3, minmax(110px, 1fr));
+    gap: 20px;
+    align-items: center;
+}
+
+.course-info h2,
+.course-info h3 {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+.course-stat {
+    padding-left: 20px;
+    text-align: center;
+    border-left: 1px solid var(--light-gray);
+}
+
+.course-stat-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    color: var(--medium-gray);
+}
+
+.course-stat-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+}
 
 
 /* Footer */
@@ -154,8 +272,8 @@ a {
     margin-top:30px;
     padding: 24p 0;
     text-align: center;
-    color: #787e95;
-    border-top: 1px solid #e9ebf0;
+    color: var(--medium-gray);
+    border-top: 1px solid var(--light-gray);
 }
 
 .site-footer p {

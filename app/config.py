@@ -1,0 +1,1 @@
+DATABASE = "course_reviews.db"
