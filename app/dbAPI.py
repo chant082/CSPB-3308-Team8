@@ -111,6 +111,83 @@ def search_courses(db_name, keyword):
             connection.close()
 
 
+# return the average rating, difficulty, and workload of a course
+def get_course_averages(db_name, course_id):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT
+                AVG(rating) AS avg_rating,
+                AVG(difficulty) AS avg_difficulty,
+                AVG(workload) AS avg_workload
+            FROM Reviews
+            WHERE course_id = ?;
+        """, (course_id,))
+
+        averages = cursor.fetchone()
+
+        return averages
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# add a course
+# return the course_id of this new course
+def add_course(
+    db_name,
+    credits,
+    course_name,
+    course_code,
+    description,
+    course_type):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            INSERT INTO Courses
+                (
+                    credits,
+                    course_name,
+                    course_code,
+                    description,
+                    course_type
+                )
+            VALUES (?, ?, ?, ?, ?);
+        """, (
+            credits,
+            course_name,
+            course_code,
+            description,
+            course_type
+        ))
+
+        course_id = cursor.lastrowid
+
+        connection.commit()
+
+        return course_id
+
+    except sqlite3.Error:
+        if connection is not None:
+            connection.rollback()
+        raise
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
 # return all reviews for one course
 # this contains reviews themselves and the usernames of authors
 
@@ -133,18 +210,7 @@ def get_reviews_for_course(db_name, course_id):
 
         cursor.execute("""
             SELECT
-                Reviews.review_id,
-                Reviews.course_id,
-                Reviews.user_id,
-                Reviews.review_text,
-                Reviews.upvotes,
-                Reviews.downvotes,
-                Reviews.is_flagged,
-                Reviews.rating,
-                Reviews.difficulty,
-                Reviews.workload,
-                Reviews.year,
-                Reviews.semester,
+                Reviews.*,
                 Users.username
             FROM Reviews
             JOIN Users
@@ -162,3 +228,350 @@ def get_reviews_for_course(db_name, course_id):
     finally:
         if connection is not None:
             connection.close()
+
+
+
+# get all the data of a user by user_id
+# return None if the user does not exist
+def get_user(db_name, user_id):
+    """
+    Return one user with the specified user ID.
+
+    Return None if the user does not exist.
+    """
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM Users
+            WHERE user_id = ?;
+        """, (user_id,))
+
+        user = cursor.fetchone()
+
+        return user
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# return all the users
+# sorted by user_id
+def get_all_users(db_name):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM Users
+            ORDER BY user_id;
+        """)
+
+        users = cursor.fetchall()
+
+        return users
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# get the data of a user by username
+# return None if the user does not exist
+def get_user_by_username(db_name, username):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM Users
+            WHERE username = ?;
+        """, (username,))
+
+        user = cursor.fetchone()
+
+        return user
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# get the data of a user by email
+# return None if the user does not exist
+def get_user_by_email(db_name, email):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM Users
+            WHERE email = ?;
+        """, (email,))
+
+        user = cursor.fetchone()
+
+        return user
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# return all the reviews written by a user
+# include course names and course codes
+def get_reviews_by_user(db_name, user_id):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT
+                Reviews.*,
+                Courses.course_code,
+                Courses.course_name
+            FROM Reviews
+            JOIN Courses
+                ON Reviews.course_id = Courses.course_id
+            WHERE Reviews.user_id = ?
+            ORDER BY Reviews.created_at DESC,
+                     Reviews.year DESC,
+                     Reviews.semester,
+                     Courses.course_code;
+        """, (user_id,))
+
+        reviews = cursor.fetchall()
+
+        return reviews
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+# add a course
+# return course _id
+def add_course(
+    db_name,
+    credits,
+    course_name,
+    course_code,
+    description,
+    course_type):
+
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            INSERT INTO Courses
+                (
+                    credits,
+                    course_name,
+                    course_code,
+                    description,
+                    course_type
+                )
+            VALUES
+                (?, ?, ?, ?, ?);
+        """, (
+            credits,
+            course_name,
+            course_code,
+            description,
+            course_type
+        ))
+
+        course_id = cursor.lastrowid
+
+        connection.commit()
+
+        return course_id
+
+    except sqlite3.Error:
+        if connection is not None:
+            connection.rollback()
+        raise
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# update a review
+# return true if the review was successfully updated
+# return false if review_id does not exist
+def update_review(
+    db_name,
+    review_id,
+    review_text,
+    rating,
+    difficulty,
+    workload,
+    year,
+    semester):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            UPDATE Reviews
+            SET
+                review_text = ?,
+                rating = ?,
+                difficulty = ?,
+                workload = ?,
+                year = ?,
+                semester = ?
+            WHERE review_id = ?;
+        """, (
+            review_text,
+            rating,
+            difficulty,
+            workload,
+            year,
+            semester,
+            review_id
+        ))
+
+        review_was_updated = cursor.rowcount > 0
+
+        connection.commit()
+
+        return review_was_updated
+
+    except sqlite3.Error:
+        if connection is not None:
+            connection.rollback()
+        raise
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+
+# increase a review's upvote by 1
+# return true if the review was found
+# return false if the review does not exist
+def upvote_review(db_name, review_id):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            UPDATE Reviews
+            SET upvotes = upvotes + 1
+            WHERE review_id = ?;
+        """, (review_id,))
+
+        review_was_found = cursor.rowcount > 0
+
+        connection.commit()
+
+        return review_was_found
+
+    except sqlite3.Error:
+        if connection is not None:
+            connection.rollback()
+        raise
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# increase a reviewer's downvote by 1
+# return true if the review was found
+# return false if the review_id does not exist
+def downvote_review(db_name, review_id):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            UPDATE Reviews
+            SET downvotes = downvotes + 1
+            WHERE review_id = ?;
+        """, (review_id,))
+
+        review_was_found = cursor.rowcount > 0
+
+        connection.commit()
+
+        return review_was_found
+
+    except sqlite3.Error:
+        if connection is not None:
+            connection.rollback()
+        raise
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# mark a review as flagged
+# return true if the review was found
+# review false if the review_id does not exist
+def flag_review(db_name, review_id):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            UPDATE Reviews
+            SET is_flagged = 1
+            WHERE review_id = ?;
+        """, (review_id,))
+
+        review_was_found = cursor.rowcount > 0
+
+        connection.commit()
+
+        return review_was_found
+
+    except sqlite3.Error:
+        if connection is not None:
+            connection.rollback()
+        raise
+
+    finally:
+        if connection is not None:
+            connection.close()
+
