@@ -12,7 +12,8 @@ from getpass import getuser
 from flask import Flask, session, url_for, request, render_template, redirect, abort
 from markupsafe import escape
 from create_db import DATABASE_NAME
-from dbAPI import get_connection, get_all_courses, search_courses
+from dbAPI import get_course as db_get_course
+from dbAPI import get_connection, get_all_courses, search_courses, get_course_averages, get_reviews_for_course
 from models import get_course, get_course_object, insert_review
 
 # Create the Flask application
@@ -189,10 +190,13 @@ def show_courses():
 ## COURSE DETAILS - display the details of a specific course and its reviews
 @app.route('/courses/<int:course_id>')
 def course_details(course_id):
-    course = get_course_object(course_id)
+    course = db_get_course(DATABASE_NAME, course_id)
     if course is None:
         abort(404)
-    return render_template("course_details.html", course=course)
+
+    averages = get_course_averages(DATABASE_NAME, course_id)
+    reviews = get_reviews_for_course(DATABASE_NAME, course_id)
+    return render_template("course_details.html", course=course, averages=averages, reviews=reviews)
 
 
 ###############################################################################
