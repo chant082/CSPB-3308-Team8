@@ -7,13 +7,12 @@
 ##
 ###############################################################################
 
-
 from getpass import getuser
 
 from flask import Flask, session, url_for, request, render_template, redirect, abort
 from markupsafe import escape
 from create_db import DATABASE_NAME
-from dbAPI import get_connection
+from dbAPI import get_connection, get_all_courses, search_courses
 from models import get_course, get_course_object, insert_review
 
 # Create the Flask application
@@ -158,7 +157,7 @@ def show_edit_course_form(course_id):
 ## COURSE ROUTES
 ###############################################################################
 
-## BROWSE/SEARCH COURSE - display all courses or process a course search
+## BROWSE/SEARCH COURSES - display all courses or process a course search
 @app.route('/courses', methods=['GET', 'POST'])
 def browse_courses():
     if request.method == 'POST':
@@ -166,11 +165,25 @@ def browse_courses():
     else:
         return show_courses()   
 
+# search for courses by keyword. If no keyword entered, display all courses
 def do_search_courses():
-    return "do_search_courses called"       
 
+    # get the search keyword entered by user and remove any leading or trailing whitespace
+    keyword = request.form.get("keyword", "").strip()
+
+    # search DB if a keyword was entered. Otherwise retrieve all courses
+    if keyword:
+        courses = search_courses(DATABASE_NAME, keyword)
+    else:
+        courses = get_all_courses(DATABASE_NAME)
+
+    # display matching courses
+    return render_template("courses.html", courses = courses, keyword = keyword)    
+
+# display all courses
 def show_courses():
-    return render_template("courses.html")
+    courses = get_all_courses(DATABASE_NAME)
+    return render_template("courses.html", courses = courses)
 
 
 ## COURSE DETAILS - display the details of a specific course and its reviews

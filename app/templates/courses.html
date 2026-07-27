@@ -1,23 +1,86 @@
-<!-- Search Courses: Search page for finding courses -->
+<!-- Courses: Search page for finding courses -->
 {% extends "base.html" %}
 
 {% block title %}Courses | CSPB Course Reviews{% endblock %}
 
 {% block content %}
 
-<section=description>
-    <h2>Browse Courses</h2>
-    <p>
-        Use the search bar or browse courses.
-    </p>
+
+<!-- Search bar -->
+<section class="hero-card hero">
+    
+    <form method="POST" action="{{ url_for('browse_courses') }}">
+
+        <div class="form-group">   
+
+            <label for="keyword">Search Courses</label>
+
+            <input class="form-control"
+                type="text" 
+                id="keyword" 
+                name="keyword" 
+                value="{{ keyword | default('') }}" 
+                placeholder="Enter a course code or course name">
+        </div>
+
+        <button class="button" type="submit">Search</button>
+
+     </form>
+
 </section>
 
-<section=search id="search_bar">
-    <!-- TODO: Add search bar -->
-</section>
+<!-- List of courses returned from database-->
+<section
+>
+    {% for course in courses %}
+        <article class="card course-card">
 
-<section=course_list>
-    <!-- TODO: Add table of all courses with filters and view course buttons, links for write a review if logged in -->
+            <!-- Course info -->
+            <div class="course-info">
+                <h3>{{ course["course_code"] }}</h3>
+                <h4>{{ course["course_name"] }}</h4>
+                
+                <p>
+                    {{ course["description"] }}
+                </p>
+            </div>
+
+            <!-- Course type-->
+            <div class="course-stat">
+
+                <span class="course-stat-label">Type</span>
+                <span class="course-stat-value">{{ course["course_type"] }}</span>
+           
+            </div>
+
+            <!-- Number of credits -->
+            <div class="course-stat">
+
+                <span class="course-stat-label">Credits</span>
+                <span class="course-stat-value">{{ course["credits"] }}</span>
+
+            </div>
+
+            <!-- Link to the course details page -->
+            <div class="course-stat">
+
+                <a class="button" href="{{ url_for('course_details', course_id=course['course_id']) }}">View Course</a>
+
+            </div>
+        
+        </article>
+
+    {% else %}
+
+        <!-- Displayed when no courses match the search -->
+        <section class="card">
+
+            <p>No courses were found.</p>
+
+        </section>
+
+    {% endfor %}
+
 </section>
 
 {% endblock %}
