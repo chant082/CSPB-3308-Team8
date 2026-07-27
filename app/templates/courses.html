@@ -30,9 +30,10 @@
 </section>
 
 <!-- List of courses returned from database-->
-<section
->
-    {% for course in courses %}
+
+{% for course in courses %}
+<section>
+    
         <article class="card course-card">
 
             <!-- Course info -->
@@ -45,19 +46,22 @@
                 </p>
             </div>
 
-            <!-- Course type-->
+            <!-- Course type and credits -->
             <div class="course-stat">
 
-                <span class="course-stat-label">Type</span>
-                <span class="course-stat-value">{{ course["course_type"] }}</span>
-           
+                <p><strong>Type: </strong>{{ course["course_type"] }}</p>
+                <p><strong>Credits: </strong>{{ course["credits"] }}</p>
+
             </div>
 
-            <!-- Number of credits -->
+            <!-- Review averages -->
             <div class="course-stat">
+               
+                <p><strong>Average Rating: </strong>{{ course["avg_rating"]|default(0)|round(1) }} / 5</p>
 
-                <span class="course-stat-label">Credits</span>
-                <span class="course-stat-value">{{ course["credits"] }}</span>
+                <p><strong>Difficulty: </strong>{{ course["avg_difficulty"]|default(0)|round(1) }} / 5</p>
+
+                <p><strong>Workload: </strong>{{ course["avg_workload"]|default(0)|round(1) }} hrs / wk</p>
 
             </div>
 
@@ -84,3 +88,12 @@
 </section>
 
 {% endblock %}
+
+
+
+
+<div class="course-stat">
+
+    
+
+</div>

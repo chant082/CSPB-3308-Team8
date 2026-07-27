@@ -7,7 +7,6 @@
 
 <!-- Course info -->
 <section class="hero-card hero">
-    <!-- Add image or course icon -->
 
     <div>
         <h1 class="page_title">{{ course["course_name"] }}</h1>
@@ -18,7 +17,6 @@
             <span class="tag tag-green">{{ course["course_type"] }}</span>
 
             <span class="tag">{{ course["credits"] }} Credits</span>
-
         </p>
     </div>
 
@@ -31,11 +29,12 @@
 
         <div class="course-stat">
 
-            <!-- Round the rating to nearest whole number and convert to int -->
+            <!-- Stars: Round the rating to nearest whole number and convert to int -->
             {% set rating = averages["avg_rating"]|default(0)|round|int %}
 
             <div class="stars" aria-label="{{ averages['avg_rating']|default(0) }} out of 5 stars">
  
+                <!-- Fill in stars based on rating. Can add half stars later-->
                 {% for i in range(5) %}
                     {% if i < rating %}
                         <span class="star filled">★</span>
@@ -45,13 +44,13 @@
                 {% endfor %}   
             </div>         
                 
-
                 <span class="course-stat-label">Overall Rating</span>
 
                 <span class="course-stat-value">{{ averages["avg_rating"] }} / 5</span>
 
         </div>
 
+        <!-- Difficulty -->
         <div class="course-stat">
 
             <img class="rating-icon" src="{{ url_for('static', filename='images/difficulty.png') }}" alt="Difficulty">
@@ -62,6 +61,7 @@
 
         </div>
 
+        <!-- Workload -->
         <div class="course-stat">
 
             <img class="rating-icon" src="{{ url_for('static', filename='images/workload.png') }}" alt="Workload">
@@ -86,7 +86,7 @@
 
     <h2 class="section_title">Reviews</h2>
 
-    <!-- TODO: Display reviews here -->
+    <!-- TODO: Display reviews here, message if no reviews yet -->
 
 </section>
 

@@ -166,6 +166,7 @@ def browse_courses():
     else:
         return show_courses()   
 
+
 # search for courses by keyword. If no keyword entered, display all courses
 def do_search_courses():
 
