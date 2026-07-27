@@ -8,8 +8,12 @@
 ###############################################################################
 
 
-from flask import Flask, url_for, request, render_template, redirect, abort
+from getpass import getuser
+
+from flask import Flask, session, url_for, request, render_template, redirect, abort
 from markupsafe import escape
+from create_db import DATABASE_NAME
+from dbAPI import get_connection
 from models import get_course, get_course_object, insert_review
 
 # Create the Flask application
@@ -39,21 +43,30 @@ def about():
 
 
 ###############################################################################
-## LOGIN AND SIGNUP ROUTES
+## LOGIN, LOGOUT, AND SIGNUP ROUTES
 ###############################################################################
 
 ## LOGIN - Display or process the login form
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        return do_the_login()
-    else:
-        return show_the_login_form()
+        username = request.form["username"]
+        password = request.form["password"]
 
-def do_the_login():
-    return "do_the_login called."
+        connection = get_connection(DATABASE_NAME)
+        cursor = connection.cursor()
 
-def show_the_login_form():
+        cursor.execute("SELECT * FROM Users WHERE username = ? AND password_hash = ?", (username, password))
+        user = cursor.fetchone()
+
+        connection.close()
+        if user:
+            return redirect(url_for("user_home", username=user["username"]))
+
+        else:
+            return render_template(
+                "login.html"
+            )
     return render_template("login.html")
 
 
@@ -74,7 +87,7 @@ def show_the_signup_form():
 ## LOG OUT - Log the user out and redirect to the homepage
 @app.route('/logout')
 def logout():
-    return "logout called."
+    return render_template("logout.html")
 
 ###############################################################################
 ## USER/ADMIN PROFILE ROUTES
@@ -82,7 +95,11 @@ def logout():
 
 ## NORMAL USER PROFILE PAGE - display user's profile page with their info and reviews
 @app.route('/profile/<username>')
-def profile(username):   
+def profile(username):
+    user = getuser(username)
+    if user is None:
+        abort(404)
+
     return render_template("profile.html", username=escape(username))
 
 

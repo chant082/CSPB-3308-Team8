@@ -1,0 +1,19 @@
+<!-- Logout Page: Page to display user has been logged out -->
+{% extends "base.html" %}
+
+{% block title %}Logout | CSPB Course Reviews{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section id = "description">
+    <p>
+        You have been successfully logged out. 
+        Thank you for using CSPB Course Reviews. We hope to see you again soon! <br>
+    </p>
+</section>
+
+{% endblock %}
