@@ -3,29 +3,35 @@
 
 {% block title %}Profile | CSPB Course Reviews{% endblock %}
 
+
+{%block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
 {% block content %}
 
 <section=description>
-    <h2>Profile</h2>
+    <h2>Your Profile</h2>
     <p>
-        Welcome to your profile page, {{ user.username }}! Here you can view and edit your account information.
+        Welcome to your profile page, {{ username }}! Here you can view and edit your account information.
     </p>
 </section>
 
 <section=profile_info>
     <!-- TODO: Add Profile information. Block out password? -->
     <!-- Profile Pic -->
-    Username: {{ user.username }} <br>
-    Email: {{ user.email }} <br>
-    Password: {{ user.password }} <br>
-    Role: <!-- if is_admin
+    Username: {{ username }} <br>
+    Email: {{ email }} <br>
+    Password: ********** <br>
+    Role: 
+    {% if is_admin %}
         Admin
-    else
+    {% else %}
         Normal User
-    endif -->
+    {% endif %}
 
     <!-- TODO: Add Edit Profile button -->
-    <a href="{{ url_for('user_update_info') }}">Edit Profile</a>
+    <a href="{{ url_for('update_info', username=username) }}">Edit Profile</a>
 </section>
 
 <section=recent_reviews>
@@ -35,8 +41,8 @@
 
 <section=admin_panel>
     <!-- admin panel button-->
-    {% if user.is_admin %}
-        <a href="{{ url_for('admin_panel') }}">Admin Panel</a>
+    {% if is_admin %}
+        <a href="{{ url_for('admin', username=username) }}">Admin Panel</a>
     {% endif %}
 </section>
 
