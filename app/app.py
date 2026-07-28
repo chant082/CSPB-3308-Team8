@@ -179,24 +179,60 @@ def do_search_courses():
     else:
         courses = get_all_courses(DATABASE_NAME)
 
+    # create new list that includes course info and average review stats
+    course_list = []
+
+    # add average rating, difficulty, and workload to each course
+    for course in courses:
+        course_data = dict(course)
+
+        averages = get_course_averages(DATABASE_NAME, course["course_id"])
+
+        course_data["avg_rating"] = averages["avg_rating"]
+        course_data["avg_difficulty"] = averages["avg_difficulty"]
+        course_data["avg_workload"] = averages["avg_workload"]
+
+        course_list.append(course_data)
+
     # display matching courses
-    return render_template("courses.html", courses = courses, keyword = keyword)    
+    return render_template("courses.html", courses = course_list, keyword = keyword)    
 
 # display all courses
 def show_courses():
+
+    # get all courses from database
     courses = get_all_courses(DATABASE_NAME)
-    return render_template("courses.html", courses = courses)
+
+    # create a new list that includes course info and average review stats
+    course_list = []
+
+    # add average rating, difficulty, and workload to each course
+    for course in courses:
+        course_data = dict(course)
+
+        averages = get_course_averages(DATABASE_NAME, course["course_id"])
+
+        course_data["avg_rating"] = averages["avg_rating"]
+        course_data["avg_difficulty"] = averages["avg_difficulty"]
+        course_data["avg_workload"] = averages["avg_workload"]
+
+        course_list.append(course_data)
+
+    # display all courses
+    return render_template("courses.html", courses = course_list)
 
 
 ## COURSE DETAILS - display the details of a specific course and its reviews
 @app.route('/courses/<int:course_id>')
 def course_details(course_id):
     course = db_get_course(DATABASE_NAME, course_id)
+
     if course is None:
         abort(404)
 
     averages = get_course_averages(DATABASE_NAME, course_id)
     reviews = get_reviews_for_course(DATABASE_NAME, course_id)
+    
     return render_template("course_details.html", course=course, averages=averages, reviews=reviews)
 
 

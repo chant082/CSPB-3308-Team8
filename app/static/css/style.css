@@ -26,7 +26,7 @@
 
 
 /* Page Setup */
-
+/* Apply border-box sizing so padding and borders are included in element width */
 * {
     box-sizing: border-box;
 }
@@ -46,7 +46,8 @@ a {
 }
 
 
-/* Overall page container */
+/* Overall page container 
+Center the page and limit the max width on large screens */
 .site_container {
     width: 100%;
     max-width: 1400px;
@@ -56,7 +57,8 @@ a {
 }
 
 
-/* Header */
+/* Header 
+Use Flexbox to place the logo on the left and nav on the right */
 .site_header {
     display: flex;
     align-items: center;
@@ -109,10 +111,11 @@ a {
 }
 
 
-/* Resuable hero card and generic cards */
-
+/* Resuable hero card and generic cards 
+Use CSS grid for 2-column hero section (content and image) */
 .hero {
     display: grid;
+    /* 2 parts for text, 2 part for image */
     grid-template-columns: 2fr 1fr;
     align-items: center;
     gap: 2rem;
@@ -131,8 +134,8 @@ a {
     padding: 30px;
     background-color: var(--pale-blue);
     border: 1px solid var(--light-gray);
-    border: 10px;
-
+    border-radius: 10px;
+    /* add a subtle shadow to make cards stand out */
     box-shadow: 0 4px 12px rgba(5, 19, 49, 0.06);
 }
 
@@ -143,11 +146,12 @@ a {
     padding: 30px;
     background-color: var(--white);
     border: 1px solid var(--light-gray);
-    border: 10px;
+    border-radius: 10px;
 
     box-shadow: 0 4px 12px rgba(5, 19, 49, 0.06);
 }
 
+/* style only images that are direct children of a card */
 .card > img {
     width: 50%;
     max-width: 500px;
@@ -180,7 +184,7 @@ a {
 .button {
     display: inline-block;
     padding: 10px 22px;
-
+    /* keep buttons the same font as the surrounding text */
     font: inherit;
     font-weight: bold;
     text-align: center;
@@ -227,15 +231,18 @@ a {
     border-radius: 5px;
 }
 
+/* show a blue outline when the textbox is selected */
 .form-control:focus {
     outline: 2px solid rgba(0, 82, 242, 0.2);
     border-color: var(--bright-blue);
 }
 
 
-/* Course cards */
+/* Course cards 
+Display each course as a four-column grid */
 .course-card {
     display: grid;
+    /* one wide column for course info and 3 smaller columns */
     grid-template-columns: minmax(0, 2fr) repeat(3, minmax(110px, 1fr));
     gap: 20px;
     align-items: center;
@@ -268,7 +275,7 @@ a {
 
 
 /* Course Details Page */
-
+/* Display the three summary stats in equal-width columns */
 .course-summary {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -289,6 +296,7 @@ a {
     margin-bottom: 12px;
 }
 
+/* Display tags such as Core or Elective inline with rounded corners */
 .tag {
     display: inline-block;
     padding: 4px 12px;
@@ -305,18 +313,23 @@ a {
     color: #2e8b57;
 }
 
+/* center write review button */
 .write-review {
     margin: 25px 0;
     text-align: center;
 }
 
+/* arrange rating stars in horizontal row */
 .stars {
     margin-top: 10px;
     margin-bottom: 10px;
+    /* Flexbox places stars in a row */
     display: flex;
     justify-content: center;
     align-items: center;
+    /* keep star area same height as other icons */
     height: 80px;
+    /* small gap between stars */
     gap: 2px;
 }
 
@@ -336,7 +349,7 @@ a {
 /* Footer */
 .site_footer {
     margin-top:30px;
-    padding: 24p 0;
+    padding: 24px 0;
     text-align: center;
     color: var(--medium-gray);
     border-top: 1px solid var(--light-gray);
