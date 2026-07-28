@@ -1,5 +1,10 @@
 <!-- Course Details: Course page with average ratings and reviews -->
+
+<!-- TODO: add review action functionality, make write review appear only if logged in, add review ratings icons? -->
+
 {% extends "base.html" %}
+
+{% block styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/course_details.css') }}">{% endblock %}
 
 {% block title %}{{ course["course_name"] }} | CSPB Course Reviews{% endblock %}
 
@@ -9,7 +14,8 @@
 <section class="hero-card hero">
 
     <div>
-        <h1 class="page_title">{{ course["course_name"] }}</h1>
+        <h1 class="page_title">{{ course["course_code"] }}</h1>
+        <h2 class="page_title">{{ course["course_name"] }}</h2>
 
         <p class="secondary_text">{{ course["description"] }}</p>
 
@@ -55,7 +61,7 @@
 
             <img class="rating-icon" src="{{ url_for('static', filename='images/difficulty.png') }}" alt="Difficulty">
 
-            <span class="course-stat-label">Difficulty</span>
+            <span class="course-stat-label">Average Difficulty</span>
 
             <span class="course-stat-value">{{ averages["avg_difficulty"] }} / 5</span>
 
@@ -66,7 +72,7 @@
 
             <img class="rating-icon" src="{{ url_for('static', filename='images/workload.png') }}" alt="Workload">
 
-            <span class="course-stat-label">Workload</span>
+            <span class="course-stat-label"> Average Workload</span>
 
             <span class="course-stat-value">{{ averages["avg_workload"] }} hrs / wk</span>
 
@@ -86,7 +92,58 @@
 
     <h2 class="section_title">Reviews</h2>
 
-    <!-- TODO: Display reviews here, message if no reviews yet -->
+    <!-- Display each review if reviews exist -->
+    {% if reviews %}
+
+        <div class="review-list">
+
+            {% for review in reviews %}
+
+                <article class="review-card">
+
+                    <!-- Reviewer username and semester taken -->
+                    <div class="review-header">
+
+                        <h3 class="review-author">{{ review["username"] }}</h3>
+                        <span class="review-term">{{ review["semester"] }} {{ review["year"] }}</span>
+
+                    </div>
+
+                    <!-- Review ratings -->
+                    <div class ="review-ratings">
+
+                        <span>Overall Rating: <strong>{{ review["rating"] }} / 5</strong></span>
+                        <span>Difficulty: <strong>{{ review["difficulty"] }} / 5</strong></span>
+                        <span>Workload: <strong>{{ review["workload"] }} hrs /wk</strong></span>
+
+                    </div>
+
+                    <!-- Written review -->
+                    <p class="review-text">{{ review["review_text"] }}</p>
+
+                    <!-- Voting and flags -->
+                    <div class="review-actions">
+
+                        <button class="review-action upvote" type="button">↑ {{ review["upvotes"]|default(0) }}</button>
+                        
+                        <button class="review-action downvote" type="button">↓ {{ review["downvotes"]|default(0) }}</button>
+
+                        <button class="review-action flag-review" type="button">⚑ Flag / Report</button>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    <!-- Else display "no reviews" message -->
+    {% else %}
+        <p class="secondary-text">
+            No reviews have been submitted for this course yet.
+        </p>
+    {% endif %}
 
 </section>
 

@@ -1,6 +1,8 @@
 <!-- Courses: Search page for finding courses -->
 {% extends "base.html" %}
 
+{% block styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/courses.css') }}">{% endblock %}
+
 {% block title %}Courses | CSPB Course Reviews{% endblock %}
 
 {% block content %}
@@ -57,7 +59,7 @@
             <!-- Review averages -->
             <div class="course-stat">
                
-                <p><strong>Average Rating: </strong>{{ course["avg_rating"]|default(0)|round(1) }} / 5</p>
+                <p><strong>Overall Rating: </strong>{{ course["avg_rating"]|default(0)|round(1) }} / 5</p>
 
                 <p><strong>Difficulty: </strong>{{ course["avg_difficulty"]|default(0)|round(1) }} / 5</p>
 

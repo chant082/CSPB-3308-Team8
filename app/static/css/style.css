@@ -12,7 +12,10 @@
         #f2f6ff - pale blue (secondary button hover)
 */
 
-/* Color variables */
+/*******************************************************************************
+* Color Variables
+*******************************************************************************/
+
 :root {
     --bright-blue: #0052f2;
     --blue: #0045cc;
@@ -25,7 +28,10 @@
 }
 
 
-/* Page Setup */
+/*******************************************************************************
+* Page Setup
+*******************************************************************************/
+
 /* Apply border-box sizing so padding and borders are included in element width */
 * {
     box-sizing: border-box;
@@ -39,15 +45,12 @@ body {
     color: var(--black);
 }
 
-
 /* Links - blue */
 a {
     color: var(--bright-blue);
 }
 
-
-/* Overall page container 
-Center the page and limit the max width on large screens */
+/* Overall page container: Center the page and limit the max width on large screens */
 .site_container {
     width: 100%;
     max-width: 1400px;
@@ -56,9 +59,7 @@ Center the page and limit the max width on large screens */
     padding: 0 24px;
 }
 
-
-/* Header 
-Use Flexbox to place the logo on the left and nav on the right */
+/* Header: Use Flexbox to place the logo on the left and nav on the right */
 .site_header {
     display: flex;
     align-items: center;
@@ -67,7 +68,6 @@ Use Flexbox to place the logo on the left and nav on the right */
     padding: 18px 0;
     border-bottom: 1px solid var(--light-gray);
 }
-
 
 /* Logo */
 .logo_link {
@@ -83,7 +83,6 @@ Use Flexbox to place the logo on the left and nav on the right */
     align-items: left;
 }
 
-
 /* Main Navigation */
 .main_nav {
     display: flex;
@@ -91,6 +90,7 @@ Use Flexbox to place the logo on the left and nav on the right */
     gap: 28px;
 }
 
+/* Main nav links */
 .main_nav a {
     text-decoration: none;
     color: var(--navy);
@@ -101,7 +101,6 @@ Use Flexbox to place the logo on the left and nav on the right */
     color: var(--bright-blue);
 }
 
-
 /* Main page content */
 .content {
     width: 100%;
@@ -111,10 +110,32 @@ Use Flexbox to place the logo on the left and nav on the right */
 }
 
 
-/* Resuable hero card and generic cards 
-Use CSS grid for 2-column hero section (content and image) */
+/*Headings and text*/
+.page_title {
+    margin-top: 0;
+    margin-bottom: 24px;
+    color: var(--navy);
+}
+
+.section_title {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: var(--navy);
+}
+
+.secondary_text {
+    color: var(--medium-gray);
+}
+
+
+/*******************************************************************************
+* Resuable hero card and generic cards
+*******************************************************************************/
+
+/* Use CSS grid for 2-column hero section (content and image) */
 .hero {
     display: grid;
+
     /* 2 parts for text, 2 part for image */
     grid-template-columns: 2fr 1fr;
     align-items: center;
@@ -135,10 +156,10 @@ Use CSS grid for 2-column hero section (content and image) */
     background-color: var(--pale-blue);
     border: 1px solid var(--light-gray);
     border-radius: 10px;
-    /* add a subtle shadow to make cards stand out */
+    
+    /* Add a subtle shadow to make cards stand out */
     box-shadow: 0 4px 12px rgba(5, 19, 49, 0.06);
 }
-
 
 .card {
     margin-top: 30px;
@@ -147,11 +168,12 @@ Use CSS grid for 2-column hero section (content and image) */
     background-color: var(--white);
     border: 1px solid var(--light-gray);
     border-radius: 10px;
-
+    
+    /* Add a subtle shadow to make cards stand out */
     box-shadow: 0 4px 12px rgba(5, 19, 49, 0.06);
 }
 
-/* style only images that are direct children of a card */
+/* Style only images that are direct children of a card */
 .card > img {
     width: 50%;
     max-width: 500px;
@@ -162,30 +184,17 @@ Use CSS grid for 2-column hero section (content and image) */
 }
 
 
-/* Headings and text */
-.page_title {
-    margin-top: 0;
-    margin-bottom: 24px;
-    color: var(--navy);
-}
+/*******************************************************************************
+* Buttons
+*******************************************************************************/
 
-.section_title {
-    margin-top: 0;
-    margin-bottom: 16px;
-    color: var(--navy);
-}
-
-.secondary_text {
-    color: var(--medium-gray);
-}
-
-
-/* Buttons */
 .button {
     display: inline-block;
     padding: 10px 22px;
-    /* keep buttons the same font as the surrounding text */
+
+    /* Keep buttons the same font as the surrounding text */
     font: inherit;
+
     font-weight: bold;
     text-align: center;
     text-decoration: none;
@@ -211,7 +220,10 @@ Use CSS grid for 2-column hero section (content and image) */
 }
 
 
-/* Forms */
+/*******************************************************************************
+* Forms
+*******************************************************************************/
+
 .form-group {
     margin-bottom: 18px;
 }
@@ -231,122 +243,106 @@ Use CSS grid for 2-column hero section (content and image) */
     border-radius: 5px;
 }
 
-/* show a blue outline when the textbox is selected */
+/* Show a blue outline when the textbox is selected */
 .form-control:focus {
     outline: 2px solid rgba(0, 82, 242, 0.2);
     border-color: var(--bright-blue);
 }
 
 
-/* Course cards 
-Display each course as a four-column grid */
-.course-card {
+/*******************************************************************************
+* Reviews
+*******************************************************************************/
+
+/* Review cards used on the Course Details and Home pages */
+.review-list {
     display: grid;
-    /* one wide column for course info and 3 smaller columns */
-    grid-template-columns: minmax(0, 2fr) repeat(3, minmax(110px, 1fr));
-    gap: 20px;
-    align-items: center;
+    gap: 16px;
 }
 
-.course-info h2,
-.course-info h3 {
-    margin-top: 0;
-    margin-bottom: 6px;
-}
-
-.course-stat {
-    padding-left: 20px;
-    text-align: center;
-    border-left: 1px solid var(--light-gray);
-}
-
-.course-stat-label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 0.85rem;
-    color: var(--medium-gray);
-}
-
-.course-stat-value {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--navy);
-}
-
-
-/* Course Details Page */
-/* Display the three summary stats in equal-width columns */
-.course-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 10px;
-}
-
-.course-summary .course-stat {
+.review-card {
     padding: 20px;
-    text-align: center;
+    background-color: var(--white);
     border: 1px solid var(--light-gray);
     border-radius: 10px;
 }
 
-.rating-icon {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 12px;
+/* Place the review author and rating on the same row */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 8px;
 }
 
-/* Display tags such as Core or Elective inline with rounded corners */
-.tag {
-    display: inline-block;
-    padding: 4px 12px;
-    margin-right: 8px;
-    border-radius: 8px;
-    background-color: var(--light-gray);
+.review-author {
+    margin: 0;
     color: var(--navy);
-    font-size: 0.9rem;
-    font-weight: 600;
 }
 
-.tag-green {
-    background-color: #e8f7eb;
+.review-term {
+    font-size: 0.9rem;
+    color: var(--medium-gray);
+}
+
+.review-ratings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: var(--medium-gray)
+}
+
+.review-ratings strong {
+    color: var(--navy)
+}
+
+.review-text {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+/* Place voting and report in one row */
+.review-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Smaller secondary buttons used for review actions */
+.review-action {
+    padding: 5px 10px;
+    font: inherit;
+    font-size: 0.85rem;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.review-action:hover {
+    background-color: var(--pale-blue);
+}
+
+.upvote {
     color: #2e8b57;
 }
 
-/* center write review button */
-.write-review {
-    margin: 25px 0;
-    text-align: center;
+.downvote {
+    color: #d64545;
 }
 
-/* arrange rating stars in horizontal row */
-.stars {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    /* Flexbox places stars in a row */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* keep star area same height as other icons */
-    height: 80px;
-    /* small gap between stars */
-    gap: 2px;
-}
-
-.star {
-    font-size: 2rem;
-}
-
-.star.filled {
-    color: #f4b400;
-}
-
-.star.empty {
-    color: var(--light-gray);
+.flag-review {
+    color: var(--medium-gray);
 }
 
 
-/* Footer */
+/*******************************************************************************
+* Footer
+*******************************************************************************/
+
 .site_footer {
     margin-top:30px;
     padding: 24px 0;
