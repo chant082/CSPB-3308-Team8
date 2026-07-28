@@ -235,12 +235,16 @@ a {
 }
 
 .form-control {
-    width: 100%;
+    width: 30%;
     padding: 11px 12px;
     font: inherit;
     background-color: var(--white);
     border: 1px solid var(--light-gray);
     border-radius: 5px;
+}
+
+.review-box {
+    width: 100%;
 }
 
 /* Show a blue outline when the textbox is selected */
