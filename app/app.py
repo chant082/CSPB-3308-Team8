@@ -12,7 +12,8 @@ from getpass import getuser
 from flask import Flask, session, url_for, request, render_template, redirect, abort
 from markupsafe import escape
 from create_db import DATABASE_NAME
-from dbAPI import get_connection, get_all_courses, search_courses
+from dbAPI import get_course as db_get_course
+from dbAPI import get_connection, get_all_courses, search_courses, get_course_averages, get_reviews_for_course
 from models import get_course, get_course_object, insert_review
 
 # Create the Flask application
@@ -165,6 +166,7 @@ def browse_courses():
     else:
         return show_courses()   
 
+
 # search for courses by keyword. If no keyword entered, display all courses
 def do_search_courses():
 
@@ -177,22 +179,61 @@ def do_search_courses():
     else:
         courses = get_all_courses(DATABASE_NAME)
 
+    # create new list that includes course info and average review stats
+    course_list = []
+
+    # add average rating, difficulty, and workload to each course
+    for course in courses:
+        course_data = dict(course)
+
+        averages = get_course_averages(DATABASE_NAME, course["course_id"])
+
+        course_data["avg_rating"] = averages["avg_rating"]
+        course_data["avg_difficulty"] = averages["avg_difficulty"]
+        course_data["avg_workload"] = averages["avg_workload"]
+
+        course_list.append(course_data)
+
     # display matching courses
-    return render_template("courses.html", courses = courses, keyword = keyword)    
+    return render_template("courses.html", courses = course_list, keyword = keyword)    
 
 # display all courses
 def show_courses():
+
+    # get all courses from database
     courses = get_all_courses(DATABASE_NAME)
-    return render_template("courses.html", courses = courses)
+
+    # create a new list that includes course info and average review stats
+    course_list = []
+
+    # add average rating, difficulty, and workload to each course
+    for course in courses:
+        course_data = dict(course)
+
+        averages = get_course_averages(DATABASE_NAME, course["course_id"])
+
+        course_data["avg_rating"] = averages["avg_rating"]
+        course_data["avg_difficulty"] = averages["avg_difficulty"]
+        course_data["avg_workload"] = averages["avg_workload"]
+
+        course_list.append(course_data)
+
+    # display all courses
+    return render_template("courses.html", courses = course_list)
 
 
 ## COURSE DETAILS - display the details of a specific course and its reviews
 @app.route('/courses/<int:course_id>')
 def course_details(course_id):
-    course = get_course_object(course_id)
+    course = db_get_course(DATABASE_NAME, course_id)
+
     if course is None:
         abort(404)
-    return render_template("course_details.html", course=course)
+
+    averages = get_course_averages(DATABASE_NAME, course_id)
+    reviews = get_reviews_for_course(DATABASE_NAME, course_id)
+    
+    return render_template("course_details.html", course=course, averages=averages, reviews=reviews)
 
 
 ###############################################################################

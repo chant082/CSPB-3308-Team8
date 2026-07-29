@@ -1,39 +1,150 @@
 <!-- Course Details: Course page with average ratings and reviews -->
+
+<!-- TODO: add review action functionality, make write review appear only if logged in, add review ratings icons? -->
+
 {% extends "base.html" %}
 
-{% block title %}{{ course.get_course_name() }} | CSPB Course Reviews{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/course_details.css') }}">{% endblock %}
+
+{% block title %}{{ course["course_name"] }} | CSPB Course Reviews{% endblock %}
 
 {% block content %}
 
-<div>
-    <h2>{{ course.get_course_name() }}</h2>
-    <!-- Add image or course icon -->
-    <p>
-        This is the details page for the course: "{{ course.get_course_name() }}".
-    </p>
-    <!-- Add course description -->
-    <p>
-        {{ course.get_course_description() }}
-    </p>
+<!-- Course info -->
+<section class="hero-card hero">
+
+    <div>
+        <h1 class="page_title">{{ course["course_code"] }}</h1>
+        <h2 class="page_title">{{ course["course_name"] }}</h2>
+
+        <p class="secondary_text">{{ course["description"] }}</p>
+
+        <p>
+            <span class="tag tag-green">{{ course["course_type"] }}</span>
+
+            <span class="tag">{{ course["credits"] }} Credits</span>
+        </p>
+    </div>
+
 </section>
 
-<section=write_review>
-    <!-- If logged in, write a review button shows -->
+<!-- Average ratings -->
+<section class="card">
+
+    <div class="course-summary">
+
+        <div class="course-stat">
+
+            <!-- Stars: Round the rating to nearest whole number and convert to int -->
+            {% set rating = averages["avg_rating"]|default(0)|round|int %}
+
+            <div class="stars" aria-label="{{ averages['avg_rating']|default(0) }} out of 5 stars">
+ 
+                <!-- Fill in stars based on rating. Can add half stars later-->
+                {% for i in range(5) %}
+                    {% if i < rating %}
+                        <span class="star filled">★</span>
+                    {% else %}
+                        <span class="star empty">☆</span>
+                    {% endif %}
+                {% endfor %}   
+            </div>         
+                
+                <span class="course-stat-label">Overall Rating</span>
+
+                <span class="course-stat-value">{{ averages["avg_rating"] }} / 5</span>
+
+        </div>
+
+        <!-- Difficulty -->
+        <div class="course-stat">
+
+            <img class="rating-icon" src="{{ url_for('static', filename='images/difficulty.png') }}" alt="Difficulty">
+
+            <span class="course-stat-label">Average Difficulty</span>
+
+            <span class="course-stat-value">{{ averages["avg_difficulty"] }} / 5</span>
+
+        </div>
+
+        <!-- Workload -->
+        <div class="course-stat">
+
+            <img class="rating-icon" src="{{ url_for('static', filename='images/workload.png') }}" alt="Workload">
+
+            <span class="course-stat-label"> Average Workload</span>
+
+            <span class="course-stat-value">{{ averages["avg_workload"] }} hrs / wk</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Write review button only shows for logged in users -->
+<div class="write-review">
+    <a class="button" href="{{ url_for('submit_review', course_id=course['course_id']) }}">Write a Review</a>
 </div>
 
-<section=average_ratings>
-    <h3>Average Ratings</h3>
-    <!-- TODO: Add average rating display (include icons) -->
-    <p>
-        Overall Rating: {{ course.get_average_rating() }}<br>
-        Difficulty: {{ course.get_average_difficulty() }}<br>
-        Workload: {{ course.get_average_workload() }}
-    </p>
-</section>
+<!-- Reviews -->
+<section class="card">
 
-<section=recent_reviews>
-    <!-- TODO: Add table of recent reviews with ratings, upvote and downvote buttons. 
-     Filters? Refer to software specifications for details -->
+    <h2 class="section_title">Reviews</h2>
+
+    <!-- Display each review if reviews exist -->
+    {% if reviews %}
+
+        <div class="review-list">
+
+            {% for review in reviews %}
+
+                <article class="review-card">
+
+                    <!-- Reviewer username and semester taken -->
+                    <div class="review-header">
+
+                        <h3 class="review-author">{{ review["username"] }}</h3>
+                        <span class="review-term">{{ review["semester"] }} {{ review["year"] }}</span>
+
+                    </div>
+
+                    <!-- Review ratings -->
+                    <div class ="review-ratings">
+
+                        <span>Overall Rating: <strong>{{ review["rating"] }} / 5</strong></span>
+                        <span>Difficulty: <strong>{{ review["difficulty"] }} / 5</strong></span>
+                        <span>Workload: <strong>{{ review["workload"] }} hrs /wk</strong></span>
+
+                    </div>
+
+                    <!-- Written review -->
+                    <p class="review-text">{{ review["review_text"] }}</p>
+
+                    <!-- Voting and flags -->
+                    <div class="review-actions">
+
+                        <button class="review-action upvote" type="button">↑ {{ review["upvotes"]|default(0) }}</button>
+                        
+                        <button class="review-action downvote" type="button">↓ {{ review["downvotes"]|default(0) }}</button>
+
+                        <button class="review-action flag-review" type="button">⚑ Flag / Report</button>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    <!-- Else display "no reviews" message -->
+    {% else %}
+        <p class="secondary-text">
+            No reviews have been submitted for this course yet.
+        </p>
+    {% endif %}
+
 </section>
 
 {% endblock %}

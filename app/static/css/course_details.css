@@ -1,0 +1,87 @@
+/*
+    Course Details CSS file.
+    
+    Color palette from mockups:
+        #0052f2 - bright blue (button)
+        #0045cc - blue (button hover)
+        #051331 - navy
+        #ffffff - white (background)
+        #000000 - black (main text)
+        #e9ebf0 - light gray (border)
+        #787e95 - medium gray (secondary text)
+        #f2f6ff - pale blue (secondary button hover)
+*/
+
+/* Display the three summary stats in equal-width columns */
+.course-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.course-summary .course-stat {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--light-gray);
+    border-radius: 10px;
+}
+
+.rating-icon {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 12px;
+}
+
+/* Display tags such as Core or Elective inline with rounded corners */
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-right: 8px;
+    border-radius: 8px;
+    background-color: var(--light-gray);
+    color: var(--navy);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.tag-green {
+    background-color: #e8f7eb;
+    color: #2e8b57;
+}
+
+/* Center write review button */
+.write-review {
+    margin: 25px 0;
+    text-align: center;
+}
+
+/* Arrange rating stars in horizontal row */
+.stars {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    /* Flexbox places stars in a row */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Keep star area same height as other icons */
+    height: 80px;
+
+    /* Small gap between stars */
+    gap: 2px;
+}
+
+.star {
+    font-size: 2rem;
+}
+
+.star.filled {
+    color: #f4b400;
+}
+
+.star.empty {
+    color: var(--light-gray);
+}
