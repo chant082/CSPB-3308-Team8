@@ -39,10 +39,12 @@
     </form>
 </section>
 
-<section=admin_panel>
-    <!-- admin panel button-->
+<section class="admin_panel">
     {% if is_admin %}
-        <a href="{{ url_for('admin', username=username) }}">Admin Panel</a>
+        <a class="button"
+           href="{{ url_for('admin', username=username) }}">
+            Admin Panel
+        </a>
     {% endif %}
 </section>
 

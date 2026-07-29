@@ -122,11 +122,11 @@ def get_course_averages(db_name, course_id):
 
         cursor.execute("""
             SELECT
-                AVG(rating) AS avg_rating,
-                AVG(difficulty) AS avg_difficulty,
-                AVG(workload) AS avg_workload
+                COALESCE(AVG(rating), 0) AS avg_rating,
+                COALESCE(AVG(difficulty), 0) AS avg_difficulty,
+                COALESCE(AVG(workload), 0) AS avg_workload
             FROM Reviews
-            WHERE course_id = ?;
+            WHERE course_id = ?
         """, (course_id,))
 
         averages = cursor.fetchone()
@@ -182,6 +182,58 @@ def add_course(
         if connection is not None:
             connection.rollback()
         raise
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+# update a course
+# return true if successful and false if failed
+def update_course(
+    db_name,
+    course_id,
+    credits,
+    course_name,
+    course_code,
+    description,
+    course_type
+):
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute(
+            """
+            UPDATE Courses
+            SET credits = ?,
+                course_name = ?,
+                course_code = ?,
+                description = ?,
+                course_type = ?
+            WHERE course_id = ?
+            """,
+            (
+                credits,
+                course_name,
+                course_code,
+                description,
+                course_type,
+                course_id
+            )
+        )
+
+        connection.commit()
+
+        return cursor.rowcount > 0
+
+    except sqlite3.Error as error:
+        if connection is not None:
+            connection.rollback()
+
+        print(f"Error updating course: {error}")
+        return False
 
     finally:
         if connection is not None:

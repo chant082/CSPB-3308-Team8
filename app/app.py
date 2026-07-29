@@ -14,6 +14,8 @@ from markupsafe import escape
 from create_db import DATABASE_NAME
 from dbAPI import get_course as db_get_course, get_user
 from dbAPI import get_connection, get_all_courses, search_courses, get_course_averages, get_reviews_for_course
+from dbAPI import add_course as admin_add_course
+from dbAPI import update_course
 from models import get_course, get_course_object, insert_review
 
 # Create the Flask application
@@ -174,7 +176,8 @@ def show_update_info_form():
 ## ADMIN PROFILE - display the admin panel
 @app.route('/admin/<username>')
 def admin(username):
-    return render_template("admin_panel.html", username=escape(username))
+    courses = get_all_courses(DATABASE_NAME)
+    return render_template("admin_panel.html", username=escape(username), courses=courses)
 
 
 ## ADMIN ADD COURSE - display or process the add course form
@@ -183,28 +186,75 @@ def add_course(username):
     if request.method == 'POST':
         return do_add_course(username)
     else:
-        return show_add_course_form()
+        return show_add_course_form(username)
 
 def do_add_course(username):
-    return f"do_add_course called for user: {username}"
+    credits = int(request.form.get("credits"))
+    course_name = request.form.get("course_name")
+    course_code = request.form.get("course_code")
+    description = request.form.get("description")
+    course_type = request.form.get("course_type")
 
-def show_add_course_form():
-    return render_template("admin_add_course.html")
+    course_id = admin_add_course(
+        DATABASE_NAME,
+        credits,
+        course_name,
+        course_code,
+        description,
+        course_type
+    )
+
+    return redirect(
+        url_for("course_details", course_id=course_id)
+    )
+
+def show_add_course_form(username):
+    return render_template("admin_add_course.html", username=username)
 
 
 ## ADMIN EDIT COURSE - Display or process the edit course form
 @app.route('/admin/<username>/edit_course/<int:course_id>', methods=['GET', 'POST'])
 def edit_course(username, course_id):
     if request.method == 'POST':
-        return do_edit_course(course_id)
+        return do_edit_course(username, course_id)
     else:
-        return show_edit_course_form(course_id)
+        return show_edit_course_form(username, course_id)
 
-def do_edit_course(course_id):
-    return f"do_edit_course called for course: {course_id}"
+def do_edit_course(username, course_id):
+    credits = int(request.form.get("credits"))
+    course_name = request.form.get("course_name")
+    course_code = request.form.get("course_code")
+    description = request.form.get("description")
+    course_type = request.form.get("course_type")
 
-def show_edit_course_form(course_id):
-    return render_template("admin_edit_course.html", course_id=course_id)
+    success = update_course(
+    DATABASE_NAME,
+    course_id,
+    credits,
+    course_name,
+    course_code,
+    description,
+    course_type
+    )
+
+    if not success:
+        return "The course could not be updated.", 500
+
+    return redirect(
+        url_for("course_details", course_id=course_id)
+    )
+
+def show_edit_course_form(username, course_id):
+    course = db_get_course(DATABASE_NAME, course_id)
+
+    if course is None:
+        abort(404)
+
+    return render_template(
+        "admin_edit_course.html",
+        username=username,
+        course=course
+    )
 
 
 ###############################################################################
