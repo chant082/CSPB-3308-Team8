@@ -1,23 +1,44 @@
-<!-- Edit Profile: Page for updating user account information -->
+<!-- Edit Profile: Change Password -->
 {% extends "base.html" %}
 
-{% block title %}Edit Profile | CSPB Course Reviews{% endblock %}
+{% block title %}Change Password | CSPB Course Reviews{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
 
 {% block content %}
 
-<section class="hero-card hero">
-    <div>
-        <h2 class="page-title">Edit Profile</h2>
-        <p>
-            Edit your account information below, {{ user["username"] }}. 
-            You can update your email, password, and other details as needed.
-        </p>
-    </div>
+<section id="description">
+    <h2>Change Password</h2>
+    <p>
+        Welcome, {{ username }}! Enter your new password below.
+    </p>
 </section>
 
-<section class="form-group">
-    <!-- TODO: Add edit profile form to change pic, username, email, password, apply for admin role? use CSS classes 
-     (form-group for each div, form-control for each input, button for buttons)-->
+<section id="profile_info">
+
+    <form action="{{ url_for('update_info') }}" method="post">
+
+        <p><strong>Username:</strong> {{ username }}</p>
+        <p><strong>Email:</strong> {{ email }}</p>
+
+        <label for="password"><strong>New Password:</strong></label><br>
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            required>
+
+        <br><br>
+
+        <button type="submit" class="edit-profile-button">
+            Save Password
+        </button>
+
+    </form>
 </section>
 
 {% endblock %}

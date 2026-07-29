@@ -25,14 +25,18 @@
             </a> 
         
             <nav class="main_nav">
-                {% if username %}
-                    <a href="{{ url_for('user_home', username=username) }}">Home</a>
+                {% if session.get("user_id") %}
+                    <a href="{{ url_for('user_home', username=session['username']) }}">Home</a>
                 {% else %}
                     <a href="{{ url_for('home') }}">Home</a>
                 {% endif %}
+
+
                 <a href="{{ url_for('browse_courses') }}">Browse</a>
-                {% if username %}
-                    <a href="{{ url_for('profile', username=username) }}">Profile</a>
+
+
+                {% if session.get("user_id") %}
+                    <a href="{{ url_for('profile') }}">Profile</a>
                     <a href="{{ url_for('logout') }}">Log Out</a>
                 {% else %}
                     <a href="{{ url_for('signup') }}">Sign Up</a>

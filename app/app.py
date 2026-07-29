@@ -12,13 +12,15 @@ from getpass import getuser
 from flask import Flask, session, url_for, request, render_template, redirect, abort
 from markupsafe import escape
 from create_db import DATABASE_NAME
-from dbAPI import get_course as db_get_course
+from dbAPI import get_course as db_get_course, get_user
 from dbAPI import get_connection, get_all_courses, search_courses, get_course_averages, get_reviews_for_course
 from models import get_course, get_course_object, insert_review
 
 # Create the Flask application
 app = Flask(__name__)
 
+# Set a secret key for session management. In a real application, this should be a secure random value and kept secret.
+app.secret_key = "CSPB3308Team8"
 
 ###############################################################################
 ## HOMEPAGE AND GENERAL WEBSITE ROUTES
@@ -61,8 +63,11 @@ def login():
 
         connection.close()
         if user:
-            return redirect(url_for("user_home", username=user["username"]))
+            session["user_id"] = user["user_id"]
+            session["username"] = user["username"]
+            session["is_admin"] = user["is_admin"]
 
+            return redirect(url_for("user_home", username=user["username"]))
         else:
             return render_template(
                 "login.html"
@@ -74,19 +79,30 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        return do_the_signup()
+        username = request.form["username"]
+        email = request.form["email"]
+        password = request.form["password"]
+
+        connection = get_connection(DATABASE_NAME)
+        cursor = connection.cursor()
+
+        cursor.execute("INSERT INTO Users (username, email, password_hash) VALUES (?, ?, ?)", (username, email, password))
+        connection.commit()
+        connection.close()
+
+        return redirect(url_for("login"))
+    
     else:
         return show_the_signup_form()
-    
-def do_the_signup():
-    return "do_the_signup called."
 
+#Helpful function to show the signup form
 def show_the_signup_form():
     return render_template("signup.html")
     
 ## LOG OUT - Log the user out and redirect to the homepage
 @app.route('/logout')
 def logout():
+    session.clear()
     return render_template("logout.html")
 
 ###############################################################################
@@ -94,28 +110,65 @@ def logout():
 ###############################################################################
 
 ## NORMAL USER PROFILE PAGE - display user's profile page with their info and reviews
-@app.route('/profile/<username>')
-def profile(username):
-    user = getuser(username)
-    if user is None:
-        abort(404)
+@app.route('/profile')
+def profile():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
 
-    return render_template("profile.html", username=escape(username))
+    #Import the get_user function from dbAPI.py and use it to retrieve the user's information from the database using their user_id stored in the session.
+    user = get_user(DATABASE_NAME, session["user_id"])
+
+    return render_template(
+        "profile.html",
+        username=user["username"],
+        email=user["email"],
+        is_admin=user["is_admin"]
+    )
 
 
 ## USER UPDATE INFO - display or process the update info form
-@app.route('/profile/<username>/update_info', methods=['GET', 'POST'])
-def update_info(username):
-    if request.method == 'POST':
-        return do_update_info(username)
-    else:
-        return show_update_info_form(username)
+@app.route('/profile/update_info', methods=['GET', 'POST'])
+def update_info():
 
-def do_update_info(username):
-    return f"do_update_info called for user: {username}"
+    if "user_id" not in session:
+        return redirect(url_for("login"))
 
-def show_update_info_form(username):
-    return render_template("user_update_info.html", username=escape(username))
+    if request.method == "POST":
+        return do_update_info()
+
+    return show_update_info_form()
+
+def do_update_info():
+    connection = None
+
+    try:
+        password = request.form["password"]
+
+        connection = get_connection(DATABASE_NAME)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            UPDATE Users
+            SET password_hash = ?
+            WHERE user_id = ?
+        """, (password, session["user_id"]))
+
+        connection.commit()
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+    return redirect(url_for("profile"))
+
+def show_update_info_form():
+    user = get_user(DATABASE_NAME, session["user_id"])
+
+    return render_template(
+        "user_update_info.html",
+        username=user["username"],
+        email=user["email"]
+    )
 
 
 ## ADMIN PROFILE - display the admin panel

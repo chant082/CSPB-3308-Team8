@@ -84,7 +84,9 @@
 
 <!-- Write review button only shows for logged in users -->
 <div class="write-review">
-    <a class="button" href="{{ url_for('submit_review', course_id=course['course_id']) }}">Write a Review</a>
+    {% if session.get("user_id") %}
+        <a class="button" href="{{ url_for('submit_review', course_id=course['course_id']) }}">Write a Review</a>
+    {% endif %}
 </div>
 
 <!-- Reviews -->
