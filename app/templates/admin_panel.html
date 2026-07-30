@@ -9,7 +9,7 @@
     <!-- Insert image (admin shield) -->
     <h1 class="page-title">Admin Panel</h1>
     <p>
-        Welcome to the admin panel, {{ user.username }}! As an admin, you have the ability to manage courses and 
+        Welcome to the admin panel, {{ username }}! As an admin, you have the ability to manage courses and 
         oversee the content on the CSPB Course Reviews platform. Use the options below to add new courses or edit existing ones.
     </p>
 </section>
@@ -21,11 +21,36 @@
 <section class="card">
     <h3>Course Management</h3>
 
-    <!-- TODO: Add Buttons for add courses -->
-    <button class="button" href="{{ url_for('admin_add_course') }}">Add New Course</a><br>
+    <a class="button"
+       href="{{ url_for('add_course', username=username) }}">
+        Add New Course
+    </a>
+    <br><br>
 
-    <!-- TODO: Add table of courses with info and edit button. Add delete course button per mockups? -->
-    <button class="button" href="{{ url_for('admin_edit_course') }}">Edit</a>
+    <h3>Available Courses</h3>
+
+    {% if courses %}
+        <div class="course-management-list">
+            {% for course in courses %}
+                <div class="course-management-item">
+                    <div>
+                        <strong>{{ course["course_code"] }}</strong>
+                        — {{ course["course_name"] }}
+                    </div>
+                    <a class="button"
+                       href="{{ url_for(
+                           'edit_course',
+                           username=username,
+                           course_id=course['course_id']
+                       ) }}">
+                        Edit Course
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No courses are currently available.</p>
+    {% endif %}
 </section>
 
 {% endblock %}
