@@ -85,3 +85,15 @@
 .star.empty {
     color: var(--light-gray);
 }
+
+
+/* Stack on smaller screens */
+@media (max-width: 700px) {
+    .course-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .course-stat {
+        width: 100%;
+    }
+}

@@ -559,7 +559,7 @@ def flag_review(db_name, review_id):
 
         cursor.execute("""
             UPDATE Reviews
-            SET is_flagged = 1
+            SET is_flagged = NOT is_flagged
             WHERE review_id = ?;
         """, (review_id,))
 

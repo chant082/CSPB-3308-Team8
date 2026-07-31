@@ -13,7 +13,7 @@ from flask import Flask, session, url_for, request, render_template, redirect, a
 from markupsafe import escape
 from create_db import DATABASE_NAME
 from dbAPI import get_course as db_get_course, get_user
-from dbAPI import get_connection, get_all_courses, search_courses, get_course_averages, get_reviews_for_course
+from dbAPI import get_connection, get_all_courses, search_courses, get_course_averages, get_reviews_for_course, upvote_review, downvote_review, flag_review
 from dbAPI import add_course as admin_add_course
 from dbAPI import update_course, insert_review
 
@@ -442,6 +442,55 @@ def do_edit_review(course_id, review_id):
 def show_edit_review_form(course_id, review_id):
     # TO DO: retrieve the existing review and populate the edit form
     return render_template("edit_review.html", course_id=course_id, review_id=review_id)
+
+
+## UPVOTE REVIEW - increase a review's upvote count by 1
+@app.route("/courses/<int:course_id>/reviews/<int:review_id>/upvote", methods=["POST"])
+
+def upvote(course_id, review_id):
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+    
+    review_found = upvote_review(DATABASE_NAME, review_id)
+
+    if not review_found:
+        abort(404)
+
+    return redirect(url_for("course_details", course_id=course_id) + f"#review-{review_id}")
+
+## DOWNVOTE REVIEW - increase a review's downvote count by one
+@app.route("/courses/<int:course_id>/reviews/<int:review_id>/downvote", methods=["POST"]
+)
+def downvote(course_id, review_id):
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    review_found = downvote_review(DATABASE_NAME, review_id)
+
+    if not review_found:
+        abort(404)
+
+    return redirect(url_for("course_details", course_id=course_id) + f"#review-{review_id}")
+
+
+## FLAG REVIEW - mark a review as flagged
+@app.route(
+    "/courses/<int:course_id>/reviews/<int:review_id>/flag",
+    methods=["POST"]
+)
+def flag(course_id, review_id):
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    review_found = flag_review(DATABASE_NAME, review_id)
+
+    if not review_found:
+        abort(404)
+
+    return redirect(url_for("course_details", course_id=course_id) + f"#review-{review_id}")
 
 
 ###############################################################################
