@@ -6,16 +6,18 @@
 {% block content %}
 
 <section class="hero-card hero">
-    <!-- Insert image (admin shield) -->
-    <h1 class="page-title">Admin Panel</h1>
-    <p>
-        Welcome to the admin panel, {{ username }}! As an admin, you have the ability to manage courses and 
-        oversee the content on the CSPB Course Reviews platform. Use the options below to add new courses or edit existing ones.
-    </p>
-</section>
+    <div>
+        <h1 class="page_title">Admin Panel</h1>
 
-<section class="card">
-    <!-- Flagged for Review?-->
+        <h3>
+            Welcome to the admin panel, {{ username }}! As an admin, you have the ability to manage courses and
+            oversee the content on the CSPB Course Reviews platform. Use the options below to add new courses or edit existing ones.
+        </h3>
+    </div>
+        <img
+        class="hero-image"
+        src="{{ url_for('static', filename='images/admin.png') }}"
+        alt="Admin Panel">
 </section>
 
 <section class="card">

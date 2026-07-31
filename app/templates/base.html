@@ -18,11 +18,19 @@
 <body>
     <div class="site_container">
         <header class="site_header">
-            <a href="{{ url_for('home') }}" class="logo_link">
-                <img src="{{ url_for('static', filename='images/CSPB_horiz_logo.png') }}" 
-                    alt="CSPB Course Reviews Logo"
-                    class="site_logo">
-            </a> 
+            {% if session.get("user_id") %}
+                <a href="{{ url_for('user_home', username=session['username']) }}" class="logo_link">
+                    <img src="{{ url_for('static', filename='images/CSPB_horiz_logo.png') }}"
+                        alt="CSPB Course Reviews Logo"
+                        class="site_logo">
+                </a>
+            {% else %}
+                <a href="{{ url_for('home') }}" class="logo_link">
+                    <img src="{{ url_for('static', filename='images/CSPB_horiz_logo.png') }}"
+                        alt="CSPB Course Reviews Logo"
+                        class="site_logo">
+                </a>
+            {% endif %}
         
             <nav class="main_nav">
                 {% if session.get("user_id") %}
