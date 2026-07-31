@@ -1,7 +1,7 @@
 import sqlite3
 from config import DATABASE
-
-#the Review object that we can customize
+#CURRENTLY UNUSED BUT SAVED FOR FUTURE IMPLEMENTATION:
+#the Review object that we can customize 
 class Review:
     def __init__(self, review_id: int, course_id: int, user_id: int, review_text: str,
                  upvotes: int, downvotes: int, is_flagged: bool, rating: int,
@@ -111,15 +111,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-#get a single course by id
-def get_course(course_id):
-    conn = get_db()
-    course = conn.execute(
-        "SELECT * FROM Courses WHERE course_id = ?", (course_id,)
-    ).fetchone()
-    conn.close()
-    return course
-
 #get a course and its reviews as Course/Review objects
 def get_course_object(course_id):
     conn = get_db()
@@ -148,19 +139,3 @@ def get_course_object(course_id):
         course_row["course_id"], course_row["course_name"], course_row["description"],
         course_row["credits"], course_row["course_type"] == "Core", reviews,
     )
-
-#insert review into review table
-def insert_review(course_id, user_id, review_text, rating, difficulty, time, year, semester):
-    conn = get_db()
-    conn.execute(
-        """
-        INSERT INTO Reviews (course_id, user_id, review_text, rating, difficulty, workload, year, semester)
-        VALUES(?,?,?,?,?,?,?,?)
-        """,
-        (course_id, user_id, review_text, rating, difficulty, time, year, semester),
-    )
-    conn.commit()
-    conn.close()
-
-
-

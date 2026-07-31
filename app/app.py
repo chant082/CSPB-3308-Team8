@@ -15,8 +15,7 @@ from create_db import DATABASE_NAME
 from dbAPI import get_course as db_get_course, get_user
 from dbAPI import get_connection, get_all_courses, search_courses, get_course_averages, get_reviews_for_course
 from dbAPI import add_course as admin_add_course
-from dbAPI import update_course
-from models import get_course, get_course_object, insert_review
+from dbAPI import update_course, insert_review
 
 # Create the Flask application
 app = Flask(__name__)
@@ -362,17 +361,32 @@ def do_submit_review(course_id):
         time = int(request.form.get("time"))
         year = int(request.form.get("year"))
     except ValueError as ve:
-        return f"Invalid input: {ValueError}"
+        return f"Invalid input: {ve}"
  
-    #this will have to be changed once we have auth functionality
-    user_id = 1
+    if "user_id" not in session:
+            return redirect(url_for("login"))
 
-    insert_review(course_id, user_id, review_text, rating, difficulty, time, year, semester)
+    user_id = session["user_id"]
 
+    result = insert_review(DATABASE_NAME, course_id, user_id, review_text, rating, difficulty, time, year, semester)
+
+    if result != "review insertion successful.": 
+        error = "You have already submitted a review for this course." if result == "duplicate" else "An error occurred submitting your review"
+
+        course = db_get_course(DATABASE_NAME, course_id)
+        return render_template(
+            "submit_review.html",
+            course_id=course_id,
+            course=course,
+            error=error,
+            form=request.form,
+        )
     return redirect(url_for('course_details', course_id=course_id))
 
 def show_submit_review_form(course_id):
-    course = get_course(course_id)
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+    course = db_get_course(DATABASE_NAME, course_id)
     return render_template("submit_review.html", course_id = course_id, course = course)
 
 ## EDIT REVIEW - display or process the edit review form for a specific course and review
