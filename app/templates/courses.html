@@ -11,23 +11,33 @@
 <!-- Search bar -->
 <section class="hero-card hero">
     
-    <form method="POST" action="{{ url_for('browse_courses') }}">
+    <!-- Left side -->
+    <div>
+        <h1 class="page_title">Search Courses</h1>
 
-        <div class="form-group">   
+        <form method="post" action="{{ url_for('browse_courses') }}">
 
-            <label for="keyword">Search Courses</label>
+            <div class="search-row">
+                <input
+                    class="form-control"
+                    type="text"
+                    name="keyword"
+                    placeholder="Enter a course code or course name">
 
-            <input class="form-control"
-                type="text" 
-                id="keyword" 
-                name="keyword" 
-                value="{{ keyword | default('') }}" 
-                placeholder="Enter a course code or course name"> <br>
-        </div>
+                <button class="button" type="submit">
+                    Search
+                </button>
+            </div>
 
-        <button class="button" type="submit">Search</button>
+        </form>
+    </div>
 
-     </form>
+    <!-- Right side -->
+    <img
+        class="hero-image"
+        src="{{ url_for('static', filename='images/search.png') }}"
+        alt="Search Courses">
+
 
 </section>
 
