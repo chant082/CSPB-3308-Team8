@@ -5,6 +5,10 @@
 
 {% block content %}
 
+{% if error %}
+<div class="form-error">{{ error }}</div>
+{% endif %}
+
 <section class="hero-card hero">
     <div>
         <h2 class="page-title">Submit Review</h2>
@@ -21,37 +25,37 @@
 
         <div class="form-group">
             <label for="rating">Course rating (1-5)</label>
-            <input class="form-control" type="number" id="rating" name="rating" min="1" max="5" required>
+            <input class="form-control" type="number" id="rating" name="rating" min="1" max="5" required value="{{ form.rating if form }}">
         </div>
 
         <div class="form-group">
             <label for="difficulty">Perceived course difficulty (1-5)</label>
-            <input class="form-control" type="number" id="difficulty" name="difficulty" min="1" max="5" required>
+            <input class="form-control" type="number" id="difficulty" name="difficulty" min="1" max="5" required value="{{ form.difficulty if form }}">
         </div>
         
         <div class="form-group">
             <label for="time">Time commitment per week (hrs)</label>
-            <input class="form-control" type="number" id="time" name="time" min="0" max="30" required>
+            <input class="form-control" type="number" id="time" name="time" min="0" max="30" required value="{{ form.time if form }}">
         </div>
 
         <div class="form-group">        
             <label for="review">Leave a review (300 character max.)</label>
-            <textarea class="form-control review-box" id="review" name="review_text" maxlength=300 rows="5" required></textarea>
+            <textarea class="form-control review-box" id="review" name="review_text" maxlength=300 rows="5" required>{{ form.review_text if form }}</textarea>
 
         </div>
 
         <div class="form-group">
             <label for="year">Year class was taken (YYYY)</label>
-            <input class="form-control" type="text" id="year" name="year" pattern="[0-9]{4}" maxlength="4" inputmode="numeric" required>
+            <input class="form-control" type="text" id="year" name="year" pattern="[0-9]{4}" maxlength="4" inputmode="numeric" required value="{{ form.year if form }}">
         </div>
 
         <div class="form-group">
             <label for="semester">Semester</label>
             <select class="form-control" id="semester" name="semester" required>
-                <option value="" disabled selected>Select a semester</option>
-                <option value="Spring">Spring</option>
-                <option value="Summer">Summer</option>
-                <option value="Fall">Fall</option>
+                <option value="" disabled{% if not form or not form.semester %} selected {% endif %}>Select a semester</option>
+                <option value="Spring" {% if form and form.semester == "Spring" %} selected {% endif %}>Spring</option>
+                <option value="Summer" {% if form and form.semester == "Summer" %} selected {% endif %}>Summer</option>
+                <option value="Fall" {% if form and form.semester == "Fall" %} selected {% endif %}>Fall</option>
             </select>
         </div>
 

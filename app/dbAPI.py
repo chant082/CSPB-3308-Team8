@@ -138,54 +138,7 @@ def get_course_averages(db_name, course_id):
             connection.close()
 
 
-# add a course
-# return the course_id of this new course
-def add_course(
-    db_name,
-    credits,
-    course_name,
-    course_code,
-    description,
-    course_type):
 
-    connection = None
-
-    try:
-        connection = get_connection(db_name)
-        cursor = connection.cursor()
-
-        cursor.execute("""
-            INSERT INTO Courses
-                (
-                    credits,
-                    course_name,
-                    course_code,
-                    description,
-                    course_type
-                )
-            VALUES (?, ?, ?, ?, ?);
-        """, (
-            credits,
-            course_name,
-            course_code,
-            description,
-            course_type
-        ))
-
-        course_id = cursor.lastrowid
-
-        connection.commit()
-
-        return course_id
-
-    except sqlite3.Error:
-        if connection is not None:
-            connection.rollback()
-        raise
-
-    finally:
-        if connection is not None:
-            connection.close()
 
 # update a course
 # return true if successful and false if failed
@@ -431,7 +384,6 @@ def add_course(
     description,
     course_type):
 
-
     connection = None
 
     try:
@@ -471,7 +423,6 @@ def add_course(
     finally:
         if connection is not None:
             connection.close()
-
 
 # update a review
 # return true if the review was successfully updated
@@ -627,3 +578,29 @@ def flag_review(db_name, review_id):
         if connection is not None:
             connection.close()
 
+#insert review into review table
+def insert_review(db_name, course_id, user_id, review_text, rating, difficulty, time, year, semester):
+    
+    connection = None
+    
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+        cursor.execute(
+            """
+            INSERT INTO Reviews (course_id, user_id, review_text, rating, difficulty, workload, year, semester)
+            VALUES(?,?,?,?,?,?,?,?)
+            """,
+            (course_id, user_id, review_text, rating, difficulty, time, year, semester),
+        )
+        connection.commit()
+    except sqlite3.IntegrityError as e:
+        if "UNIQUE constraint failed: Reviews.course_id, Reviews.user_id" in str(e):
+            return "duplicate"
+        return f'Error table insertion failed: {e}'
+    except Exception as e:
+        return f'Error table insertion failed: {e}'
+    finally:
+        if connection is not None:
+            connection.close()
+    return "review insertion successful."
