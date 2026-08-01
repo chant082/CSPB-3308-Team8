@@ -374,6 +374,91 @@ def get_reviews_by_user(db_name, user_id):
         if connection is not None:
             connection.close()
 
+
+# Get the 5 most recent unflagged reviews (for home page recent reviews section)
+def get_recent_reviews(db_name, limit=5):
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute(
+            """
+            SELECT
+                Reviews.review_id,
+                Reviews.course_id,
+                Reviews.user_id,
+                Reviews.review_text,
+                Reviews.rating,
+                Reviews.difficulty,
+                Reviews.workload,
+                Reviews.year,
+                Reviews.semester,
+                Reviews.created_at,
+                Users.username,
+                Courses.course_code,
+                Courses.course_name
+            FROM Reviews
+            JOIN Users
+                ON Reviews.user_id = Users.user_id
+            JOIN Courses
+                ON Reviews.course_id = Courses.course_id
+            WHERE Reviews.is_flagged = 0
+            ORDER BY Reviews.created_at DESC
+            LIMIT ?
+            """,
+            (limit,)
+        )
+
+        return cursor.fetchall()
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# Get the 5 most recent reviews written by a user (for recent reviews section on profile page)
+def get_recent_reviews_for_user(db_name, user_id, limit=5):
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute(
+            """
+            SELECT
+                Reviews.review_id,
+                Reviews.course_id,
+                Reviews.user_id,
+                Reviews.review_text,
+                Reviews.rating,
+                Reviews.difficulty,
+                Reviews.workload,
+                Reviews.year,
+                Reviews.semester,
+                Reviews.created_at,
+                Reviews.is_flagged,
+                Courses.course_code,
+                Courses.course_name
+            FROM Reviews
+            JOIN Courses
+                ON Reviews.course_id = Courses.course_id
+            WHERE Reviews.user_id = ?
+            ORDER BY Reviews.created_at DESC
+            LIMIT ?
+            """,
+            (user_id, limit)
+        )
+
+        return cursor.fetchall()
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
 # add a course
 # return course _id
 def add_course(
@@ -559,7 +644,7 @@ def flag_review(db_name, review_id):
 
         cursor.execute("""
             UPDATE Reviews
-            SET is_flagged = 1
+            SET is_flagged = NOT is_flagged
             WHERE review_id = ?;
         """, (review_id,))
 
@@ -579,7 +664,7 @@ def flag_review(db_name, review_id):
             connection.close()
 
 #insert review into review table
-def insert_review(db_name, course_id, user_id, review_text, rating, difficulty, time, year, semester):
+def insert_review(db_name, course_id, user_id, review_text, rating, difficulty, workload, year, semester):
     
     connection = None
     
@@ -591,7 +676,7 @@ def insert_review(db_name, course_id, user_id, review_text, rating, difficulty, 
             INSERT INTO Reviews (course_id, user_id, review_text, rating, difficulty, workload, year, semester)
             VALUES(?,?,?,?,?,?,?,?)
             """,
-            (course_id, user_id, review_text, rating, difficulty, time, year, semester),
+            (course_id, user_id, review_text, rating, difficulty, workload, year, semester),
         )
         connection.commit()
     except sqlite3.IntegrityError as e:

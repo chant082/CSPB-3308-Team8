@@ -1,5 +1,5 @@
 # CSPB 3308 Team Project
-# CSPB Coruse Review Platform
+# CSPB Course Review Platform
 
 # This Python script creates the Users, Courses, and Reviews table
 # It also inserts initial test data
@@ -110,7 +110,7 @@ def insert_test_data(db_name):
         connection = sqlite3.connect(db_name)
         cursor = connection.cursor()
 
-        # enalbe foreign keys
+        # enable foreign keys
         cursor.execute("PRAGMA foreign_keys = ON")
 
  
@@ -280,7 +280,7 @@ def insert_test_data(db_name):
                 'A challenging course. Some assignments can take a lot of time.',
                 3, 0, 0,
                 4, 5, 10,
-                2024, 'Fall',
+                2025, 'Fall',
                 '2025-12-10 19:42:05');
         """)
 

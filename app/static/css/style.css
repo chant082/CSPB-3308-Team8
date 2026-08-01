@@ -72,7 +72,7 @@ a {
 /* Logo */
 .logo_link {
     display: inline-flex;
-    align-items: left;
+    align-items: center;
 }
 
 .site_logo {
@@ -80,7 +80,6 @@ a {
     width: 500px;
     max-width: 100%;
     height: auto;
-    align-items: left;
 }
 
 /* Main Navigation */
@@ -298,6 +297,7 @@ a {
     white-space: nowrap;
 }
 
+
 /*******************************************************************************
 * Reviews
 *******************************************************************************/
@@ -309,7 +309,9 @@ a {
 }
 
 .review-card {
+    position: relative;
     padding: 20px;
+    padding-right: 220px;
     background-color: var(--white);
     border: 1px solid var(--light-gray);
     border-radius: 10px;
@@ -319,9 +321,23 @@ a {
 .review-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    width: 100%;
     gap: 20px;
     margin-bottom: 8px;
+}
+
+.review-side {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 180px;
+    text-align: right;
+}
+
+.review-info {
+    display: flex;
+    flex-direction: column;
 }
 
 .review-author {
@@ -329,9 +345,25 @@ a {
     color: var(--navy);
 }
 
+.created_at {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    color: var(--medium-gray)
+}
+
 .review-term {
-    font-size: 0.9rem;
-    color: var(--medium-gray);
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--navy);
+    white-space: nowrap;
+}
+
+.edit-review {
+    display: block;
+    width: 140px;
+    margin: 50px auto 0;
+    padding: 6px 14px;
 }
 
 .review-ratings {
@@ -356,7 +388,13 @@ a {
 .review-actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
+    
+}
+
+.review-actions form {
+    margin: 0;
 }
 
 /* Smaller secondary buttons used for review actions */
@@ -386,6 +424,91 @@ a {
     color: var(--medium-gray);
 }
 
+.flagged {
+    color: #9a6700;
+    background-color: #fff4d6;
+    border-color: #f59e0b;
+    cursor: default;
+}
+
+.flagged:disabled {
+    opacity: 1;
+}
+
+.flagged:hover {
+    background-color: #fff4d6;
+}
+
+/* Stack on smaller screens */
+@media (max-width: 800px) {
+    .review-card {
+        padding-right: 20px;
+    }
+
+    .review-side {
+        position: static;
+        width: 100%;
+        margin-bottom: 16px;
+        text-align: left;
+    }
+
+    .review-term {
+        text-align: left;
+    }
+
+    .edit-review {
+        margin: 10px 0 0;
+    }
+
+    .review-ratings {
+        gap: 12px;
+    }
+}
+
+
+/*******************************************************************************
+* Home Page Recent Reviews
+*******************************************************************************/
+
+.home-review-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    gap: 30px;
+    align-items: stretch;
+
+    /* Override spacing used by course-detail review cards */
+    padding-right: 20px;
+}
+
+.home-review-main {
+    min-width: 0;
+}
+
+.home-review-user {
+    margin: 0 0 2px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--medium-gray);
+}
+
+.home-review-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.home-review-side .review-term {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    white-space: nowrap;
+}
+
+.home-review-side .button {
+    white-space: nowrap;
+}
+
 
 /*******************************************************************************
 * Footer
@@ -399,15 +522,16 @@ a {
     border-top: 1px solid var(--light-gray);
 }
 
-.site-footer p {
+.site_footer p {
     margin-top: 0;
     margin-bottom: 6px;
 }
 
-.site-footer a {
+.site_footer a {
     text-decoration: none;
 }
 
-.site-footer a:hover {
+.site_footer a:hover {
     text-decoration: underline;
 }
+

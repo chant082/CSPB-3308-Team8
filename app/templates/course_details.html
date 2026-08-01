@@ -101,16 +101,28 @@
 
             {% for review in reviews %}
 
-                <article class="review-card">
+                <article class="review-card" id="review-{{ review['review_id'] }}">
 
-                    <!-- Reviewer username and semester taken -->
+                    <!-- Reviewer username, semester taken, and timestamp -->
                     <div class="review-header">
-
-                        <h3 class="review-author">{{ review["username"] }}</h3>
-                        <span class="review-term">{{ review["semester"] }} {{ review["year"] }}</span>
-
+                        <div class="review-info"> 
+                            <h3 class="review-author">{{ review["username"] }}</h3>
+                             <p class="created_at">Reviewed on {{ review["created_at"][:10] }}</p>
+                        </div>
                     </div>
 
+                    <div class="review-side">
+                        <span class="review-term">{{ review["semester"] }} {{ review["year"] }}</span>
+                        
+                        {% if session.get("user_id") == review["user_id"] %}
+                            <a class="button button_secondary edit-review"
+                                href="{{ url_for('edit_review',
+                                    course_id=course['course_id'],
+                                    review_id=review['review_id'])}}">
+                                    Edit Review</a>
+                        {% endif %}
+                    </div>
+                    
                     <!-- Review ratings -->
                     <div class ="review-ratings">
 
@@ -126,11 +138,43 @@
                     <!-- Voting and flags -->
                     <div class="review-actions">
 
-                        <button class="review-action upvote" type="button">↑ {{ review["upvotes"]|default(0) }}</button>
+                        <!-- Upvotes -->
+                        <form
+                            action="{{ url_for('upvote', 
+                                course_id=course['course_id'], 
+                                review_id=review['review_id']) 
+                                }}"
+                                method="POST">
                         
-                        <button class="review-action downvote" type="button">↓ {{ review["downvotes"]|default(0) }}</button>
+                            <button class="review-action upvote" type="submit">↑ {{ review["upvotes"]|default(0) }}</button>
+                        </form>
+                        
+                        <!-- Downvotes -->
+                        <form
+                            action="{{ url_for('downvote',
+                                course_id=course['course_id'],
+                                review_id=review['review_id'])
+                            }}"
+                            method="POST">
 
-                        <button class="review-action flag-review" type="button">⚑ Flag / Report</button>
+                            <button class="review-action downvote" type="submit">↓ {{ review["downvotes"]|default(0) }}</button>
+                        </form>
+
+                        <!-- Flagging-->
+                        <form
+                            action="{{ url_for('flag',
+                            course_id=course['course_id'],
+                            review_id=review['review_id'])
+                            }}"
+                            method="POST">
+
+                            {% if review["is_flagged"] %}
+                                <button class="review-action flagged" type="submit">⚑ Reported</button>
+                            {% else %}
+                                <button class="review-action flag-review" type="submit">⚑ Flag/Report</button>
+                            {% endif %}
+                        
+                        </form>
 
                     </div>
 

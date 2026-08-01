@@ -27,6 +27,19 @@
     border-radius: 10px;
 }
 
+.course-stat-label {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.95rem;
+    color: var(--medium-gray);
+}
+
+.course-stat-value {
+    display: block;
+    font-weight: 700;
+    color: var(--navy);
+}
+
 .rating-icon {
     display: block;
     width: 80px;
@@ -84,4 +97,16 @@
 
 .star.empty {
     color: var(--light-gray);
+}
+
+
+/* Stack on smaller screens */
+@media (max-width: 700px) {
+    .course-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .course-stat {
+        width: 100%;
+    }
 }
