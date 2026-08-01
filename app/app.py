@@ -13,9 +13,9 @@ from flask import Flask, session, url_for, request, render_template, redirect, a
 from markupsafe import escape
 from create_db import DATABASE_NAME
 from dbAPI import get_course as db_get_course
-from dbAPI import get_connection, get_all_courses, search_courses, get_course_averages, get_reviews_for_course, upvote_review, downvote_review, flag_review, get_recent_reviews_for_user, get_user
 from dbAPI import add_course as admin_add_course
-from dbAPI import update_course, insert_review
+from dbAPI import get_connection, get_user, get_all_courses, search_courses, get_course_averages, update_course
+from dbAPI import get_reviews_for_course, upvote_review, downvote_review, flag_review, get_recent_reviews_for_user, get_recent_reviews, insert_review
 
 # Create the Flask application
 app = Flask(__name__)
@@ -34,7 +34,11 @@ def home():
 
     # retrieve username from the current session if user is logged in
     username = session.get("username")
-    return render_template("home.html", username=username)
+
+    # retrieve the 5 most recent unflagged reviews
+    reviews = get_recent_reviews(DATABASE_NAME, limit=5)
+
+    return render_template("home.html", username=username, reviews=reviews)
 
 
 ## ABOUT PAGE

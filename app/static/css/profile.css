@@ -90,6 +90,13 @@
     }
 }
 
+.flagged-message {
+    color: red;
+    margin-top: 10px;
+}
+
+    
+
 /* Stack the buttons on smaller screens */
 @media (max-width: 450px) {
     .profile-review-buttons {

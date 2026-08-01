@@ -45,11 +45,80 @@
 
 </section>
 
+<!-- Recent Reviews -->
 <section class="card">
-    <h2 class="section-title">Recent Reviews</h2>
 
-    <p>Recent reviews will appear here.</p>
-    <!-- TODO: Add Recent Reviews Section (list of recent courses and links to each course detail page) -->
+    <h2 class="section_title">Recent Reviews</h2>
+
+    <!-- Display each review if reviews exist -->
+    {% if reviews %}
+
+        <div class="review-list">
+
+            {% for review in reviews %}
+
+                <article class="review-card home-review-card" id="review-{{ review['review_id'] }}">
+
+                    <!-- Left column -->
+                    <div class="home-review-main">
+
+                        <div class="review-info"> 
+                            <h3>{{ review["course_code"] }}: {{ review["course_name"] }}</h3>
+                            <p class="review-author">Reviewed by {{ review["username"] }}</p>
+                            <p class="created_at">Reviewed on {{ review["created_at"][:10] }}</p>
+                        </div>
+
+                        <!-- Review ratings -->
+                        <div class ="review-ratings">
+
+                            <span>Overall Rating: <strong>{{ review["rating"] }} / 5</strong></span>
+                            <span>Difficulty: <strong>{{ review["difficulty"] }} / 5</strong></span>
+                            <span>Workload: <strong>{{ review["workload"] }} hrs /wk</strong></span>
+
+                        </div>
+
+                        <!-- Written review -->
+                        <p class="review-text">{{ review["review_text"] }}</p>
+
+                    </div>
+
+                    <!-- Right column -->
+                    <div class="home-review-side">
+
+                        <span class="review-term">{{ review["semester"] }} {{ review["year"] }}</span>
+                        
+                        <!-- Action buttons -->
+                        <div>
+                        
+                            <!-- Jump to specific review on course page -->
+                            <a class="button"
+                                href="{{ url_for('course_details', course_id=review['course_id']) }}#review-{{review['review_id'] }}">
+                                View Course
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    <!-- Else display "no reviews" message -->
+    {% else %}
+        {% if username %}
+            <p class="secondary_text">
+                No recent reviews. Browse courses to write your first review!
+            </p>
+        {% else %}
+            <p class="secondary_text">
+                No recent reviews. Log in or create an account to write your first review!
+            </p>
+        {% endif %}
+
+    {% endif %}
 
 </section>
 

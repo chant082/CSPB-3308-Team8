@@ -77,7 +77,6 @@
 
                         <div class="review-info"> 
                             <h3>{{ review["course_code"] }}: {{ review["course_name"] }}</h3>
-                             <p class="created_at">Reviewed on {{ review["created_at"][:10] }}</p>
                         </div>
 
                         <!-- Review ratings -->
@@ -91,6 +90,12 @@
 
                         <!-- Written review -->
                         <p class="review-text">{{ review["review_text"] }}</p>
+                        <p class="created_at">Reviewed on {{ review["created_at"][:10] }}</p>
+
+                        <!-- Flag message review--->
+                        {% if review["is_flagged"] %}
+                            <p class="flagged-message">⚑ This review has been flagged for moderation.</p>
+                        {% endif %}
 
                     </div>
 

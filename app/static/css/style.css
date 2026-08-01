@@ -297,6 +297,7 @@ a {
     white-space: nowrap;
 }
 
+
 /*******************************************************************************
 * Reviews
 *******************************************************************************/
@@ -463,6 +464,51 @@ a {
         gap: 12px;
     }
 }
+
+
+/*******************************************************************************
+* Home Page Recent Reviews
+*******************************************************************************/
+
+.home-review-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    gap: 30px;
+    align-items: stretch;
+
+    /* Override spacing used by course-detail review cards */
+    padding-right: 20px;
+}
+
+.home-review-main {
+    min-width: 0;
+}
+
+.home-review-user {
+    margin: 0 0 2px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--medium-gray);
+}
+
+.home-review-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.home-review-side .review-term {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    white-space: nowrap;
+}
+
+.home-review-side .button {
+    white-space: nowrap;
+}
+
 
 /*******************************************************************************
 * Footer

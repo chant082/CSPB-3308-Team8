@@ -375,6 +375,49 @@ def get_reviews_by_user(db_name, user_id):
             connection.close()
 
 
+# Get the 5 most recent unflagged reviews (for home page recent reviews section)
+def get_recent_reviews(db_name, limit=5):
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute(
+            """
+            SELECT
+                Reviews.review_id,
+                Reviews.course_id,
+                Reviews.user_id,
+                Reviews.review_text,
+                Reviews.rating,
+                Reviews.difficulty,
+                Reviews.workload,
+                Reviews.year,
+                Reviews.semester,
+                Reviews.created_at,
+                Users.username,
+                Courses.course_code,
+                Courses.course_name
+            FROM Reviews
+            JOIN Users
+                ON Reviews.user_id = Users.user_id
+            JOIN Courses
+                ON Reviews.course_id = Courses.course_id
+            WHERE Reviews.is_flagged = 0
+            ORDER BY Reviews.created_at DESC
+            LIMIT ?
+            """,
+            (limit,)
+        )
+
+        return cursor.fetchall()
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
 # Get the 5 most recent reviews written by a user (for recent reviews section on profile page)
 def get_recent_reviews_for_user(db_name, user_id, limit=5):
     connection = None
@@ -396,6 +439,7 @@ def get_recent_reviews_for_user(db_name, user_id, limit=5):
                 Reviews.year,
                 Reviews.semester,
                 Reviews.created_at,
+                Reviews.is_flagged,
                 Courses.course_code,
                 Courses.course_name
             FROM Reviews
