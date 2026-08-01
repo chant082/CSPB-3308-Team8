@@ -69,7 +69,8 @@ def create_table(db_name):
                     CHECK (difficulty BETWEEN 1 AND 5),
                 workload INTEGER NOT NULL
                     CHECK (workload >= 0),
-                year INTEGER NOT NULL,
+                year INTEGER NOT NULL
+                    CHECK (year BETWEEN 2015 AND 2100),
                 semester TEXT NOT NULL
                     CHECK (semester IN ('Spring', 'Summer', 'Fall')),
                 created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,

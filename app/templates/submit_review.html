@@ -45,8 +45,18 @@
         </div>
 
         <div class="form-group">
-            <label for="year">Year class was taken (YYYY)</label>
-            <input class="form-control" type="text" id="year" name="year" pattern="[0-9]{4}" maxlength="4" inputmode="numeric" required value="{{ form.year if form }}">
+            <label for="year">Year Taken</label>
+            <select
+                class="form-control"
+                id="year"
+                name="year"
+                required>
+                {% for year in range(current_year, 2014, -1) %}
+                    <option value="{{ year }}">
+                        {{ year }}
+                    </option>
+                {% endfor %}
+            </select>
         </div>
 
         <div class="form-group">

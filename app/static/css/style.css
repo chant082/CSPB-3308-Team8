@@ -535,3 +535,28 @@ a {
     text-decoration: underline;
 }
 
+/******************************************************
+* Table
+*******************************************************/
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.admin-table th {
+    background-color: var(--pale-blue);
+    color: var(--navy);
+}
+
+.admin-table tr:hover {
+    background-color: #f8f9fb;
+}

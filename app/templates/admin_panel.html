@@ -55,4 +55,101 @@
     {% endif %}
 </section>
 
+<section class="card">
+
+    <h3>User Management</h3>
+
+    {% if users %}
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Admin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user["user_id"] }}</td>
+                        <td>{{ user["username"] }}</td>
+                        <td>{{ user["email"] }}</td>
+                        <td>
+                            {% if user["is_admin"] %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No users found.</p>
+    {% endif %}
+
+</section>
+
+<section class="card">
+    <h3>Flagged Reviews</h3>
+
+    {% if flagged_reviews %}
+        <div class="review-list">
+            {% for review in flagged_reviews %}
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <h4 class="review-author">
+                                {{ review["username"] }}
+                            </h4>
+                            <div class="review-term">
+                                {{ review["course_code"] }}
+                                —
+                                {{ review["course_name"] }}
+                            </div>
+                        </div>
+                        <span class="secondary_text">
+                            Flagged
+                        </span>
+                    </div>
+                    <p class="review-text">
+                        {{ review["review_text"] }}
+                    </p>
+                    <div class="review-ratings">
+                        <span>
+                            Rating:
+                            <strong>{{ review["rating"] }} / 5</strong>
+                        </span>
+                        <span>
+                            Difficulty:
+                            <strong>{{ review["difficulty"] }} / 5</strong>
+                        </span>
+                        <span>
+                            Workload:
+                            <strong>{{ review["workload"] }} hours/week</strong>
+                        </span>
+                    </div>
+
+                    <p class="secondary_text">
+                        Taken:
+                        {{ review["semester"] }}
+                        {{ review["year"] }}
+                        |
+                        Posted:
+                        {{ review["created_at"] }}
+                    </p>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+
+        <p class="secondary_text">
+            There are currently no flagged reviews.
+        </p>
+
+    {% endif %}
+</section>
+
 {% endblock %}
