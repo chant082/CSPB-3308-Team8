@@ -3,7 +3,6 @@
 
 {% block title %}Profile | CSPB Course Reviews{% endblock %}
 
-
 {%block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
 {% endblock %}
@@ -11,6 +10,7 @@
 {% block content %}
 
 <section class="hero-card hero">
+
     <div>
         <h2>Your Profile</h2>
         <p>
@@ -18,19 +18,18 @@
         </p>
     </div> 
 
-    <img
-        class="hero-image"
-        src="{{ url_for('static', filename='images/setting.png') }}"
-        alt="Settings">
+    <div>
+        <img class="hero-image" src="{{ url_for('static', filename='images/setting.png') }}" alt="Profile Settings">
+    </div>
 
 </section>
 
 <section class="card">
 
-    <div class="profile-layout">
+    <div class="hero">
 
         <!-- Left side -->
-        <div class="profile-info">
+        <div>
             <p><strong>Username:</strong> {{ username }}</p>
             <p><strong>Email:</strong> {{ email }}</p>
             <p><strong>Password:</strong> **********</p>
@@ -47,22 +46,95 @@
         <!-- Right side -->
         <div class="profile-actions">
 
-            <form action="{{ url_for('update_info') }}" method="get">
-                <button class="edit-profile-button" type="submit">
-                    Edit Profile
-                </button>
-            </form>
-
             {% if is_admin %}
-                <form action="{{ url_for('admin', username=username) }}" method="get">
-                    <button class="admin-button" type="submit">
-                        Admin Panel
-                    </button>
-                </form>
+                <a class="button" href="{{ url_for('admin', username=username) }}">Admin Panel</a>
             {% endif %}
+
+            <a class="button button_secondary" href="{{ url_for('update_info') }}">Edit Profile</a>
 
         </div>
 
     </div>
+
+</section>
+
+<!-- Reviews -->
+<section class="card">
+
+    <h2 class="section_title">Your Recent Reviews</h2>
+
+    <!-- Display each review if reviews exist -->
+    {% if reviews %}
+
+        <div class="review-list">
+
+            {% for review in reviews %}
+
+                <article class="review-card profile-review-card" id="review-{{ review['review_id'] }}">
+
+                    <!-- Left column -->
+                    <div class="profile-review-main">
+
+                        <div class="review-info"> 
+                            <h3>{{ review["course_code"] }}: {{ review["course_name"] }}</h3>
+                             <p class="created_at">Reviewed on {{ review["created_at"][:10] }}</p>
+                        </div>
+
+                        <!-- Review ratings -->
+                         <div class ="review-ratings">
+
+                        <span>Overall Rating: <strong>{{ review["rating"] }} / 5</strong></span>
+                        <span>Difficulty: <strong>{{ review["difficulty"] }} / 5</strong></span>
+                        <span>Workload: <strong>{{ review["workload"] }} hrs /wk</strong></span>
+
+                        </div>
+
+                        <!-- Written review -->
+                        <p class="review-text">{{ review["review_text"] }}</p>
+
+                    </div>
+
+                    <!-- Right column -->
+                    <div class="profile-review-side">
+
+                        <span class="review-term">{{ review["semester"] }} {{ review["year"] }}</span>
+                        
+                        <!-- Action buttons -->
+                        <div class="profile-review-buttons">
+                        
+                            <!-- Jump to specific review on course page -->
+                            <a class="button"
+                                href="{{ url_for('course_details', course_id=review['course_id']) }}#review-{{review['review_id'] }}">
+                                View Course
+                            </a>
+
+                            <a class="button button_secondary"
+                                href="{{ url_for('edit_review',
+                                    course_id=review['course_id'],
+                                    review_id=review['review_id'])}}">
+                                    Edit Review
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    <!-- Else display "no reviews" message -->
+    {% else %}
+        <p class="secondary_text">
+            You have no recent reviews. Browse courses to write your first review!
+        </p>
+
+        <a href="{{ url_for('browse_courses') }}" class="button">Browse Courses</a>
+
+    {% endif %}
+
+</section>
 
 {% endblock %}

@@ -12,8 +12,8 @@ from getpass import getuser
 from flask import Flask, session, url_for, request, render_template, redirect, abort
 from markupsafe import escape
 from create_db import DATABASE_NAME
-from dbAPI import get_course as db_get_course, get_user
-from dbAPI import get_connection, get_all_courses, search_courses, get_course_averages, get_reviews_for_course, upvote_review, downvote_review, flag_review
+from dbAPI import get_course as db_get_course
+from dbAPI import get_connection, get_all_courses, search_courses, get_course_averages, get_reviews_for_course, upvote_review, downvote_review, flag_review, get_recent_reviews_for_user, get_user
 from dbAPI import add_course as admin_add_course
 from dbAPI import update_course, insert_review
 
@@ -133,11 +133,15 @@ def profile():
     # retrieve current user's info using the ID stored in the session
     user = get_user(DATABASE_NAME, session["user_id"])
 
+    # retrieve the user's 5 most recent reviews for display on the profile page
+    reviews = get_recent_reviews_for_user(DATABASE_NAME, session["user_id"], limit=5)
+    
     return render_template(
         "profile.html",
         username=user["username"],
         email=user["email"],
-        is_admin=user["is_admin"]
+        is_admin=user["is_admin"],
+        reviews=reviews
     )
 
 
