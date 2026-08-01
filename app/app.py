@@ -16,6 +16,13 @@ from dbAPI import get_course as db_get_course
 from dbAPI import add_course as admin_add_course
 from dbAPI import get_connection, get_user, get_all_courses, search_courses, get_course_averages, update_course
 from dbAPI import get_reviews_for_course, upvote_review, downvote_review, flag_review, get_recent_reviews_for_user, get_recent_reviews, insert_review
+from dbAPI import get_all_users
+from dbAPI import get_flagged_reviews
+from dbAPI import get_review, update_review, get_review_by_user_and_course
+
+
+from datetime import datetime
+current_year = datetime.now().year
 
 # Create the Flask application
 app = Flask(__name__)
@@ -201,7 +208,16 @@ def show_update_info_form():
 @app.route('/admin/<username>')
 def admin(username):
     courses = get_all_courses(DATABASE_NAME)
-    return render_template("admin_panel.html", username=escape(username), courses=courses)
+    users = get_all_users(DATABASE_NAME)
+    flagged_reviews = get_flagged_reviews(DATABASE_NAME)
+
+    return render_template(
+        "admin_panel.html", 
+        username=escape(username), 
+        courses=courses,
+        users=users,
+        flagged_reviews=flagged_reviews
+        )
 
 
 ## ADMIN ADD COURSE - display or process the add course form
@@ -382,10 +398,29 @@ def course_details(course_id):
 ## SUBMIT REVIEW - display or process the submit review form for a specific course
 @app.route('/courses/<int:course_id>/submit_review', methods=['GET', 'POST'])
 def submit_review(course_id):
-    if request.method == 'POST':
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    existing_review = get_review_by_user_and_course(
+        DATABASE_NAME,
+        session["user_id"],
+        course_id
+    )
+
+    if existing_review is not None:
+        return redirect(
+            url_for(
+                "edit_review",
+                course_id=course_id,
+                review_id=existing_review["review_id"]
+            )
+        )
+    
+    if request.method == "POST":
         return do_submit_review(course_id)
-    else:
-        return show_submit_review_form(course_id)
+
+    return show_submit_review_form(course_id)
 
 
 def do_submit_review(course_id):
@@ -423,6 +458,7 @@ def do_submit_review(course_id):
             course=course,
             error=error,
             form=request.form,
+            current_year=datetime.now().year
         )
     # return to course page after successful submission
     return redirect(url_for('course_details', course_id=course_id))
@@ -432,24 +468,66 @@ def show_submit_review_form(course_id):
     if "user_id" not in session:
         return redirect(url_for("login"))
     course = db_get_course(DATABASE_NAME, course_id)
-    return render_template("submit_review.html", course_id = course_id, course = course)
+    return render_template(
+        "submit_review.html", 
+        course_id = course_id, 
+        course = course,
+        current_year=current_year)
 
 
 ## EDIT REVIEW - display or process the edit review form for a specific course and review
 @app.route('/courses/<int:course_id>/edit_review/<int:review_id>', methods=['GET', 'POST'])
 def edit_review(course_id, review_id):
-    if request.method == 'POST':
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+    if request.method == "POST":
         return do_edit_review(course_id, review_id)
-    else:
-        return show_edit_review_form(course_id, review_id)
+
+    return show_edit_review_form(course_id, review_id)
+
 
 def do_edit_review(course_id, review_id):
-    # TO DO: Update the selected review in the database
-    return f"do_edit_review called for course: {course_id}, review: {review_id}"
+
+    review_text = request.form.get("review_text")
+    semester = request.form.get("semester")
+
+    try:
+        rating = int(request.form.get("rating"))
+        difficulty = int(request.form.get("difficulty"))
+        workload = int(request.form.get("workload"))
+        year = int(request.form.get("year"))
+
+    except (TypeError, ValueError):
+        return "Invalid numeric input.", 400
+
+    success = update_review(
+        DATABASE_NAME,
+        review_id,
+        review_text,
+        rating,
+        difficulty,
+        workload,
+        year,
+        semester
+    )
+
+    if not success:
+        return "The review could not be updated.", 500
+
+    return redirect(
+        url_for("course_details", course_id=course_id)
+        + f"#review-{review_id}"
+    )
 
 def show_edit_review_form(course_id, review_id):
-    # TO DO: retrieve the existing review and populate the edit form
-    return render_template("edit_review.html", course_id=course_id, review_id=review_id)
+    review = get_review(DATABASE_NAME, review_id)
+
+    return render_template(
+        "edit_review.html",
+        review=review,
+        current_year=datetime.now().year
+    )
+
 
 
 ## UPVOTE REVIEW - increase a review's upvote count by 1

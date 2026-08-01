@@ -689,3 +689,119 @@ def insert_review(db_name, course_id, user_id, review_text, rating, difficulty, 
         if connection is not None:
             connection.close()
     return "review insertion successful."
+
+
+# get all the reviews flagged by ysers
+# this gets the author's username, review info, and course info
+
+def get_flagged_reviews(db_name):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT
+                Reviews.review_id,
+                Reviews.review_text,
+                Reviews.rating,
+                Reviews.difficulty,
+                Reviews.workload,
+                Reviews.year,
+                Reviews.semester,
+                Reviews.created_at,
+                Reviews.upvotes,
+                Reviews.downvotes,
+                Users.username,
+                Courses.course_code,
+                Courses.course_name
+            FROM Reviews
+            JOIN Users
+                ON Reviews.user_id = Users.user_id
+            JOIN Courses
+                ON Reviews.course_id = Courses.course_id
+            WHERE Reviews.is_flagged = 1
+            ORDER BY Reviews.created_at DESC;
+        """)
+
+        flagged_reviews = cursor.fetchall()
+
+        return flagged_reviews
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# get a specific review by review_id
+# this also returns course name and course code
+# return None if the review does not exist
+
+def get_review(db_name, review_id):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT
+                Reviews.review_id,
+                Reviews.course_id,
+                Reviews.user_id,
+                Reviews.review_text,
+                Reviews.upvotes,
+                Reviews.downvotes,
+                Reviews.is_flagged,
+                Reviews.rating,
+                Reviews.difficulty,
+                Reviews.workload,
+                Reviews.year,
+                Reviews.semester,
+                Reviews.created_at,
+                Courses.course_code,
+                Courses.course_name
+            FROM Reviews
+            JOIN Courses
+                ON Reviews.course_id = Courses.course_id
+            WHERE Reviews.review_id = ?;
+        """, (review_id,))
+
+        review = cursor.fetchone()
+
+        return review
+
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+# return a user's review for a course
+# return None if the user has not reviewed this course
+def get_review_by_user_and_course(db_name, user_id, course_id):
+
+    connection = None
+
+    try:
+        connection = get_connection(db_name)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM Reviews
+            WHERE user_id = ?
+              AND course_id = ?;
+        """, (
+            user_id,
+            course_id
+        ))
+
+        return cursor.fetchone()
+
+    finally:
+        if connection is not None:
+            connection.close()
+
