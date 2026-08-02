@@ -18,6 +18,11 @@
 <section id = "login_form">
     <!-- TODO: Add Login Form -->
      <div class="login-container">
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
         <form action="{{ url_for('login') }}" method="post">
             <label for="username"><strong>Username:</strong></label>
             <input type="text" id="username" name="username" required>
