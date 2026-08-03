@@ -18,6 +18,10 @@
 
 <section id="profile_info">
 
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
     <form action="{{ url_for('update_info') }}" method="post">
 
         <p><strong>Username:</strong> {{ username }}</p>

@@ -85,8 +85,10 @@ def login():
             return redirect(url_for("home"))
         
         else:
-            # reload ogin page when credentials don't match
-            return render_template("login.html")
+            return render_template(
+                "login.html",
+                error="Invalid username or password."
+            )
         
     # display the login form when the page is first loaded
     return render_template("login.html")
@@ -95,25 +97,69 @@ def login():
 ## SIGNUP - Display or process the signup form
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    # add new user when signup form is submitted
+
     if request.method == 'POST':
-        username = request.form["username"]
-        email = request.form["email"]
+        username = request.form["username"].strip()
+        email = request.form["email"].strip()
         password = request.form["password"]
 
         connection = get_connection(DATABASE_NAME)
         cursor = connection.cursor()
 
-        # insert new user's info into Users table
-        cursor.execute("INSERT INTO Users (username, email, password_hash) VALUES (?, ?, ?)", (username, email, password))
+        #Check Password length
+        if len(password) < 8:
+            connection.close()
+            return render_template(
+                "signup.html",
+                error="Password must be at least 8 characters long."
+            )
+
+        # Check username
+        cursor.execute(
+            "SELECT 1 FROM Users WHERE username = ?",
+            (username,)
+        )
+
+        if cursor.fetchone():
+            connection.close()
+            return render_template(
+                "signup.html",
+                error="Username is already taken."
+            )
+
+        # Check email domain
+        if not email.endswith("@colorado.edu"):
+            connection.close()
+            return render_template(
+                "signup.html",
+                error="Please use a valid @colorado.edu email address."
+            )
+
+        # Check email
+        cursor.execute(
+            "SELECT 1 FROM Users WHERE email = ?",
+            (email,)
+        )
+
+        if cursor.fetchone():
+            connection.close()
+            return render_template(
+                "signup.html",
+                error="An account with that email already exists."
+            )
+
+        # Create user
+        cursor.execute(
+            "INSERT INTO Users (username, email, password_hash) VALUES (?, ?, ?)",
+            (username, email, password)
+        )
+
         connection.commit()
         connection.close()
 
-        # send new user to the login page
         return redirect(url_for("login"))
-    
-    else:
-        return show_the_signup_form()
+
+    return show_the_signup_form()
 
 # Helper function to show the signup form
 def show_the_signup_form():
@@ -175,6 +221,12 @@ def do_update_info():
     try:
         password = request.form["password"]
 
+        # Check password length
+        if len(password) < 8:
+            return show_update_info_form(
+                error="Password must be at least 8 characters long."
+            )
+
         connection = get_connection(DATABASE_NAME)
         cursor = connection.cursor()
 
@@ -194,13 +246,14 @@ def do_update_info():
     return redirect(url_for("profile"))
 
 
-def show_update_info_form():
+def show_update_info_form(error=None):
     user = get_user(DATABASE_NAME, session["user_id"])
 
     return render_template(
         "user_update_info.html",
         username=user["username"],
-        email=user["email"]
+        email=user["email"],
+        error=error
     )
 
 

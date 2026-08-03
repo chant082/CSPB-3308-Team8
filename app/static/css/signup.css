@@ -54,3 +54,10 @@
     margin-top: 20px;
     margin-bottom: 500px;
 }
+
+.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
