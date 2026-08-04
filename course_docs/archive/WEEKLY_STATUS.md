@@ -349,3 +349,82 @@ The team reported:
 - **Craig Sanders:** Submitted submit_review.html with the necessary functions in app.py and models.py
 - **Ching-Hsiang (Sean) Lin**: Build SQL database and sample courses and reviews. Added SQL methods. 
 ---
+
+# Reporting Period
+
+**Week**: 11 (of the semester)
+
+**Sprint**: 7
+
+**Meeting Held:** Yes
+
+**Meeting Date:** July 30, 2026
+
+**Meeting Duration:** 20 minutes
+
+**Meeting Format:** Zoom
+
+**Scrum master:** Sean
+
+**Meeting attendees:** Hannah, Adam, Sean
+
+---
+
+## Progress Since Last Week
+This week, the team focused on **remaining tasks before demo**.
+
+Key accomplishments include:
+- Built out more HTML and CSS on the frontend
+- Built out SQL database
+- Added Flask sessions
+- Completed most of the main functionality
+- Discuss remaining to do items
+- Clarified that administrators can also write reviews
+- Finalize a meeting time for the demo prep and demo
+---
+
+## Completed Tasks
+- Repository
+    - Finished the SQL methods and test them to ensure they work correctly
+    - Doubled the initial test data in the database tables
+    - Add Flask session for login/logout functionality
+    - Finish building HTML web forms so users can submit information to the database
+    - Testing and debugging
+---
+
+## Planned Tasks for Next Week
+- Create a slideshow for the demo
+- Test and debug as much as possible
+- Clean up redundant code and double check consitent styling
+- Finish the edit review form
+- Fix upvote/downvote/flag review buttons
+- Add recent reviews list to Home and Profile
+- Finish the admin panel 
+- Project demo (milestone 7) recording
+
+---
+
+## Blockers and Issues
+Now that we have connected the front and back end, some bugs have appeared and require some more testing and fixing
+
+---
+
+## Risks and Mitigation
+**Identified Risk:** 1 week before project demo
+- *Mitigation:* Finish the remaining tasks, debug and test, and prepare the slides for demo. Extra check-in meeting before the demo to practice the presentation.
+
+---
+
+## Team Reflection
+The team reported:
+- A lot of progress made and the MVP is almost complete. We need to finish up by the weekend so we can test and debug before the demo.
+
+---
+
+## Individual Contributions This Week
+- **Hannah Pfeifer:** Completed Browse Courses and Course Detail pages, debugging, testing, created slideshow for presentation, updated WEEKLY_STATUS.md.
+- **Adam Chathankeo:** Finished remaining web forms, Flask sessions, debugging, testing, presentation prep
+- **Craig Sanders:** Debugging, testing, presentation prep
+- **Ching-Hsiang (Sean) Lin**: Finished and tested the SQL methods, update API to handle new courses without reviews, doubled initial test data in the database tables, created a list of SQL functions/methods in the Google Doc for reference and how to use them, presentation prep
+
+---
