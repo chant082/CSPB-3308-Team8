@@ -91,7 +91,11 @@ Edit Review | CSPB Course Reviews
                 name="year"
                 required>
                 {% for year in range(current_year, 2014, -1) %}
-                    <option value="{{ year }}">
+                    <option
+                        value="{{ year }}"
+                        {% if review["year"] == year %}
+                            selected
+                        {% endif %}>
                         {{ year }}
                     </option>
                 {% endfor %}
