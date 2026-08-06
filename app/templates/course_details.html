@@ -38,7 +38,7 @@
             <!-- Stars: Round the rating to nearest whole number and convert to int -->
             {% set rating = averages["avg_rating"]|default(0)|round|int %}
 
-            <div class="stars" aria-label="{{ averages['avg_rating']|default(0) }} out of 5 stars">
+            <div class="stars" aria-label="{{ '%.1f'|format(averages['avg_rating']|default(0, true)) }} out of 5 stars">
  
                 <!-- Fill in stars based on rating. Can add half stars later-->
                 {% for i in range(5) %}
@@ -52,7 +52,7 @@
                 
                 <span class="course-stat-label">Overall Rating</span>
 
-                <span class="course-stat-value">{{ averages["avg_rating"] }} / 5</span>
+                <span class="course-stat-value">{{ "%.1f"|format(averages["avg_rating"]|default(0, true)) }} / 5</span>
 
         </div>
 
@@ -63,7 +63,7 @@
 
             <span class="course-stat-label">Average Difficulty</span>
 
-            <span class="course-stat-value">{{ averages["avg_difficulty"] }} / 5</span>
+            <span class="course-stat-value">{{ "%.1f"|format(averages["avg_difficulty"]|default(0, true)) }} / 5</span>
 
         </div>
 
@@ -74,7 +74,7 @@
 
             <span class="course-stat-label"> Average Workload</span>
 
-            <span class="course-stat-value">{{ averages["avg_workload"] }} hrs / wk</span>
+            <span class="course-stat-value">{{ "%.1f"|format(averages["avg_workload"]|default(0, true)) }} hrs / wk</span>
 
         </div>
 
