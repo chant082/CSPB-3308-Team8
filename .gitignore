@@ -20,3 +20,6 @@ venv/
 *.db
 *.sqlite
 *.sqlite3
+
+# Sphinx docs
+app/docs/build/
