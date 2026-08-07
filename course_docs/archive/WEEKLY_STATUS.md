@@ -428,3 +428,145 @@ The team reported:
 - **Ching-Hsiang (Sean) Lin**: Finished and tested the SQL methods, update API to handle new courses without reviews, doubled initial test data in the database tables, created a list of SQL functions/methods in the Google Doc for reference and how to use them, presentation prep
 
 ---
+
+# Reporting Period
+
+**Week**: 10 (of the semester)
+
+**Sprint**: 6
+
+**Meeting Held:** Yes
+
+**Meeting Date:** July 23, 2026
+
+**Meeting Duration:** 20 minutes
+
+**Meeting Format:** Zoom
+
+**Scrum master:** Hannah
+
+**Meeting attendees:** Hannah, Adam, Sean
+
+---
+
+## Progress Since Last Week
+This week, the team focused on **Project progress and planning before demo**.
+
+Key accomplishments include:
+- Built out more HTML and CSS on the frontend
+- Started building out SQL database
+- Discussed project deadlines and goals for next week including completing main functionality by end of next week to allow time for testing before the Aug. 6th presentation demo
+- Decide users will login with email instead of username
+---
+
+## Completed Tasks
+- Repository
+    - Expanded on HTML and CSS
+    - SQL database created and methods started
+    - Added necessary funtions added for submit_review.html 
+---
+
+## Planned Tasks for Next Week
+- Adam and Hannah - Finish building out the HTML and CSS pages
+- Sean - Finish the SQL methods and test them to ensure they work correctly
+- Sean - Double the initial test data in the database tables
+- Sean - Create a unit test for the database functions
+- Sean - Create a list of SQL functions/methods in the Google Doc for reference
+- Sean - Work on creating the login system and hook it up with the login page
+- Hannah - Look into Flask sessions for login/logout functionality
+- Sean - show team how to pull data from the database into a webpage
+- Adam and Hannah - Finish building HTML web forms so users can submit information to the database
+- Craig - Work on testing submit_review and interfaces with DB. 
+- Craig - Start the classes for Review and Course which will be how we instantiate the Course and relevant Reviews after querying the DB.
+---
+
+## Blockers and Issues
+No major technical blockers were encountered this week.
+
+---
+
+## Risks and Mitigation
+**Identified Risk:** Only 2 weeks before project demo
+- *Mitigation:* Try to finish as much as possible in the next week so we can leave the last week for testing and preparing for the demo.
+---
+
+## Team Reflection
+The team reported:
+- Frontend and backend is coming along and we will soon need to tie everything together. We might need an additional check in meeting this weekend or early next week to touch base. We will keep open communication in the Discord chat when we finish something.
+---
+
+## Individual Contributions This Week
+- **Hannah Pfeifer:** Expanded on HTML pages and finished About and Home pages. Built out style.css for overall website styling. Updated WEEKLY_STATUS.md.
+- **Adam Chathankeo:** Worked on CSS styling for html files. Finished HTML for Login and Sign Up pages.
+- **Craig Sanders:** Submitted submit_review.html with the necessary functions in app.py and models.py
+- **Ching-Hsiang (Sean) Lin**: Build SQL database and sample courses and reviews. Added SQL methods. 
+---
+
+# Reporting Period
+
+**Week**: 12 (of the semester)
+
+**Sprint**: 8
+
+**Meeting Held:** Yes
+
+**Meeting Date:** August 6, 2026
+
+**Meeting Duration:** 30 minutes
+
+**Meeting Format:** Zoom
+
+**Scrum master:** Hannah
+
+**Meeting attendees:** Hannah, Craig, Sean
+
+---
+
+## Progress Since Last Week
+This week, the team focused on **demo preparation**.
+
+Key accomplishments include:
+- Testing and fixed a few more bugs
+- Completed the main functionality
+- Discuss remaining to do items
+- Dicuss the final report (Milestone 8)
+---
+
+## Completed Tasks
+- Testing and debugging
+- Presentation preparation (create slideshow and practice presentation demo)
+---
+
+## Planned Tasks for Next Week
+- Complete the final report
+- Continue testing and debugging
+- Clean up redundant code and double check consitent styling
+- Add unit tests to database
+- Expand documentation
+
+---
+
+## Blockers and Issues
+None reported.
+
+---
+
+## Risks and Mitigation
+**Identified Risk:** Make sure all requirements are met for the final report
+- *Mitigation:* Divide out sections of the final report and check each other's work. Meet next week before the report is due to finalize everything.
+
+---
+
+## Team Reflection
+The team reported:
+- We felt our presentation went well and that we can use the demo from the Zoom recording for our final report. We just have a few bugs to clean up and documentation to polish for next week. We plan to continue working on expanding features in the platform after the semester ends if possible.
+
+---
+
+## Individual Contributions This Week
+- **Hannah Pfeifer:** Debugging, testing, editted and proofread slideshow for presentation, updated WEEKLY_STATUS.md, added final report tab to Google Doc
+- **Adam Chathankeo:** Debugging, testing, presentation prep, update slideshow
+- **Craig Sanders:** Debugging, testing, presentation prep, update slideshow
+- **Ching-Hsiang (Sean) Lin**: Debugging, testing, presentation prep, update slideshow
+
+---
