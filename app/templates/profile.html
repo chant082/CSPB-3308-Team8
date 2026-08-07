@@ -1,11 +1,10 @@
 <!-- Profile: Page with user profile information -->
+
 {% extends "base.html" %}
 
 {% block title %}Profile | CSPB Course Reviews{% endblock %}
 
-{%block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
-{% endblock %}
+{%block styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">{% endblock %}
 
 {% block content %}
 
@@ -13,9 +12,9 @@
 
     <div>
         <h2>Your Profile</h2>
-        <p>
+        <h3>
             Welcome to your profile page, {{ username }}! Here you can view and edit your account information.
-        </p>
+        </h3>
     </div> 
 
     <div>
@@ -33,8 +32,7 @@
             <p><strong>Username:</strong> {{ username }}</p>
             <p><strong>Email:</strong> {{ email }}</p>
             <p><strong>Password:</strong> **********</p>
-            <p>
-                <strong>Role:</strong>
+            <p><strong>Role:</strong>
                 {% if is_admin %}
                     Admin
                 {% else %}
@@ -53,7 +51,6 @@
             <a class="button button_secondary" href="{{ url_for('update_info') }}">Edit Profile</a>
 
         </div>
-
     </div>
 
 </section>
