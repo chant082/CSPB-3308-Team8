@@ -1,8 +1,11 @@
-# CSPB 3308 Team Project
-# CSPB Course Review Platform
-
-# This Python script creates the Users, Courses, and Reviews table
-# It also inserts initial test data
+###############################################################################
+## This Python script creates the Users, Courses, and Reviews tables in the 
+## SQLite database and inserts initial test data into the tables.
+##
+## CSPB 3308 Summer 2026
+## Author: Team Infinity(Team 8)
+##
+###############################################################################
 
 import sqlite3
 
@@ -18,11 +21,11 @@ def create_table(db_name):
         connection = sqlite3.connect(db_name)
         cursor = connection.cursor()
 
-        # enable foreign keys
+        # Enable foreign keys
         cursor.execute("PRAGMA foreign_keys = ON")
 
         # Users table
-        # enforce some initial value checks
+        # Enforce some initial value checks
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS Users (
                 user_id INTEGER PRIMARY KEY,
@@ -35,7 +38,7 @@ def create_table(db_name):
         """)
 
         # Courses table
-        # enforce some initial value checks
+        # Enforce some initial value checks
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS Courses (
                 course_id INTEGER PRIMARY KEY,
@@ -50,7 +53,7 @@ def create_table(db_name):
         """)
 
         # Reviews table
-        # enforce some initial value checks
+        # Enforce some initial value checks
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS Reviews (
                 review_id INTEGER PRIMARY KEY,
@@ -87,7 +90,7 @@ def create_table(db_name):
 
         connection.commit()
 
-    # error handling
+    # Error handling
     except sqlite3.Error as error:
         if connection is not None:
             connection.rollback()
@@ -95,13 +98,13 @@ def create_table(db_name):
         print("Database error:", error)
         raise
 
-    # always close the DB connection 
+    # Always close the DB connection 
     finally:
         if connection is not None:
             connection.close()
 
 
-# insert initial test data into the database
+# Insert initial test data into the database
 # db_name: the name of the SQLite database file
 def insert_test_data(db_name):
 
@@ -111,11 +114,10 @@ def insert_test_data(db_name):
         connection = sqlite3.connect(db_name)
         cursor = connection.cursor()
 
-        # enable foreign keys
+        # Enable foreign keys
         cursor.execute("PRAGMA foreign_keys = ON")
 
- 
-        # test data for the Users table
+        # Test data for the Users table
 
         cursor.execute("""
             INSERT INTO Users
@@ -189,7 +191,7 @@ def insert_test_data(db_name):
                 '8765HGFE');
         """)
 
-        # test data for the Courses table
+        # Test data for the Courses table
  
         cursor.execute("""
             INSERT INTO Courses
@@ -239,7 +241,7 @@ def insert_test_data(db_name):
                  'Elective');
         """)
 
-        # test data for the Reviews table
+        # Test data for the Reviews table
         cursor.execute("""
             INSERT INTO Reviews
                 (course_id, user_id, review_text,
@@ -482,13 +484,13 @@ def insert_test_data(db_name):
         
         connection.commit()
 
-    # error handling
+    # Error handling
     except sqlite3.Error:
         if connection is not None:
             connection.rollback()
         raise
 
-    # always close the connection
+    # Always close the connection
     finally:
         if connection is not None:
             connection.close()

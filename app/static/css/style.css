@@ -128,7 +128,7 @@ a {
 
 
 /*******************************************************************************
-* Resuable hero card and generic cards
+* Reusable hero card and generic cards
 *******************************************************************************/
 
 /* Use CSS grid for 2-column hero section (content and image) */
@@ -328,6 +328,11 @@ a {
 }
 
 .review-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    min-width: 140px;
     position: absolute;
     top: 20px;
     right: 20px;

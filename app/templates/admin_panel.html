@@ -1,31 +1,40 @@
 <!-- Admin Panel: Panel for admins to manage courses and reviews -->
+
+<!-- Future improvements: Add ability to delete courses, ban/delete users, and delete reviews -->
+<!-- Add ability to flag users such as inappropriate behavior, name, profile picture and list the flag reason in the panel -->
+<!-- Possibly add statistics such as number of courses, users, and reviews, comments, flagged, site traffic, etc. -->
+
 {% extends "base.html" %}
 
 {% block title %}Admin Panel | CSPB Course Reviews{% endblock %}
 
 {% block content %}
 
+<!-- Admin Panel Description -->
 <section class="hero-card hero">
+
     <div>
         <h1 class="page_title">Admin Panel</h1>
 
         <h3>
             Welcome to the admin panel, {{ username }}! As an admin, you have the ability to manage courses and
-            oversee the content on the CSPB Course Reviews platform. Use the options below to add new courses or edit existing ones.
+            oversee the content on the CSPB Course Reviews platform.
         </h3>
     </div>
-        <img
-        class="hero-image"
-        src="{{ url_for('static', filename='images/admin.png') }}"
-        alt="Admin Panel">
+
+    <div>
+        <img class="hero-image" src="{{ url_for('static', filename='images/admin.png') }}" alt="Admin Panel">
+    </div>
+
 </section>
 
+<!-- Course Management -->
 <section class="card">
-    <h3>Course Management</h3>
+    <h2>Course Management</h2>
 
     <a class="button"
        href="{{ url_for('add_course', username=username) }}">
-        Add New Course
+       Add New Course
     </a>
     <br><br>
 
@@ -36,15 +45,9 @@
             {% for course in courses %}
                 <div class="course-management-item">
                     <div>
-                        <strong>{{ course["course_code"] }}</strong>
-                        — {{ course["course_name"] }}
+                        <strong>{{ course["course_code"] }}</strong>: {{ course["course_name"] }}
                     </div>
-                    <a class="button"
-                       href="{{ url_for(
-                           'edit_course',
-                           username=username,
-                           course_id=course['course_id']
-                       ) }}">
+                    <a class="button" href="{{ url_for('edit_course', username=username, course_id=course['course_id']) }}">
                         Edit Course
                     </a>
                 </div>
@@ -55,9 +58,10 @@
     {% endif %}
 </section>
 
+<!-- User Management -->
 <section class="card">
 
-    <h3>User Management</h3>
+    <h2>User Management</h2>
 
     {% if users %}
         <table class="admin-table">
@@ -92,57 +96,68 @@
 
 </section>
 
+<!-- Flagged Reviews -->
 <section class="card">
-    <h3>Flagged Reviews</h3>
 
+    <h2>Flagged Reviews</h2>
+
+    <!-- Display each flagged review if reviews exist -->
     {% if flagged_reviews %}
+
         <div class="review-list">
+
             {% for review in flagged_reviews %}
-                <article class="review-card">
-                    <div class="review-header">
-                        <div>
-                            <h4 class="review-author">
-                                {{ review["username"] }}
-                            </h4>
-                            <div class="review-term">
-                                {{ review["course_code"] }}
-                                —
-                                {{ review["course_name"] }}
-                            </div>
-                        </div>
-                        <span class="secondary_text">
-                            Flagged
-                        </span>
-                    </div>
-                    <p class="review-text">
-                        {{ review["review_text"] }}
-                    </p>
-                    <div class="review-ratings">
-                        <span>
-                            Rating:
-                            <strong>{{ review["rating"] }} / 5</strong>
-                        </span>
-                        <span>
-                            Difficulty:
-                            <strong>{{ review["difficulty"] }} / 5</strong>
-                        </span>
-                        <span>
-                            Workload:
-                            <strong>{{ review["workload"] }} hours/week</strong>
-                        </span>
+
+                <article class="review-card" id="review-{{ review['review_id'] }}">
+
+                    <!-- Left column -->
+                    <div class="review-info">
+                        
+                        <h3>{{ review["course_code"] }}: {{ review["course_name"] }}</h3>
+                        <p class="review-author">Reviewed by {{ review["username"] }}</p>
+                        <p class="created_at">Reviewed on {{ review["created_at"][:10] }}</p>
+
                     </div>
 
-                    <p class="secondary_text">
-                        Taken:
-                        {{ review["semester"] }}
-                        {{ review["year"] }}
-                        |
-                        Posted:
-                        {{ review["created_at"] }}
-                    </p>
+                    <!-- Review ratings -->
+                    <div class ="review-ratings">
+
+                        <span>Overall Rating: <strong>{{ review["rating"] }} / 5</strong></span>
+                        <span>Difficulty: <strong>{{ review["difficulty"] }} / 5</strong></span>
+                        <span>Workload: <strong>{{ review["workload"] }} hrs /wk</strong></span>
+
+                    </div>
+
+                    <!-- Written review -->
+                    <p class="review-text">{{ review["review_text"] }}</p>
+
+
+                    <div class="review-actions">
+                        <span class="review-action flagged">⚑ Flagged</span>
+                    </div>
+
+                    <!-- Right column: Admin actions -->
+                    <div class="review-side">
+                        
+                        <!-- Semester and Year --->
+                        <p class="review-term">{{ review["semester"] }} {{ review["year"] }}</p><br><br>
+
+                        
+                        
+                        <!-- Jump to specific review on course page -->
+                        <a class="button"
+                            href="{{ url_for('course_details', course_id=review['course_id']) }}#review-{{review['review_id'] }}">
+                            View Course
+                        </a>
+
+                    </div>
+
                 </article>
+
             {% endfor %}
+
         </div>
+
     {% else %}
 
         <p class="secondary_text">
@@ -150,6 +165,7 @@
         </p>
 
     {% endif %}
+
 </section>
 
 {% endblock %}

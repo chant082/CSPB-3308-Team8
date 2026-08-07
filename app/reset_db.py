@@ -1,16 +1,19 @@
-# CSPB 3308 Team Project
-# CSPB Course Review Platform
-
-# This Python script deletes the existing database (if it exists)
-# It then calls create_db to create the tables again and insert initial test data
+###############################################################################
+## This Python script deletes the existing database (if it exists)
+## It then calls create_db to create the tables again and insert initial test data
+##
+## CSPB 3308 Summer 2026
+## Author: Team Infinity(Team 8)
+##
+###############################################################################
 
 import os
 
 from create_db import (DATABASE_NAME, create_table, insert_test_data)
 
 
-# delete the existing database
-# re-create the tables and inserts test data
+# Delete the existing database
+# Re-create the tables and inserts test data
 def reset_database():
 
     if os.path.exists(DATABASE_NAME):

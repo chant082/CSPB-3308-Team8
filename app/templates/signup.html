@@ -1,11 +1,14 @@
 <!-- Signup: Page for creating a new user account -->
+
+<!-- Future improvements: Add stronger password validation, email verification, confirm password box, -->
+<!-- make sure username doesn't contain personal info, add option to generate a username -->
+<!-- Add password hashes for security -->
+
 {% extends "base.html" %}
 
 {% block title %}Sign Up | CSPB Course Reviews{% endblock %}
 
-{% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
-{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">{% endblock %}
 
 {% block content %}
 

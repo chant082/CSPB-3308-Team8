@@ -1,4 +1,7 @@
 <!-- Submit Review: Page for submitting a new course review -->
+
+<!-- Future improvements: Add course picture on right side of hero card, possible spell check and don't allow offensive language -->
+
 {% extends "base.html" %}
 
 {% block title %}Submit Review | CSPB Course Reviews{% endblock %}
@@ -9,41 +12,48 @@
 <div class="form-error">{{ error }}</div>
 {% endif %}
 
+<!-- Course info -->
 <section class="hero-card hero">
     <div>
         <h2 class="page-title">Submit Review</h2>
         <h4>
-            This is the submit review page for: {{ course["course_name"] }}.
+            This is the submit review page for: {{ course["course_code"] }} - {{ course["course_name"] }}.
         </h4>
     </div>
 </section>
 
+<!-- Review form -->
 <div>
     <form method="post" action="{{url_for('submit_review', course_id=course_id)}}">
         
-        <!--inputs-->
+        <!-- Inputs -->
 
+        <!-- Course rating -->
         <div class="form-group">
             <label for="rating">Course rating (1-5)</label>
             <input class="form-control" type="number" id="rating" name="rating" min="1" max="5" required value="{{ form.rating if form }}">
         </div>
 
+        <!-- Difficulty -->
         <div class="form-group">
             <label for="difficulty">Perceived course difficulty (1-5)</label>
             <input class="form-control" type="number" id="difficulty" name="difficulty" min="1" max="5" required value="{{ form.difficulty if form }}">
         </div>
         
+        <!-- Time commitment -->
         <div class="form-group">
             <label for="time">Time commitment per week (hrs)</label>
             <input class="form-control" type="number" id="time" name="time" min="0" max="30" required value="{{ form.time if form }}">
         </div>
 
+        <!-- Review text -->
         <div class="form-group">        
             <label for="review">Leave a review (300 character max.)</label>
             <textarea class="form-control review-box" id="review" name="review_text" maxlength=300 rows="5" required>{{ form.review_text if form }}</textarea>
 
         </div>
 
+        <!-- Year and semester -->
         <div class="form-group">
             <label for="year">Year Taken</label>
             <select
@@ -69,6 +79,7 @@
             </select>
         </div>
 
+        <!-- Submit button -->
         <button class="button" type="submit">Submit Review</button>
 
     </form>
