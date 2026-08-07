@@ -703,6 +703,7 @@ def get_flagged_reviews(db_name):
                 Reviews.semester,
                 Reviews.created_at,
                 Reviews.upvotes,
+                Reviews.course_id,
                 Reviews.downvotes,
                 Users.username,
                 Courses.course_code,
