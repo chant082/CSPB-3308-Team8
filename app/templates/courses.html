@@ -1,4 +1,8 @@
 <!-- Courses: Search page for finding courses -->
+
+<!-- Future improvements: Add sorting and filtering options (sort by rating, difficulty, etc.) -->
+<!-- Ex: be able to search for course tags or description words, etc. -->
+
 {% extends "base.html" %}
 
 {% block styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/courses.css') }}">{% endblock %}
@@ -41,7 +45,7 @@
 
 </section>
 
-<!-- List of courses returned from database-->
+<!-- List of courses returned from database -->
 
 {% for course in courses %}
 <section>

@@ -1,12 +1,15 @@
-# CSPB 3308
-# CSPB Course Review Platform
-
-# This Python script provides some useful methods
-# for retriving data or inserting data
+###############################################################################
+## This Python script provides some useful methods for interacting with the 
+## SQLite database used in the CSPB Course Review Platform.
+##
+## CSPB 3308 Summer 2026
+## Author: Team Infinity(Team 8)
+##
+###############################################################################
 
 import sqlite3
 
-# create and return a database connection
+# Create and return a database connection
 # sqlite3.Row enables you to access specific data by column name
 def get_connection(db_name):
 
@@ -17,10 +20,8 @@ def get_connection(db_name):
     return connection
 
 
-# return a list of all courses
-# sorted by course code
-
-# usage: use a for loop to iterate course.
+# Return a list of all courses sorted by course code
+# Usage: use a for loop to iterate course.
 """ 
 Example
 
@@ -52,12 +53,10 @@ def get_all_courses(db_name):
             connection.close()
 
 
-
-# return one course with a course ID
-# return None if the course ID does not exist
-
-# usage: use column names as indices to access specific data
-# for example - course["course_name"] or course["course_code"]
+# Return one course with a course ID
+# Return None if the course ID does not exist
+# Usage: use column names as indices to access specific data
+# Example - course["course_name"] or course["course_code"]
 
 def get_course(db_name, course_id):
 
@@ -82,8 +81,8 @@ def get_course(db_name, course_id):
             connection.close()
 
 
-# search for courses whose name or code contains the keyword
-# return a list of courses that match criteria
+# Search for courses whose name or code contains the keyword
+# Return a list of courses that match criteria
 def search_courses(db_name, keyword):
 
     connection = None
@@ -111,7 +110,7 @@ def search_courses(db_name, keyword):
             connection.close()
 
 
-# return the average rating, difficulty, and workload of a course
+# Return the average rating, difficulty, and workload of a course
 def get_course_averages(db_name, course_id):
 
     connection = None
@@ -140,8 +139,7 @@ def get_course_averages(db_name, course_id):
 
 
 
-# update a course
-# return true if successful and false if failed
+# Update a course. Return true if successful and false if failed
 def update_course(
     db_name,
     course_id,
@@ -193,10 +191,8 @@ def update_course(
             connection.close()
 
 
-# return all reviews for one course
-# this contains reviews themselves and the usernames of authors
-
-# usage: use a loop to iterate reviews
+# Return all reviews for one course. This contains reviews themselves and the usernames of authors
+# Usage: use a loop to iterate reviews
 """
 For Example
 
@@ -236,8 +232,7 @@ def get_reviews_for_course(db_name, course_id):
 
 
 
-# get all the data of a user by user_id
-# return None if the user does not exist
+# Get all the data of a user by user_id. Return None if the user does not exist.
 def get_user(db_name, user_id):
     """
     Return one user with the specified user ID.
@@ -266,8 +261,7 @@ def get_user(db_name, user_id):
             connection.close()
 
 
-# return all the users
-# sorted by user_id
+# Return all the users orted by user_id
 def get_all_users(db_name):
 
     connection = None
@@ -291,8 +285,7 @@ def get_all_users(db_name):
             connection.close()
 
 
-# get the data of a user by username
-# return None if the user does not exist
+# Get the data of a user by username. Return None if the user does not exist
 def get_user_by_username(db_name, username):
 
     connection = None
@@ -316,8 +309,7 @@ def get_user_by_username(db_name, username):
             connection.close()
 
 
-# get the data of a user by email
-# return None if the user does not exist
+# Get the data of a user by email. Return None if the user does not exist
 def get_user_by_email(db_name, email):
 
     connection = None
@@ -341,8 +333,7 @@ def get_user_by_email(db_name, email):
             connection.close()
 
 
-# return all the reviews written by a user
-# include course names and course codes
+# Return all the reviews written by a user. Include course names and course codes
 def get_reviews_by_user(db_name, user_id):
 
     connection = None
@@ -509,9 +500,9 @@ def add_course(
         if connection is not None:
             connection.close()
 
-# update a review
-# return true if the review was successfully updated
-# return false if review_id does not exist
+# Update a review
+# Return true if the review was successfully updated
+# Return false if review_id does not exist
 def update_review(
     db_name,
     review_id,
@@ -565,9 +556,9 @@ def update_review(
 
 
 
-# increase a review's upvote by 1
-# return true if the review was found
-# return false if the review does not exist
+# Increase a review's upvote by 1
+# Return true if the review was found
+# Return false if the review does not exist
 def upvote_review(db_name, review_id):
 
     connection = None
@@ -598,9 +589,9 @@ def upvote_review(db_name, review_id):
             connection.close()
 
 
-# increase a reviewer's downvote by 1
-# return true if the review was found
-# return false if the review_id does not exist
+# Increase a reviewer's downvote by 1
+# Return true if the review was found
+# Return false if the review_id does not exist
 def downvote_review(db_name, review_id):
 
     connection = None
@@ -631,9 +622,9 @@ def downvote_review(db_name, review_id):
             connection.close()
 
 
-# mark a review as flagged
-# return true if the review was found
-# review false if the review_id does not exist
+# Mark a review as flagged
+# Return true if the review was found
+# Return false if the review_id does not exist
 def flag_review(db_name, review_id):
 
     connection = None
@@ -663,7 +654,7 @@ def flag_review(db_name, review_id):
         if connection is not None:
             connection.close()
 
-#insert review into review table
+# Insert review into review table
 def insert_review(db_name, course_id, user_id, review_text, rating, difficulty, workload, year, semester):
     
     connection = None
@@ -691,8 +682,7 @@ def insert_review(db_name, course_id, user_id, review_text, rating, difficulty, 
     return "review insertion successful."
 
 
-# get all the reviews flagged by ysers
-# this gets the author's username, review info, and course info
+# Get all the reviews flagged by users, including the author's username, review info, and course info
 
 def get_flagged_reviews(db_name):
 
@@ -735,9 +725,8 @@ def get_flagged_reviews(db_name):
             connection.close()
 
 
-# get a specific review by review_id
-# this also returns course name and course code
-# return None if the review does not exist
+# Get a specific review by review_id. This also returns course name and course code
+# Return None if the review does not exist
 
 def get_review(db_name, review_id):
 
@@ -779,8 +768,9 @@ def get_review(db_name, review_id):
             connection.close()
 
 
-# return a user's review for a course
-# return None if the user has not reviewed this course
+# Return a user's review for a course
+# Return None if the user has not reviewed this course
+
 def get_review_by_user_and_course(db_name, user_id, course_id):
 
     connection = None

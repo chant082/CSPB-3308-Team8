@@ -15,7 +15,7 @@
 /* Display each course card as a four-column grid */
 .course-card {
     display: grid;
-    /* one wide column for course info and 3 smaller columns */
+    /* One wide column for course info and 3 smaller columns */
     grid-template-columns: minmax(0, 2fr) repeat(3, minmax(110px, 1fr));
     gap: 20px;
     align-items: center;
