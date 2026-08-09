@@ -1,46 +1,51 @@
 <!-- Edit Profile: Change Password -->
+ 
+<!-- Future improvements: Additional fields for updating user information (username, profile picture) -->
+<!-- Add stronger validation checks (password should be different from the current one, uppercase/lowercase letters and numbers required) -->
+<!-- Make a confirm new password/username field -->
+
 {% extends "base.html" %}
 
 {% block title %}Change Password | CSPB Course Reviews{% endblock %}
 
-{% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
-{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">{% endblock %}
 
 {% block content %}
 
-<section id="description">
-    <h2>Change Password</h2>
-    <p>
-        Welcome, {{ username }}! Enter your new password below.
-    </p>
+<!-- Update Profile Description-->
+<section class="hero-card hero">
+    <div>
+        <h2>Change Password</h2>
+        <h3>
+            Enter a new password below. Passwords must be at least 8 characters long.
+        </h3>
+    </div>
+    <div>
+        <img class="hero-image" src="{{ url_for('static', filename='images/setting.png') }}" alt="Change Password">
+    </div>
 </section>
 
-<section id="profile_info">
+<section class="card">
 
     {% if error %}
         <p class="error">{{ error }}</p>
     {% endif %}
 
-    <form action="{{ url_for('update_info') }}" method="post">
+    <form action="{{ url_for('update_info', username=username) }}" method="post">
 
         <p><strong>Username:</strong> {{ username }}</p>
         <p><strong>Email:</strong> {{ email }}</p>
 
         <label for="password"><strong>New Password:</strong></label><br>
 
-        <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            required>
+        <input type="password" id="password" name="password" class="form-control" required><br><br>
 
-        <br><br>
+        <button type="submit" class="button">Save Password</button>
 
-        <button type="submit" class="edit-profile-button">
-            Save Password
-        </button>
+        <a class="button_secondary button" 
+            href="{{ url_for('profile', username=username) }}">
+            Cancel
+        </a>
 
     </form>
 </section>

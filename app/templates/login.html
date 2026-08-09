@@ -1,10 +1,10 @@
 <!-- Login: Page with web form for user login -->
+
 {% extends "base.html" %}
+
 {% block title %}Login | CSPB Course Reviews{% endblock %}
 
-{% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">{% endblock %}
 
 {% block content %}
 
@@ -16,7 +16,6 @@
 </section>
 
 <section id = "login_form">
-    <!-- TODO: Add Login Form -->
      <div class="login-container">
 
         {% if error %}

@@ -21,10 +21,12 @@
     width: 350px;
     margin: 50px auto;
     padding: 60px;
-    border: 2px solid var(--light-gray);
+    border: 1px solid var(--light-gray);
     border-radius: 8px;
     background-color: var(--white);
     text-align: center;
+    /* Add a subtle shadow to make cards stand out */
+    box-shadow: 0 4px 12px rgba(5, 19, 49, 0.06);
 }
 
 .signup-container button {
@@ -57,7 +59,6 @@
 
 .error {
     color: red;
-    font-weight: bold;
     text-align: center;
     margin-bottom: 15px;
 }

@@ -1,6 +1,6 @@
 /*
-    Course Details CSS file.
-    
+    Profile CSS file.
+
     Color palette from mockups:
         #0052f2 - bright blue (button)
         #0045cc - blue (button hover)
@@ -96,7 +96,6 @@
 }
 
     
-
 /* Stack the buttons on smaller screens */
 @media (max-width: 450px) {
     .profile-review-buttons {
@@ -110,7 +109,6 @@
 }
 
 /* Change Password Page */
-
 #description {
     text-align: center;
     margin: 30px auto;

@@ -1,12 +1,13 @@
 <!-- Course Details: Course page with average ratings and reviews -->
 
-<!-- TODO: add review action functionality, make write review appear only if logged in, add review ratings icons? -->
+<!-- Future improvements: Add course picture on right side of hero card, enable half-filled stars, limit upvotes/downvotes to one per review -->
+<!-- Add comment section to each review -->
 
 {% extends "base.html" %}
 
 {% block styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/course_details.css') }}">{% endblock %}
 
-{% block title %}{{ course["course_name"] }} | CSPB Course Reviews{% endblock %}
+{% block title %}{{ course["course_code"] }} - {{ course["course_name"] }} | CSPB Course Reviews{% endblock %}
 
 {% block content %}
 

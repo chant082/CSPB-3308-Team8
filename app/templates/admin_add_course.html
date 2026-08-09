@@ -1,18 +1,29 @@
 <!-- Admin Add Course: Page with web form for adding new courses -->
+
+<!-- Future improvements: Add validation and error handling, spell check, cancel button -->
+
 {% extends "base.html" %}
 
 {% block title %}Admin Add Course | CSPB Course Reviews{% endblock %}
 
 {% block content %}
 
-<section class="hero-card">
-    <h2 class="page_title">Add Course</h2>
+<section class="hero-card hero">
+    <div>
+        <h2 class="page_title">Add Course</h2>
 
-    <p>
-        Fill out the form below to add a new course to the CSPB Course Reviews
-        platform. Please ensure that all required fields are completed
-        accurately before submitting the form.
-    </p>
+        <h3>
+            Fill out the form below to add a new course to the CSPB Course Reviews
+            platform. Please ensure that all required fields are completed
+            accurately before submitting the form.
+        </h3>
+    </div>
+
+    <div>
+        <!-- Placeholder for an image or illustration related to adding courses -->
+    </div>
+    
+
 </section>
 
 <section class="card">
@@ -20,27 +31,21 @@
     <form method="post"
           action="{{ url_for('add_course', username=username) }}">
 
+        <!-- Course Code -->
         <div class="form-group">
+
             <label for="course_code">Course Code</label>
-            <input
-                class="form-control"
-                type="text"
-                id="course_code"
-                name="course_code"
-                placeholder="Example: CSPB 2270"
-                required>
-        </div>
-        <div class="form-group">
-            <label for="course_name">Course Name</label>
-            <input
-                class="form-control"
-                type="text"
-                id="course_name"
-                name="course_name"
-                placeholder="Example: Data Structures"
-                required>
+            <input class="form-control" type="text" id="course_code" name="course_code" placeholder="Example: CSPB 2270" required>
+
         </div>
 
+        <!-- Course Name -->
+        <div class="form-group">
+            <label for="course_name">Course Name</label>
+            <input class="form-control" type="text" id="course_name" name="course_name" placeholder="Example: Data Structures" required>
+        </div>
+
+        <!-- Credits -->
         <div class="form-group">
             <label>Credits</label>
             <div class="radio-group">
@@ -70,13 +75,12 @@
                 </label>
             </div>
         </div>
+
+        <!-- Course Type -->
         <div class="form-group">
+
             <label for="course_type">Course Type</label>
-            <select
-                class="form-control"
-                id="course_type"
-                name="course_type"
-                required>
+            <select class="form-control" id="course_type" name="course_type" required>
 
                 <option value="" disabled selected>
                     Select a course type
@@ -85,22 +89,24 @@
                 <option value="Elective">Elective</option>
 
             </select>
+
         </div>
+
+        <!-- Course Description -->
         <div class="form-group">
+
             <label for="description">Course Description</label>
-            <textarea
-                class="form-control review-box"
-                id="description"
-                name="description"
-                rows="8"
-                maxlength="2000"
-                placeholder="Enter the course description..."
-                required></textarea>
+            <textarea class="form-control review-box" id="description" name="description" rows="8" maxlength="2000" 
+                placeholder="Enter the course description..." required></textarea>
         </div>
+
+        <!-- Submit Button -->
         <button class="button" type="submit">
             Add Course
         </button>
+
     </form>
+
 </section>
 
 {% endblock %}
