@@ -7,11 +7,23 @@
 ##
 ###############################################################################
 
+"""Database access functions for the CSPB Course Review Platform SQLite database."""
+
 import sqlite3
 
-# Create and return a database connection
-# sqlite3.Row enables you to access specific data by column name
+
 def get_connection(db_name):
+    """
+    Create and return a database connection.
+
+    sqlite3.Row enables you to access specific data by column name.
+
+    Args:
+        db_name: Path to the SQLite database file.
+
+    Returns:
+        An open sqlite3.Connection with row_factory set to sqlite3.Row.
+    """
 
     connection = sqlite3.connect(db_name)
     connection.row_factory = sqlite3.Row
@@ -20,17 +32,21 @@ def get_connection(db_name):
     return connection
 
 
-# Return a list of all courses sorted by course code
-# Usage: use a for loop to iterate course.
-""" 
-Example
-
-for course in courses:  
-    print(course["course_code"])
-    print(course["course_name"])
-"""
-
 def get_all_courses(db_name):
+    """
+    Return a list of all courses sorted by course code.
+
+    Args:
+        db_name: Path to the SQLite database file.
+
+    Returns:
+        A list of course rows.
+
+    Example:
+        for course in courses:
+            print(course["course_code"])
+            print(course["course_name"])
+    """
 
     connection = None
 
@@ -53,12 +69,21 @@ def get_all_courses(db_name):
             connection.close()
 
 
-# Return one course with a course ID
-# Return None if the course ID does not exist
-# Usage: use column names as indices to access specific data
-# Example - course["course_name"] or course["course_code"]
-
 def get_course(db_name, course_id):
+    """
+    Return one course with a course ID.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        course_id: ID of the course to look up.
+
+    Returns:
+        The matching course row, or None if the course ID does not exist.
+
+    Example:
+        Use column names as indices to access specific data:
+        course["course_name"] or course["course_code"]
+    """
 
     connection = None
 
@@ -81,9 +106,17 @@ def get_course(db_name, course_id):
             connection.close()
 
 
-# Search for courses whose name or code contains the keyword
-# Return a list of courses that match criteria
 def search_courses(db_name, keyword):
+    """
+    Search for courses whose name or code contains the keyword.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        keyword: Substring to search for in course_code or course_name.
+
+    Returns:
+        A list of courses that match the search criteria.
+    """
 
     connection = None
 
@@ -110,8 +143,17 @@ def search_courses(db_name, keyword):
             connection.close()
 
 
-# Return the average rating, difficulty, and workload of a course
 def get_course_averages(db_name, course_id):
+    """
+    Return the average rating, difficulty, and workload of a course.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        course_id: ID of the course to average reviews for.
+
+    Returns:
+        A row containing avg_rating, avg_difficulty, and avg_workload.
+    """
 
     connection = None
 
@@ -139,7 +181,6 @@ def get_course_averages(db_name, course_id):
 
 
 
-# Update a course. Return true if successful and false if failed
 def update_course(
     db_name,
     course_id,
@@ -149,6 +190,21 @@ def update_course(
     description,
     course_type
 ):
+    """
+    Update a course.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        course_id: ID of the course to update.
+        credits: New credit value for the course.
+        course_name: New course name.
+        course_code: New course code.
+        description: New course description.
+        course_type: New course type.
+
+    Returns:
+        True if successful, False if failed.
+    """
     connection = None
 
     try:
@@ -191,17 +247,22 @@ def update_course(
             connection.close()
 
 
-# Return all reviews for one course. This contains reviews themselves and the usernames of authors
-# Usage: use a loop to iterate reviews
-"""
-For Example
-
-for review in reviews:
-    print(review["username"])
-    print(review["review_text"])
-"""
-
 def get_reviews_for_course(db_name, course_id):
+    """
+    Return all reviews for one course. This contains reviews themselves and the usernames of authors.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        course_id: ID of the course to fetch reviews for.
+
+    Returns:
+        A list of review rows.
+
+    Example:
+        for review in reviews:
+            print(review["username"])
+            print(review["review_text"])
+    """
 
     connection = None
 
@@ -232,12 +293,16 @@ def get_reviews_for_course(db_name, course_id):
 
 
 
-# Get all the data of a user by user_id. Return None if the user does not exist.
 def get_user(db_name, user_id):
     """
-    Return one user with the specified user ID.
+    Get all the data of a user by user_id.
 
-    Return None if the user does not exist.
+    Args:
+        db_name: Path to the SQLite database file.
+        user_id: ID of the user to look up.
+
+    Returns:
+        The matching user row, or None if the user does not exist.
     """
 
     connection = None
@@ -261,8 +326,16 @@ def get_user(db_name, user_id):
             connection.close()
 
 
-# Return all the users orted by user_id
 def get_all_users(db_name):
+    """
+    Return all the users sorted by user_id.
+
+    Args:
+        db_name: Path to the SQLite database file.
+
+    Returns:
+        A list of user rows ordered by user_id.
+    """
 
     connection = None
 
@@ -285,8 +358,17 @@ def get_all_users(db_name):
             connection.close()
 
 
-# Get the data of a user by username. Return None if the user does not exist
 def get_user_by_username(db_name, username):
+    """
+    Get the data of a user by username.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        username: Username to look up.
+
+    Returns:
+        The matching user row, or None if the user does not exist.
+    """
 
     connection = None
 
@@ -309,8 +391,17 @@ def get_user_by_username(db_name, username):
             connection.close()
 
 
-# Get the data of a user by email. Return None if the user does not exist
 def get_user_by_email(db_name, email):
+    """
+    Get the data of a user by email.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        email: Email address to look up.
+
+    Returns:
+        The matching user row, or None if the user does not exist.
+    """
 
     connection = None
 
@@ -333,8 +424,17 @@ def get_user_by_email(db_name, email):
             connection.close()
 
 
-# Return all the reviews written by a user. Include course names and course codes
 def get_reviews_by_user(db_name, user_id):
+    """
+    Return all the reviews written by a user. Include course names and course codes.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        user_id: ID of the user whose reviews to fetch.
+
+    Returns:
+        A list of review rows.
+    """
 
     connection = None
 
@@ -366,8 +466,17 @@ def get_reviews_by_user(db_name, user_id):
             connection.close()
 
 
-# Get the 5 most recent unflagged reviews (for home page recent reviews section)
 def get_recent_reviews(db_name, limit=5):
+    """
+    Get the 5 most recent unflagged reviews (for home page recent reviews section).
+
+    Args:
+        db_name: Path to the SQLite database file.
+        limit: Maximum number of reviews to return. Defaults to 5.
+
+    Returns:
+        A list of the most recent unflagged review rows.
+    """
     connection = None
 
     try:
@@ -409,8 +518,18 @@ def get_recent_reviews(db_name, limit=5):
             connection.close()
 
 
-# Get the 5 most recent reviews written by a user (for recent reviews section on profile page)
 def get_recent_reviews_for_user(db_name, user_id, limit=5):
+    """
+    Get the 5 most recent reviews written by a user (for recent reviews section on profile page).
+
+    Args:
+        db_name: Path to the SQLite database file.
+        user_id: ID of the user whose reviews to fetch.
+        limit: Maximum number of reviews to return. Defaults to 5.
+
+    Returns:
+        A list of the user's most recent review rows.
+    """
     connection = None
 
     try:
@@ -450,8 +569,6 @@ def get_recent_reviews_for_user(db_name, user_id, limit=5):
             connection.close()
 
 
-# add a course
-# return course _id
 def add_course(
     db_name,
     credits,
@@ -459,6 +576,20 @@ def add_course(
     course_code,
     description,
     course_type):
+    """
+    Add a course.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        credits: Number of credits for the course.
+        course_name: Name of the course.
+        course_code: Code of the course.
+        description: Description of the course.
+        course_type: Type of the course.
+
+    Returns:
+        The new course's course_id.
+    """
 
     connection = None
 
@@ -500,9 +631,6 @@ def add_course(
         if connection is not None:
             connection.close()
 
-# Update a review
-# Return true if the review was successfully updated
-# Return false if review_id does not exist
 def update_review(
     db_name,
     review_id,
@@ -512,6 +640,22 @@ def update_review(
     workload,
     year,
     semester):
+    """
+    Update a review.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        review_id: ID of the review to update.
+        review_text: New review text.
+        rating: New rating.
+        difficulty: New difficulty.
+        workload: New workload.
+        year: New year.
+        semester: New semester.
+
+    Returns:
+        True if the review was successfully updated, False if review_id does not exist.
+    """
 
     connection = None
 
@@ -556,10 +700,17 @@ def update_review(
 
 
 
-# Increase a review's upvote by 1
-# Return true if the review was found
-# Return false if the review does not exist
 def upvote_review(db_name, review_id):
+    """
+    Increase a review's upvote by 1.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        review_id: ID of the review to upvote.
+
+    Returns:
+        True if the review was found, False if the review does not exist.
+    """
 
     connection = None
 
@@ -589,10 +740,17 @@ def upvote_review(db_name, review_id):
             connection.close()
 
 
-# Increase a reviewer's downvote by 1
-# Return true if the review was found
-# Return false if the review_id does not exist
 def downvote_review(db_name, review_id):
+    """
+    Increase a reviewer's downvote by 1.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        review_id: ID of the review to downvote.
+
+    Returns:
+        True if the review was found, False if the review_id does not exist.
+    """
 
     connection = None
 
@@ -622,10 +780,17 @@ def downvote_review(db_name, review_id):
             connection.close()
 
 
-# Mark a review as flagged
-# Return true if the review was found
-# Return false if the review_id does not exist
 def flag_review(db_name, review_id):
+    """
+    Mark a review as flagged.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        review_id: ID of the review to flag.
+
+    Returns:
+        True if the review was found, False if the review_id does not exist.
+    """
 
     connection = None
 
@@ -654,9 +819,26 @@ def flag_review(db_name, review_id):
         if connection is not None:
             connection.close()
 
-# Insert review into review table
 def insert_review(db_name, course_id, user_id, review_text, rating, difficulty, workload, year, semester):
-    
+    """
+    Insert review into review table.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        course_id: ID of the course being reviewed.
+        user_id: ID of the user writing the review.
+        review_text: Text of the review.
+        rating: Rating given by the user.
+        difficulty: Difficulty given by the user.
+        workload: Workload given by the user.
+        year: Year the course was taken.
+        semester: Semester the course was taken.
+
+    Returns:
+        "review insertion successful." on success, "duplicate" if the user has
+        already reviewed this course, or an error message string on failure.
+    """
+
     connection = None
     
     try:
@@ -682,9 +864,16 @@ def insert_review(db_name, course_id, user_id, review_text, rating, difficulty, 
     return "review insertion successful."
 
 
-# Get all the reviews flagged by users, including the author's username, review info, and course info
-
 def get_flagged_reviews(db_name):
+    """
+    Get all the reviews flagged by users, including the author's username, review info, and course info.
+
+    Args:
+        db_name: Path to the SQLite database file.
+
+    Returns:
+        A list of flagged review rows.
+    """
 
     connection = None
 
@@ -726,10 +915,17 @@ def get_flagged_reviews(db_name):
             connection.close()
 
 
-# Get a specific review by review_id. This also returns course name and course code
-# Return None if the review does not exist
-
 def get_review(db_name, review_id):
+    """
+    Get a specific review by review_id. This also returns course name and course code.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        review_id: ID of the review to look up.
+
+    Returns:
+        The matching review row, or None if the review does not exist.
+    """
 
     connection = None
 
@@ -769,10 +965,18 @@ def get_review(db_name, review_id):
             connection.close()
 
 
-# Return a user's review for a course
-# Return None if the user has not reviewed this course
-
 def get_review_by_user_and_course(db_name, user_id, course_id):
+    """
+    Return a user's review for a course.
+
+    Args:
+        db_name: Path to the SQLite database file.
+        user_id: ID of the user.
+        course_id: ID of the course.
+
+    Returns:
+        The matching review row, or None if the user has not reviewed this course.
+    """
 
     connection = None
 
