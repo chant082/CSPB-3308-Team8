@@ -69,8 +69,9 @@ Unit tests for database API methods
 ![Unit Test](app/static/images/unit_test.png)
 
 ### What We Were in the Middle of Implementing
-Source Documentation and auto-generated documentation files
-
+- Integration tests
+- Auto-generated documentation files
+![Auto-Docs](course_doc/images/auto-doc.png)
 
 ### What We Planned for the Future
 User profile/course images: upload and edit images
