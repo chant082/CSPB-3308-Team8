@@ -142,24 +142,33 @@ The system was designed to support incremental development, clear separation of 
 ![High-Level Architecture](app/static/images/architecture.png)
 
 ## Pages That Access Database Information
+
 - **Login/ Sign Up**: users
 	- verify credentials or add a new user to database
+
 - **Home**: courses, users, review 
 	- personalized welcome message and navigation bar
 	- recent review section
+
 - **Admin Add/Edit Course**: courses
 	- add or edit a course and its attributes to the database
+
 - **Admin Panel**: courses, users, reviews 
 	- admin panel manages all tables in database
+
 - **Submit/Edit Review**: courses, users, reviews 
 	- tie a user and their review to a specific course
+
 - **Profile**: courses, users, reviews
 	- profile info
 	- recent review section
+
 - **Update User Info**: users
 	- update user’s password
+
 - **Courses (Browse)**: courses, reviews
 	- list all courses and average ratings
+	
 - **Course Details**: courses, users, reviews
 	- list the course info and all reviews with the review author
 
