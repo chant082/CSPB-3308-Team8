@@ -29,7 +29,7 @@
 - [**Google Doc**](https://docs.google.com/document/d/1nF79oh0ICRbWhd5ra6tRL8jqTmVE5mIKCr6LFDHrqlA/edit?usp=sharing) (Main document used for project tracking and planning)
 - [**Version control repository (GitHub)**](https://github.com/chant082/CSPB-3308-Team8)
 - [**Project tracker**](https://trello.com/w/userworkspace23812499) (no longer used): 
-- [**Demo video**(Youtube)](https://youtu.be/U64wILTFfX4)
+- [**Demo video (Youtube**)](https://youtu.be/U64wILTFfX4)
 
 
 ## Repository Readiness
@@ -171,33 +171,33 @@ There are many access tests, but we will highlight 3 of the most important use c
 
 ![Home Page](app/static/images/homepagenew.png)
 
-### Description
+#### Description
 Verify the home page displays the logged-in username and the most recent reviews 
 
-### Pre-conditions
+#### Pre-conditions
 - User account exists
 - User is logged in
 - The database has course reviews
 
-### Test steps
+#### Test steps
 1. Navigate to the Home page
 2. Observe the Welcome message
 3. Observe the list of Recent Reviews
 
-### Expected result
+#### Expected result
 - The welcome message shows the logged-in user’s username.
 - The list of reviews displays the most recently written unflagged reviews, including course names, rating, difficulty, workload, review text, and year & semester.
 
-### Actual result
+#### Actual result
 - Home page shows all the expected data
 
-### Status
+#### Status
 - Pass
 
-### Notes
+#### Notes
 - N/A
 
-### Post-conditions
+#### Post-conditions
 - No data is modified.
 
 _______________________________________
@@ -206,34 +206,34 @@ _______________________________________
 
 ![Review](app/static/images/write_review.png)
 
-### Description
+#### Description
 Verify that a user can submit a review, the review is inserted to the database, and the platform can retrieve this review
 
-### Pre-conditions
+#### Pre-conditions
 - User account exists
 - User is logged in
 - The database exists
 - The course exists
 
-### Test steps
+#### Test steps
 1. Navigate to the Submit Review page.
 2. Write a review and submit.
 3. Navigate to the Home page or the Course Details page of the reviewed course and view the newly-submitted review.
 
-### Expected result
+#### Expected result
 - The Submit Review page can take user input data.
 - The Home Page or the Course Details page shows the review just submitted.
 
-### Actual result
+#### Actual result
 - The platform shows the review this user just submitted.
 
-### Status
+#### Status
 - Pass
 
-### Notes
+#### Notes
 - N/A
 
-### Post-conditions
+#### Post-conditions
 - The user-written course review is inserted to the database.
 
 ________________________________________
@@ -242,15 +242,15 @@ ________________________________________
 
 ![Add Course](app/static/images/add_course_form.png)
 
-### Description
+#### Description
 Verify that an administrator can add a course to the platform and users can write a review for the added course
 
-### Pre-conditions
+#### Pre-conditions
 - Administrator account exists
 - Administrator is logged in
 - The database exists
 
-### Test steps
+#### Test steps
 1. Navigate to the Profile page.
 2. Navigate to the Admin Panel page.
 3. Navigate to the Add Course page.
@@ -259,23 +259,23 @@ Verify that an administrator can add a course to the platform and users can writ
 6. Write a review for the added course.
 
 
-### Expected result
+#### Expected result
 - An administrator can access the Add Course page and can add a new course to the platform. 
 - The Browse page shows the newly added course.
 - Users can write reviews for this course.
 
-### Actual result
+#### Actual result
 - An administrator can add a course. 
 - The platform shows the new course.
 - Users can write reviews for this course. 
 
-### Status
+#### Status
 - Pass
 
-### Notes
+#### Notes
 - N/A
 
-### Post-conditions
+#### Post-conditions
 - The new course is inserted to the database.
 
 ---
