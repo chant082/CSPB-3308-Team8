@@ -28,7 +28,7 @@
 
 - [**Google Doc**](https://docs.google.com/document/d/1nF79oh0ICRbWhd5ra6tRL8jqTmVE5mIKCr6LFDHrqlA/edit?usp=sharing) (Main document used for project tracking and planning)
 - [**Version control repository (GitHub)**](https://github.com/chant082/CSPB-3308-Team8)
-- [**Project tracker**](https://trello.com/w/userworkspace23812499) (no longer used): 
+- [**Project tracker**](https://trello.com/w/userworkspace23812499) (no longer used) 
 - [**Demo video (Youtube**)](https://youtu.be/U64wILTFfX4)
 
 
@@ -168,7 +168,7 @@ The system was designed to support incremental development, clear separation of 
 
 - **Courses (Browse)**: courses, reviews
 	- list all courses and average ratings
-	
+
 - **Course Details**: courses, users, reviews
 	- list the course info and all reviews with the review author
 
