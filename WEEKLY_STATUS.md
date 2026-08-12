@@ -427,79 +427,7 @@ The team reported:
 - **Craig Sanders:** Debugging, testing, presentation prep
 - **Ching-Hsiang (Sean) Lin**: Finished and tested the SQL methods, update API to handle new courses without reviews, doubled initial test data in the database tables, created a list of SQL functions/methods in the Google Doc for reference and how to use them, presentation prep
 
----
 
-# Reporting Period
-
-**Week**: 10 (of the semester)
-
-**Sprint**: 6
-
-**Meeting Held:** Yes
-
-**Meeting Date:** July 23, 2026
-
-**Meeting Duration:** 20 minutes
-
-**Meeting Format:** Zoom
-
-**Scrum master:** Hannah
-
-**Meeting attendees:** Hannah, Adam, Sean
-
----
-
-## Progress Since Last Week
-This week, the team focused on **Project progress and planning before demo**.
-
-Key accomplishments include:
-- Built out more HTML and CSS on the frontend
-- Started building out SQL database
-- Discussed project deadlines and goals for next week including completing main functionality by end of next week to allow time for testing before the Aug. 6th presentation demo
-- Decide users will login with email instead of username
----
-
-## Completed Tasks
-- Repository
-    - Expanded on HTML and CSS
-    - SQL database created and methods started
-    - Added necessary funtions added for submit_review.html 
----
-
-## Planned Tasks for Next Week
-- Adam and Hannah - Finish building out the HTML and CSS pages
-- Sean - Finish the SQL methods and test them to ensure they work correctly
-- Sean - Double the initial test data in the database tables
-- Sean - Create a unit test for the database functions
-- Sean - Create a list of SQL functions/methods in the Google Doc for reference
-- Sean - Work on creating the login system and hook it up with the login page
-- Hannah - Look into Flask sessions for login/logout functionality
-- Sean - show team how to pull data from the database into a webpage
-- Adam and Hannah - Finish building HTML web forms so users can submit information to the database
-- Craig - Work on testing submit_review and interfaces with DB. 
-- Craig - Start the classes for Review and Course which will be how we instantiate the Course and relevant Reviews after querying the DB.
----
-
-## Blockers and Issues
-No major technical blockers were encountered this week.
-
----
-
-## Risks and Mitigation
-**Identified Risk:** Only 2 weeks before project demo
-- *Mitigation:* Try to finish as much as possible in the next week so we can leave the last week for testing and preparing for the demo.
----
-
-## Team Reflection
-The team reported:
-- Frontend and backend is coming along and we will soon need to tie everything together. We might need an additional check in meeting this weekend or early next week to touch base. We will keep open communication in the Discord chat when we finish something.
----
-
-## Individual Contributions This Week
-- **Hannah Pfeifer:** Expanded on HTML pages and finished About and Home pages. Built out style.css for overall website styling. Updated WEEKLY_STATUS.md.
-- **Adam Chathankeo:** Worked on CSS styling for html files. Finished HTML for Login and Sign Up pages.
-- **Craig Sanders:** Submitted submit_review.html with the necessary functions in app.py and models.py
-- **Ching-Hsiang (Sean) Lin**: Build SQL database and sample courses and reviews. Added SQL methods. 
 ---
 
 # Reporting Period
@@ -585,7 +513,7 @@ The team reported:
 
 **Meeting Format:** Discord asynchronous
 
-**Scrum master:** Ching-Hsiang (Sean) Lin
+**Scrum master:** -
 
 **Meeting attendees:** -
 
@@ -595,19 +523,19 @@ The team reported:
 This week, the team focused on documentation testing and reporting
 
 Key accomplishments include:
-- additional unit and integration testing
-- additional docstring formatting
-- documentation: README.md updates, and document consolidation
-- repo and FINAL_REPORT.md contributions
+- Additional unit and integration testing
+- Additional docstring formatting
+- Documentation: README.md updates, and document consolidation
+- Repo and FINAL_REPORT.md contributions
 ---
 
 ## Completed Tasks
 - FINAL_REPORT.md
 - Repository:
-    - added demo video
-    - added demo presentation
-    - created additional unit and integration tests
-    - added addtional documents
+    - Added demo video
+    - Added demo presentation
+    - Created additional unit and integration tests
+    - Added addtional documents
 ---
 
 ## Planned Tasks for Next Week
@@ -620,7 +548,7 @@ Key accomplishments include:
 
 ## Risks and Mitigation
 **Identified Risk:** Documentation clarity
-- *Mitigation:* ensure documents are reviewed by fellow teammates
+- *Mitigation:* Ensure documents are reviewed by fellow teammates
   
 ---
 
@@ -628,7 +556,7 @@ Key accomplishments include:
 Team Reflection is reported in FINAL_REPORT.md
 
 ## Individual Contributions This Week
-- **Hannah Pfeifer:** Set up initial documentation on google drive. Led the task distributions. Contributed to FINAL_REPORT.md and updated inline documentation.
-- **Adam Chathankeo:** Contributed to FINAL_REPORT.md team reflections and inline documentation.
+- **Hannah Pfeifer:** Set up initial documentation on Google doc, led task distributions, contributed to FINAL_REPORT.md, updated inline code comments/documentation, cleaned up redundant code, final bug testing and repo review
+- **Adam Chathankeo:** Contributed to FINAL_REPORT.md team reflections and inline documentation
 - **Craig Sanders:** Added docstrings, contributed to FINAL_REPORT.md, added integration_tests, reformatted/updated repo.
-- **Ching-Hsiang (Sean) Lin**: Updated README.md, added to unit tests, added page tests, and and contributed to FINAL_REPORT.md
+- **Ching-Hsiang (Sean) Lin**: Updated README.md, added to unit tests, added page tests, and contributed to FINAL_REPORT.md

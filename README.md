@@ -36,13 +36,13 @@
 
 CSPB Course Reviews is a website built to provide reviews for courses offered in the CSPB program at CU Boulder. After sign-up and log-in, students can browse and write reviews for the courses they have taken. 
 
-To write a course review, students just need to fill out a questionnaire to provide essential information such as course rating, course difficulty, weekly workload, course taken year & semester, and then add a review text. 
+To write a course review, students just need to fill out a questionnaire to provide essential information including course rating, difficulty, weekly workload, year and semester taken, and review text. 
 
 Administrators can add and edit courses, manage accounts, and moderate reviews. Guests without accounts can still browse and view reviews but cannot contribute.
 
 ### Motivation
 
-For years, CSPB students have had a hard time finding course reviews, which are often scattered and buried in various places, such as Discord, Reddit, Piazza, blogs, and private messages. We want to create a platform where students can provide honest feedback about courses in the CSPB program. This will allow students to read course reviews from their peers and make more informed decisions when selecting classes.
+For years, CSPB students have had a hard time finding course reviews, which are often scattered and buried in various places, such as Discord, Reddit, Piazza, blogs, and private messages. We wanted to create a student-run platform where students can provide honest feedback about courses in the CSPB program. This will allow students to read course reviews from their peers and make more informed decisions when selecting classes.
 
 
 ## Tech Stack: Python, Flask, HTML/CSS, SQLite
@@ -135,7 +135,7 @@ Both a regular user and an administrator can write course reviews, but only an a
 
 On most pages, you can access the following features on the top-right corner:
 
-- Click **Home** to return to the Home page, where you can see the most recent reviews. A logged-in user sees a welcome message.
+- Click **Home** to return to the Home page, where you can see the most recent reviews. A logged-in user sees a customized welcome message.
 
 - Click **Sign Up** to create a new user account.
 
@@ -157,7 +157,7 @@ When browsing courses, click **View Course** to see the details of each course.
 </div>
 
 
-When viewing a course, click **Write a Review** to review a course. 
+When viewing a course, click **Write a Review** to review a course. This button will only appear for logged-in users.
 
 Specify required information and submit your review. This review will appear on the page of this course. 
 
@@ -169,7 +169,7 @@ Click **Edit Review** to modify your existing review.
 </div>
 
 
-You can also **Upvote**, **Downvote**, and **Report** a review from other users.
+You can also **Upvote**, **Downvote**, and **Report** a review from other users by clicking on the up arrow, down arrow, or flag button, respectively, below each review.
 
 
 <div align="left">
